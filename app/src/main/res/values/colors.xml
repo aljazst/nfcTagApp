@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#796b8f</color>
+    <color name="colorPrimaryDark">@color/grey_purple</color>
+    <color name="colorAccent">@color/red_pink</color>
+
+    <color name="blackTitle">#111111</color>
+
+    <color name="semi_white">#f9f9f9</color>
+    <color name="white_50">#80ffffff</color>
+    <color name="white75">#BFFFFFFF</color>
+
+
+
+    <color name="grey100">#ff595c71</color>
+    <color name="mushroom">#9f9c9c</color>
+    <color name="greyEditTextBorder">#aeaeb1</color>
+    <color name="grey20">#33595c71</color>
+
+    <!-- Fully transparent, equivalent to 0x00000000 -->
+    <color name="transparent">#00000000</color>
+
+
+    <color name="grey_divider">#ffe1e2e6</color>
+    <color name="purplish_brown">#3f3839</color>
+    <color name="purplish_grey">#5b5164</color>
+    <color name="grape">#483465</color>
+    <color name="grey_purple">#796b8f</color>
+    <color name="button_disabled">#b6afc1</color>
+    <color name="pale_purple">#aba2b9</color>
+    <color name="grey_purple25">#40796b8f</color>
+
+
+
+
+    <color name="red_pink">#ed2e5a</color>
+    <color name="rosa">#f697ad</color>
+    <color name="red_pink_25opacity">#40ed2e5a</color>
+    <color name="baby_pink">#f1c0cb</color>
+    <color name="light_pink">#e8e5e6</color>
+    <color name="very_light_pink">#f3f2f2</color>
+</resources>

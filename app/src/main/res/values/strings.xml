@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">nfcTagApp</string>
+
+    // INFO RECYCLE
+    <string name="info_recycle_settings">Spremenite nastavitve in prilagodite svojo aplikacijo.</string>
+    <string name="info_recycle_sub">Pregled na voljo tukaj.</string>
+    <string name="info_recycle_send_preposition">Skupaj z vami smo najboljše mesto.</string>
+    <string name="info_recycle_sub_prepositon">Pošljite svoj predlog ali komentar.</string>
+
+    // MENU ITEMS NAVIGATION
+    <string name="menu_item_read">Read</string>
+    <string name="menu_item_write">Write</string>
+    <string name="menu_item_encode">Encode</string>
+    <string name="menu_item_decode">Decode</string>
+    <string name="menu_item_settings">Settings</string>
+</resources>

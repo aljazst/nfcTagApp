@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_2">2dp</dimen>
+    <dimen name="spacing_4">4dp</dimen>
+    <dimen name="spacing_6">6dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_10">10dp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_14">14dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_18">18dp</dimen>
+    <dimen name="spacing_20">20dp</dimen>
+    <dimen name="spacing_22">22dp</dimen>
+    <dimen name="spacing_24">24dp</dimen>
+    <dimen name="spacing_26">26dp</dimen>
+    <dimen name="spacing_28">28dp</dimen>
+    <dimen name="spacing_30">30dp</dimen>
+    <dimen name="spacing_32">32dp</dimen>
+    <dimen name="spacing_40">40dp</dimen>
+    <dimen name="spacing_42">42dp</dimen>
+    <dimen name="spacing_44">44dp</dimen>
+    <dimen name="spacing_48">48dp</dimen>
+    <dimen name="spacing_52">52dp</dimen>
+    <dimen name="spacing_56">56dp</dimen>
+    <dimen name="spacing_80">80dp</dimen>
+    <dimen name="spacing_170">170dp</dimen>
+
+
+    <dimen name="corner_radius_small">2dp</dimen>
+    <dimen name="corner_radius_standard">4dp</dimen>
+    <dimen name="corner_radius_large">8dp</dimen>
+    <dimen name="corner_radius_10">10dp</dimen>
+    <dimen name="corner_radius_14">14dp</dimen>
+    <dimen name="corner_radius_xlarge">16dp</dimen>
+    <dimen name="corner_radius_huge">26dp</dimen>
+
+    <dimen name="button_height">52dp</dimen>
+    <dimen name="button_height_small">32dp</dimen>
+    <dimen name="header_height">60dp</dimen>
+    <dimen name="button_stroke_width">1dp</dimen>
+
+    <dimen name="big_elevation">8dp</dimen>
+    <dimen name="default_elevation">4dp</dimen>
+    <dimen name="small_elevation">2dp</dimen>
+
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
+    <dimen name="text_size_32">32sp</dimen>
+    <dimen name="text_size_48">48sp</dimen>
+
+    <dimen name="soft_keyboard_size">200dp</dimen>
+
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/drawable/bg_button_circle_white.xml" value="0.2703125" />
+        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/drawable/ic_creditcard.xml" value="0.2703125" />
+        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/layout/bg_button_circle_white.xml" value="0.877906976744186" />
+        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/layout/fragment_read.xml" value="0.2" />
+        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/layout/fragment_write.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/layout/item_rv_menu_navigation.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/xml/nfc_tech_filter.xml" value="0.13020833333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
