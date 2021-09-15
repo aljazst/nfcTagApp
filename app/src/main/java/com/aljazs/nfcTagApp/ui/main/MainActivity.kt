@@ -12,6 +12,7 @@ import com.aljazs.nfcTagApp.extensions.extClick
 import kotlinx.android.synthetic.main.activity_main.*
 import android.nfc.*
 import android.nfc.tech.Ndef
+import android.nfc.tech.NfcA
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -176,7 +177,17 @@ class MainActivity : AppCompatActivity() {
             return
         }
         tagId = tag!!.tagId
-        //showToast("Tag tapped: $tagId")
+      /* val NFCa : NfcA = NfcA.get(tagFromIntent) https://stackoverflow.com/questions/22719465/ntag212-mifare-ultralight-with-authentication/22723250#22723250
+      https://www.tabnine.com/code/java/methods/android.nfc.tech.NfcA/transceive
+        NFCa.connect() //TODO: password protect tag
+        NFCa.transceive() */
+
+        val tagSize : Int = Ndef.get(tagFromIntent).maxSize
+       // val makeReadOnly : Boolean = Ndef.get(tagFromIntent).makeReadOnly()
+        val makeReadOnly = Ndef.get(tagFromIntent).isConnected()
+
+        val type  = Ndef.get(tagFromIntent)
+        showToast("Tag tapped type: $makeReadOnly")
 
 
         if (writeViewModel?.isWriteTagOptionOn) {
@@ -218,7 +229,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString()))
+                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize))
                        // tv_text?.text = inMessage1
                        // tv_textUTF.text = charset.toString()
 
