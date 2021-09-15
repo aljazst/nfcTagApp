@@ -20,7 +20,7 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
     private val readViewModel: ReadViewModel by activityViewModels()
 
 
-    companion object{
+    companion object {
         fun newInstance(): ReadFragment {
             return ReadFragment()
         }
@@ -31,11 +31,14 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
         super.onViewCreated(view, savedInstanceState)
         tv_text1.text = "121212"
 
-        readViewModel.tag.observe(viewLifecycleOwner, Observer { tv_text.text = it.utfKey
-        tv_text1.text = it.messageKey})
+        readViewModel.tag.observe(viewLifecycleOwner, Observer {
+            tv_text.text = it.utfKey
+            tv_text1.text = it.messageKey
+            tv_tagId.text = it.tagIdKey
+            tv_tagSize.text = it.tagSize.toString()
+
+        })
     }
-
-
 
 
 }
