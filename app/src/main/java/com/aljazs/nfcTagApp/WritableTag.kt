@@ -75,9 +75,6 @@ class WritableTag @Throws(FormatException::class) constructor(tag: Tag) {
 
     companion object {
         fun bytesToHexString(src: ByteArray): String? {
-            if (ByteUtils.isNullOrEmpty(src)) {
-                return null
-            }
             val sb = StringBuilder()
             for (b in src) {
                 sb.append(String.format("%02X", b))

@@ -29,13 +29,13 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tv_text1.text = "121212"
 
         readViewModel.tag.observe(viewLifecycleOwner, Observer {
-            tv_text.text = it.utfKey
-            tv_text1.text = it.messageKey
-            tv_tagId.text = it.tagIdKey
-            tv_tagSize.text = it.tagSize.toString()
+
+            tv_message_data.text = it.messageKey
+            tv_utf_data.text = it.utfKey
+            tv_tagId_data.text = it.tagIdKey
+            tv_ttagSized_data.text = it.tagSize.toString()
 
         })
     }

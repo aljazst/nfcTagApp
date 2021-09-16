@@ -177,21 +177,24 @@ class MainActivity : AppCompatActivity() {
             return
         }
         tagId = tag!!.tagId
-      /* val NFCa : NfcA = NfcA.get(tagFromIntent) https://stackoverflow.com/questions/22719465/ntag212-mifare-ultralight-with-authentication/22723250#22723250
-      https://www.tabnine.com/code/java/methods/android.nfc.tech.NfcA/transceive
-        NFCa.connect() //TODO: password protect tag
-        NFCa.transceive() */
+        /* val NFCa : NfcA = NfcA.get(tagFromIntent) https://stackoverflow.com/questions/22719465/ntag212-mifare-ultralight-with-authentication/22723250#22723250
+        https://www.tabnine.com/code/java/methods/android.nfc.tech.NfcA/transceive
+          NFCa.connect() //TODO: password protect tag
+          NFCa.transceive() */
 
-        val tagSize : Int = Ndef.get(tagFromIntent).maxSize
-       // val makeReadOnly : Boolean = Ndef.get(tagFromIntent).makeReadOnly()
-        val makeReadOnly = Ndef.get(tagFromIntent).isConnected()
+        val tagSize = Ndef.get(tagFromIntent).maxSize
+        // val makeReadOnly : Boolean = Ndef.get(tagFromIntent).makeReadOnly()
+        val makeReadOnly = Ndef.get(tagFromIntent)
+        val makeReadOnlya = tagFromIntent?.techList
+
+        println("test1 techlist ${makeReadOnlya?.get(2)}")
 
         val type  = Ndef.get(tagFromIntent)
-        showToast("Tag tapped type: $makeReadOnly")
+        //showToast("Tag tapped type: $makeReadOnlya")
 
 
         if (writeViewModel?.isWriteTagOptionOn) {
-            val messageWrittenSuccessfully = NfcUtils.createNFCMessage("This is the 3nrd try", intent)
+            val messageWrittenSuccessfully = NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
             writeViewModel?.isWriteTagOptionOn = false
 
             if (messageWrittenSuccessfully) {
@@ -229,9 +232,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize))
-                       // tv_text?.text = inMessage1
-                       // tv_textUTF.text = charset.toString()
+                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize.toString()))
+
 
                     }
             }
