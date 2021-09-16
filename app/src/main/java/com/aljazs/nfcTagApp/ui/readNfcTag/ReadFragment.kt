@@ -19,12 +19,10 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
 
     private val readViewModel: ReadViewModel by activityViewModels()
 
-
     companion object {
         fun newInstance(): ReadFragment {
             return ReadFragment()
         }
-        const val INTENT = "INTENT"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -13,10 +13,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.nfc.*
 import android.nfc.tech.Ndef
 import android.nfc.tech.NfcA
+import android.util.Base64
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
+import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var readViewModel: ReadViewModel
     private lateinit var writeViewModel: WriteViewModel
 
+    private lateinit var decryptor: Decryptor
 
     private val menuAdapter by lazy {
         MenuNavigationAdapter { titleId ->
@@ -69,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         readViewModel = ViewModelProvider(this).get(ReadViewModel::class.java)
 
         initNfcAdapter()
+
+        decryptor = Decryptor()
 
         initAdapter()
         onReadSelected()
@@ -229,10 +234,16 @@ class MainActivity : AppCompatActivity() {
                             ndefRecord_0.payload.size - 1 - lanLength,
                             charset
                         ) */
+                        var INIT_VECTOR = "abcdefghijkl"
+
+                        val decodedBytes = Base64.decode(inMessage1, Base64.NO_WRAP)
+
+                      val string1 =  decryptor
+                            .decryptData("geslo123", decodedBytes, INIT_VECTOR.toByteArray())
 
 
 
-                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize.toString()))
+                        readViewModel?.setTagMessage(NfcTag(string1,charset.toString(),tagId,tagSize.toString()))
 
 
                     }
