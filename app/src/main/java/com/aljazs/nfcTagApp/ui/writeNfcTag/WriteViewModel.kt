@@ -17,5 +17,4 @@ class WriteViewModel : ViewModel() {
     val _closeDialog = MutableLiveData<Boolean>().apply {
         value = false
     }
-    val closeDialog: LiveData<Boolean> = _closeDialog
 }
