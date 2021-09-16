@@ -5,8 +5,10 @@ import android.nfc.tech.MifareUltralight
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.extensions.TAG
 import com.aljazs.nfcTagApp.extensions.extClick
@@ -26,7 +28,15 @@ class WriteFragment : Fragment(R.layout.fragment_write) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tv_write.text = "THIS IS THE WRITE FRAGMENT"
-        writeViewModel.isWriteTagOptionOn = true
+
+        et_message.doAfterTextChanged { s -> writeViewModel.messageToSave = s.toString() }
+
+
+        writeViewModel.text.observe(viewLifecycleOwner, Observer {
+            tv_write.text = it
+            writeViewModel.messageToSave = it
+        })
+
 
         button_write.extClick {
             writeViewModel.isWriteTagOptionOn = true
