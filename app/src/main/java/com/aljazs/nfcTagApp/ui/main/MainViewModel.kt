@@ -7,33 +7,40 @@ import com.aljazs.nfcTagApp.model.MenuNavigationItem
 
 class MainViewModel : ViewModel() {
 
-    fun getMenuItems() : List<MenuNavigationItem> {
+    fun getMenuItems(): List<MenuNavigationItem> {
         return navigationOptions
     }
+
     private val navigationOptions = listOf(
         MenuNavigationItem(
-            R.string.menu_item_read,
-            R.drawable.ic_creditcard
+            title = R.string.menu_item_read,
+            imageRes = R.drawable.ic_nfc,
+            isSelected = false
         ),
         MenuNavigationItem(
-            R.string.menu_item_write,
-            R.drawable.ic_creditcard
+            title = R.string.menu_item_write,
+            imageRes = R.drawable.ic_nfc,
+            isSelected = false
         ),
         MenuNavigationItem(
-            R.string.menu_item_encode,
-            R.drawable.ic_creditcard
+            title = R.string.menu_item_encode,
+            imageRes = R.drawable.ic_nfc,
+            isSelected = false
         ),
         MenuNavigationItem(
-            R.string.menu_item_decode,
-            R.drawable.ic_creditcard
+            title = R.string.menu_item_decode,
+            imageRes = R.drawable.ic_nfc,
+            isSelected = false
         ),
         MenuNavigationItem(
-            R.string.menu_item_settings,
-            R.drawable.ic_creditcard
+            title = R.string.menu_item_settings,
+            imageRes = R.drawable.ic_nfc,
+            isSelected = false
         ),
         MenuNavigationItem(
-            R.string.info_recycle_send_preposition,
-            R.drawable.ic_creditcard
+            title = R.string.info_recycle_send_preposition,
+            imageRes = R.drawable.ic_nfc,
+            isSelected = false
         )
     )
 }

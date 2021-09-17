@@ -2,6 +2,7 @@ package com.aljazs.nfcTagApp.ui.main.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.domain.DomainMenuNavigation
@@ -17,6 +18,7 @@ class MenuNavigationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         tvShortcutTitle.setText(menuItem.title)
         extClick {
             callbackItem(menuItem.title)
+            ivShortcutIcon.background = ContextCompat.getDrawable(context, R.drawable.bg_button_circle_blue);
         }
     }
 

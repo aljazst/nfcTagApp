@@ -27,7 +27,7 @@ internal class Encryptor {
     lateinit var encryptedBytes: ByteArray
     private lateinit var ivValue: ByteArray
 
-    @RequiresApi(Build.VERSION_CODES.M)
+
     fun encryptText(alias: String, textToEncrypt: String, ivValueID: String): String {
         return try {
             //ivValue = byteArrayOf(-32, 122, 27, 64, -76, 126, 33, -62, -81, 24, 31, 118)
@@ -42,7 +42,6 @@ internal class Encryptor {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun initCipher(alias: String, ivValueID: String) {
         try {
             cipher.init(Cipher.ENCRYPT_MODE, getSecretKey(alias), GCMParameterSpec(128, ivValueID.toByteArray()))
@@ -63,7 +62,7 @@ internal class Encryptor {
         keyStore.deleteEntry(alias)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+    //@RequiresApi(Build.VERSION_CODES.M)
     private fun getSecretKey(alias: String): SecretKey {
 
         val keyGenerator = KeyGenerator

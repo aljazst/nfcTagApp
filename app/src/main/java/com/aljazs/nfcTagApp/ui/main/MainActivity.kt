@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.nfc.*
 import android.nfc.tech.Ndef
 import android.nfc.tech.NfcA
+import android.provider.Settings
 import android.util.Base64
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
@@ -23,6 +24,7 @@ import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
 import com.aljazs.nfcTagApp.common.Animation
+import com.aljazs.nfcTagApp.common.Constants.INIT_VECTOR
 import com.aljazs.nfcTagApp.domain.DomainMenuNavigation
 import com.aljazs.nfcTagApp.extensions.extReplaceFragmentWithAnimation
 import com.aljazs.nfcTagApp.model.MenuNavigationItem
@@ -49,7 +51,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var readViewModel: ReadViewModel
     private lateinit var writeViewModel: WriteViewModel
 
-    private lateinit var decryptor: Decryptor
 
     private val menuAdapter by lazy {
         MenuNavigationAdapter { titleId ->
@@ -73,8 +74,6 @@ class MainActivity : AppCompatActivity() {
 
         initNfcAdapter()
 
-        decryptor = Decryptor()
-
         initAdapter()
         onReadSelected()
     }
@@ -86,7 +85,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun getAndroidId() : String {
+
+        var androidID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID) // Android id is a 64-bit number as hex. hex digit = 4 bits. so we get 4x16 = 64. android_id is 16 characters long.
+
+        return androidID.take(12) //iv needs 12
+    }
+
     private fun onReadSelected() {
+
+        writeViewModel?.isWriteTagOptionOn = false
         extReplaceFragmentWithAnimation(
             ReadFragment.newInstance(),
             Animation.RIGHT,
@@ -94,8 +102,6 @@ class MainActivity : AppCompatActivity() {
             addToBackStack = true,
             popBackStackInclusive = true
         )
-
-
     }
 
     private fun onWriteSelected() {
@@ -130,7 +136,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
             finish();
             return;
-
         }
     }
 
@@ -201,6 +206,7 @@ class MainActivity : AppCompatActivity() {
         if (writeViewModel?.isWriteTagOptionOn) {
             val messageWrittenSuccessfully = NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
             writeViewModel?.isWriteTagOptionOn = false
+            writeViewModel?._closeDialog.value = true
 
             if (messageWrittenSuccessfully) {
                 showToast("Message has been saved successfully")
@@ -234,16 +240,13 @@ class MainActivity : AppCompatActivity() {
                             ndefRecord_0.payload.size - 1 - lanLength,
                             charset
                         ) */
-                        var INIT_VECTOR = "abcdefghijkl"
-
-                        val decodedBytes = Base64.decode(inMessage1, Base64.NO_WRAP)
-
-                      val string1 =  decryptor
-                            .decryptData("geslo123", decodedBytes, INIT_VECTOR.toByteArray())
 
 
 
-                        readViewModel?.setTagMessage(NfcTag(string1,charset.toString(),tagId,tagSize.toString()))
+
+
+
+                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize.toString()))
 
 
                     }
