@@ -15,7 +15,7 @@
         android:layout_marginEnd="@dimen/spacing_10"
         android:padding="@dimen/spacing_18"
         android:background="@drawable/bg_button_circle_white"
-        tools:src="@drawable/ic_creditcard"
+        tools:src="@drawable/ic_nfc"
         android:contentDescription="Image description."
         android:elevation="@dimen/spacing_2"
         app:layout_constraintTop_toTopOf="parent"

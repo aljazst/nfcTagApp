@@ -13,4 +13,11 @@
     <string name="menu_item_encode">Encode</string>
     <string name="menu_item_decode">Decode</string>
     <string name="menu_item_settings">Settings</string>
+
+    //WRITE FRAGMENT
+    <string name="write_editText_hint">Your message</string>
+    <string name="write_password_hint">Your password</string>
+    <string name="dialog_write_message">Tap the NFC tag to write the message</string>
+    <string name="message_size">Message size: </string>
+    <string name="message_size_bytes">bytes</string>
 </resources>

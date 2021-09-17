@@ -2,44 +2,124 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/tv_write"
+        android:id="@+id/tv_message_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fragment read"
-        android:layout_marginTop="@dimen/spacing_56"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="@dimen/spacing_4"
+        android:text="@string/message_size"
+        app:layout_constraintBottom_toTopOf="@+id/vDivider"
+        app:layout_constraintEnd_toStartOf="@+id/tv_message_size_data" />
+
+    <TextView
+        android:id="@+id/tv_message_size_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_4"
+        android:text="7"
+        app:layout_constraintBottom_toTopOf="@+id/vDivider"
+        app:layout_constraintEnd_toStartOf="@+id/tv_message_bytes"
+    />
+
+    <TextView
+        android:id="@+id/tv_message_bytes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message_size_bytes"
+        app:layout_constraintBottom_toTopOf="@+id/vDivider"
+        app:layout_constraintEnd_toEndOf="@+id/vDivider"
+         />
+
+    <View
+        android:id="@+id/vDivider"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="@dimen/spacing_32"
+        android:layout_marginEnd="@dimen/spacing_32"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:background="@color/grey20"
+        app:layout_constraintBottom_toTopOf="@+id/tv_write_data_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_write_data_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your text "
+        android:layout_marginTop="@dimen/spacing_56"
+        android:layout_marginStart="@dimen/spacing_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/et_message"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:outlineSpotShadowColor="@color/baby_pink"
-        android:outlineAmbientShadowColor="@color/baby_pink"
-        android:hint="Enter the string"
-        android:textColorHint="@color/baby_pink"
-        android:background="@color/white"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="@dimen/spacing_32"
+        android:layout_marginEnd="@dimen/spacing_32"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:background="@drawable/bg_white_rounded_12dp"
+        android:gravity="top"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/spacing_48"
+        android:hint="@string/write_editText_hint"
+        android:inputType="textMultiLine|textCapSentences"
+        android:outlineAmbientShadowColor="@color/baby_pink"
+        android:outlineSpotShadowColor="@color/baby_pink"
+        android:padding="@dimen/spacing_16"
+        android:textColorHint="@color/baby_pink"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_write_data_title"
+        tools:ignore="Autofill" />
+
+    <TextView
+        android:id="@+id/tv_write_password_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:text="Enter your text "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_message" />
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/spacing_32"
+        android:layout_marginEnd="@dimen/spacing_32"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:background="@drawable/bg_white_rounded_12dp"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/spacing_16"
+        android:hint="@string/write_password_hint"
+        android:inputType="textMultiLine|textCapSentences"
+        android:outlineAmbientShadowColor="@color/baby_pink"
+        android:outlineSpotShadowColor="@color/baby_pink"
+        android:textColor="@color/black"
+        android:textColorHint="@color/baby_pink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/tv_write_password_title"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/button_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Button write"
         android:background="@color/grey100"
+        android:layout_marginTop="@dimen/spacing_16"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/tv_write"
+        android:text="Button write"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
