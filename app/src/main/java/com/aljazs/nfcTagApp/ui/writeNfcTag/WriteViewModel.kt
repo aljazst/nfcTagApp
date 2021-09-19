@@ -10,7 +10,7 @@ class WriteViewModel : ViewModel() {
     var messageToSave: String = ""
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Please enter a text to write"
+        value = "Sample message holder"
     }
     val text: LiveData<String> = _text
 

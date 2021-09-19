@@ -18,7 +18,7 @@ class  NfcUtils {
 
 
         fun createNFCMessage(payload: String, intent: Intent?): Boolean {
-            val pathPrefix = "com.aljazs.nfcTagApp"
+            val pathPrefix = "A"
             val nfcRecord = NdefRecord(
                 NdefRecord.TNF_EXTERNAL_TYPE, pathPrefix.toByteArray(),
                 ByteArray(0), payload.toByteArray()

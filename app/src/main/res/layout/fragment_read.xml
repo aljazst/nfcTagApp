@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/jet">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,45 +15,75 @@
         android:background="@drawable/bg_white_rounded_12dp">
 
         <TextView
-            android:id="@+id/tv_read"
+            android:id="@+id/tv_tag_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="READ FRAGMENT"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Tag info"
+            android:textSize="@dimen/spacing_18"
+            android:textColor="@color/grey100"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/spacing_12"
+            android:layout_marginStart="@dimen/spacing_20"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vDivider"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_marginBottom="@dimen/spacing_8"
+            android:layout_marginTop="@dimen/spacing_2"
+            android:background="@color/grey20"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tag_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
         <TextView
             android:id="@+id/tv_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
             android:text="Message: "
+            android:layout_marginTop="@dimen/spacing_12"
             android:textColor="@color/black"
-            android:padding="@dimen/spacing_8"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/vDivider" />
 
         <TextView
             android:id="@+id/tv_message_data"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_12"
             android:layout_marginEnd="@dimen/spacing_12"
+            android:layout_marginTop="@dimen/spacing_4"
             android:textColor="@color/baby_pink"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_message"
+            app:layout_constraintEnd_toStartOf="@+id/iv_asterisk"
+            app:layout_constraintStart_toStartOf="@+id/tv_message"
+            app:layout_constraintTop_toBottomOf="@+id/tv_message" />
+
+        <ImageView
+            android:id="@+id/iv_asterisk"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="@dimen/spacing_12"
+            android:src="@drawable/ic_hide_text"
+            android:background="@drawable/bg_button_circle_white"
+            android:padding="@dimen/spacing_8"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_message_data"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_message"
-            app:layout_constraintTop_toTopOf="@+id/tv_message" />
+            app:layout_constraintTop_toTopOf="@+id/tv_message_data" />
 
         <TextView
             android:id="@+id/tv_utf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UTF: "
+            android:layout_marginStart="@dimen/spacing_16"
             android:textColor="@color/black"
             android:padding="@dimen/spacing_8"
+            android:layout_marginTop="150dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_message"  />
 
@@ -70,6 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tag ID: "
+            android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_12"
             android:layout_marginBottom="@dimen/spacing_12"
             android:textColor="@color/black"
@@ -95,6 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tag size: "
+            android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_12"
             android:textColor="@color/black"
             android:padding="@dimen/spacing_8"
