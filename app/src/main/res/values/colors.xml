@@ -49,4 +49,7 @@
     <color name="baby_pink">#f1c0cb</color>
     <color name="light_pink">#e8e5e6</color>
     <color name="very_light_pink">#f3f2f2</color>
+
+    <!-- Base layout colors -->
+    <color name="jet">#333333</color>
 </resources>

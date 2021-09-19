@@ -8,7 +8,7 @@ import com.aljazs.nfcTagApp.model.NfcTag
 class ReadViewModel : ViewModel() {
 
     private val _tag = MutableLiveData<NfcTag>().apply {
-        value = NfcTag(message = "",UTF = "",tagID = "",tagSize = "")
+        value = NfcTag(message = "",UTF = "",tagID = "",tagSize = "", tagUsedMemory = "")
     }
 
     val tag: LiveData<NfcTag> = _tag

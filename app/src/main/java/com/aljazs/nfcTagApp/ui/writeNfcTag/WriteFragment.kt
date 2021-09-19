@@ -45,13 +45,7 @@ class WriteFragment : Fragment(R.layout.fragment_write) {
         encryptor = Encryptor()
 
 
-        var tedt = ""
 
-
-        et_message.doOnTextChanged { text, start, before, count ->
-
-            tv_message_size_data.text = count.plus(7).toString() // add 7bytes for basic nfc data
-        }
 
         writeViewModel.text.observe(viewLifecycleOwner, Observer {
             writeViewModel.messageToSave = it
@@ -62,11 +56,16 @@ class WriteFragment : Fragment(R.layout.fragment_write) {
             }
         })
 
+        et_message.doOnTextChanged { text, start, before, count ->
+
+            tv_message_size_data.text = count.plus(7).toString() // add 7bytes for basic nfc data
+        }
 
 
         button_write.extClick {
             showDialog()
             writeViewModel.isWriteTagOptionOn = true
+            writeViewModel.messageToSave = et_message.text.toString()
             Log.i(TAG,"Write button was clicked.")
             val encryptedText = encryptor.encryptText(et_password.text.toString(), writeViewModel.messageToSave,INIT_VECTOR)
             writeViewModel.messageToSave = encryptedText

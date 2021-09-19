@@ -219,7 +219,7 @@ class MainActivity : AppCompatActivity() {
                     ?.also { rawMessages ->
                         val messages: List<NdefMessage> = rawMessages.map { it as NdefMessage }
                         val inNdefRecords = messages[0].records
-                        val length = messages[0].byteArrayLength
+                        val usedMemory = messages[0].byteArrayLength
                         val ndefRecord_0 = inNdefRecords[0]
                         var inMessage1 = String(ndefRecord_0.payload)
                         val payloadArray: Byte = ndefRecord_0.payload[0]
@@ -232,7 +232,6 @@ class MainActivity : AppCompatActivity() {
                             Charsets.UTF_8
                         else
                             Charsets.UTF_16
-
                         /*
                        val inMessage = String(
                             ndefRecord_0.payload,
@@ -241,12 +240,9 @@ class MainActivity : AppCompatActivity() {
                             charset
                         ) */
 
+                        //showToast("Tag tapped type: $length")
 
-
-
-
-
-                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize.toString()))
+                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize.toString(),usedMemory.toString()))
 
 
                     }

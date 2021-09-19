@@ -16,6 +16,7 @@ import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.common.Constants
 import com.aljazs.nfcTagApp.extensions.extClick
+import com.aljazs.nfcTagApp.extensions.setAsterisk
 
 import kotlinx.android.synthetic.main.fragment_read.*
 
@@ -37,22 +38,29 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
         decryptor = Decryptor()
 
         var encryptedString : String = ""
+        var decryptedString : String = ""
 
         readViewModel.tag.observe(viewLifecycleOwner, Observer {
-
             tv_message_data.text = it.messageKey
             encryptedString = it.messageKey
             tv_utf_data.text = it.utfKey
             tv_tagId_data.text = it.tagIdKey
-            tv_ttagSized_data.text = it.tagSize.toString()
+            tv_ttagSized_data.text = it.tagUsedMemory +"/"+ it.tagSize.toString() +" bytes"
 
         })
+
+        iv_asterisk.extClick {
+            if(decryptedString.isNotEmpty()){
+                tv_message_data.setAsterisk(decryptedString)
+            }
+
+        }
 
         btn_decrypt.extClick {
             val decodedBytes = Base64.decode(encryptedString, Base64.NO_WRAP)
 
-            val string1 =  decryptor.decryptData(et_password.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
-            tv_message_data.text = string1
+            decryptedString =  decryptor.decryptData(et_password.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
+            tv_message_data.text = decryptedString
 
         }
     }
