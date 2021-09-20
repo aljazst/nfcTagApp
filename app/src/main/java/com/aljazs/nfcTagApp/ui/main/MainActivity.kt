@@ -38,6 +38,7 @@ import kotlinx.android.synthetic.main.fragment_read.*
 import java.lang.RuntimeException
 import java.nio.charset.Charset
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.experimental.and
 
 class MainActivity : AppCompatActivity() {
@@ -195,9 +196,9 @@ class MainActivity : AppCompatActivity() {
         val tagSize = Ndef.get(tagFromIntent).maxSize
         // val makeReadOnly : Boolean = Ndef.get(tagFromIntent).makeReadOnly()
         val makeReadOnly = Ndef.get(tagFromIntent)
-        val makeReadOnlya = tagFromIntent?.techList
+        val makeReadOnlya : Array<String> = tagFromIntent?.techList as Array<String>
 
-        println("test1 techlist ${makeReadOnlya?.get(2)}")
+        println("test1 techlist ${makeReadOnlya.contentToString()}")
 
         val type  = Ndef.get(tagFromIntent)
         //showToast("Tag tapped type: $makeReadOnlya")

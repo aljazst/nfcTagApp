@@ -16,7 +16,10 @@ import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.common.Constants
 import com.aljazs.nfcTagApp.extensions.extClick
+import com.aljazs.nfcTagApp.extensions.extGone
+import com.aljazs.nfcTagApp.extensions.extVisible
 import com.aljazs.nfcTagApp.extensions.setAsterisk
+import com.aljazs.nfcTagApp.model.NfcTag
 
 import kotlinx.android.synthetic.main.fragment_read.*
 
@@ -41,10 +44,10 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
         var decryptedString : String = ""
 
         readViewModel.tag.observe(viewLifecycleOwner, Observer {
-            tv_message_data.text = it.messageKey
-            encryptedString = it.messageKey
-            tv_utf_data.text = it.utfKey
-            tv_tagId_data.text = it.tagIdKey
+            tv_message_data.text = it.message
+            encryptedString = it.message
+            tv_utf_data.text = it.UTF
+            tv_tagId_data.text = it.tagID
             tv_ttagSized_data.text = it.tagUsedMemory +"/"+ it.tagSize.toString() +" bytes"
 
         })
@@ -62,6 +65,17 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
             decryptedString =  decryptor.decryptData(et_password.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
             tv_message_data.text = decryptedString
 
+        }
+        ivLineArrowItem.extClick {
+            readViewModel.tag.observe(viewLifecycleOwner, Observer {
+              it.isExtended = !it.isExtended
+
+                if(it.isExtended){
+                    clFaqExpanded.extVisible()
+                }else{
+                    clFaqExpanded.extGone()
+                }
+            })
         }
     }
 
