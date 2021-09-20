@@ -18,6 +18,10 @@ import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.common.Constants.INIT_VECTOR
 import com.aljazs.nfcTagApp.extensions.TAG
 import com.aljazs.nfcTagApp.extensions.extClick
+import com.aljazs.nfcTagApp.ui.dialog.AlertDialog
+import com.labters.lottiealertdialoglibrary.ClickListener
+import com.labters.lottiealertdialoglibrary.DialogTypes
+import com.labters.lottiealertdialoglibrary.LottieAlertDialog
 import kotlinx.android.synthetic.main.fragment_write.*
 import java.nio.charset.Charset
 
@@ -61,7 +65,6 @@ class WriteFragment : Fragment(R.layout.fragment_write) {
             tv_message_size_data.text = count.plus(7).toString() // add 7bytes for basic nfc data
         }
 
-
         button_write.extClick {
             showDialog()
             writeViewModel.isWriteTagOptionOn = true
@@ -69,15 +72,24 @@ class WriteFragment : Fragment(R.layout.fragment_write) {
             Log.i(TAG,"Write button was clicked.")
             val encryptedText = encryptor.encryptText(et_password.text.toString(), writeViewModel.messageToSave,INIT_VECTOR)
             writeViewModel.messageToSave = encryptedText
-
-
         }
 
     }
     private fun showDialog() {
-        dialog.setCancelable(true)
+       /* dialog.setCancelable(true)
         dialog.setContentView(R.layout.dialog_nfc_write_tag)
-        dialog.show()
+        dialog.show() */
+
+        val alertDialog = LottieAlertDialog.Builder(context,DialogTypes.TYPE_SUCCESS)
+            .setTitle("Custom Assert")
+            .setDescription("Would you like to see ?")
+            .setPositiveText("Ok")
+            .setPositiveListener(object : ClickListener {
+                override fun onClick(dialog: LottieAlertDialog) { dialog.dismiss()}
+            })
+            .build()
+        alertDialog?.show()
+
     }
 
 }

@@ -16,9 +16,19 @@ class MenuNavigationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(menuItem: MenuNavigationItem, callbackItem: (Int) -> Unit) = with(itemView) {
         ivShortcutIcon.setImageResource(menuItem.imageRes)
         tvShortcutTitle.setText(menuItem.title)
+
         extClick {
             callbackItem(menuItem.title)
-            ivShortcutIcon.background = ContextCompat.getDrawable(context, R.drawable.bg_button_circle_blue);
+            isSelected = !isSelected
+
+            if (isSelected) {
+                ivShortcutIcon.background =
+                    ContextCompat.getDrawable(context, R.drawable.bg_button_circle_blue);
+            }else{
+                ivShortcutIcon.background =
+                    ContextCompat.getDrawable(context, R.drawable.bg_button_circle_white);
+            }
+
         }
     }
 
