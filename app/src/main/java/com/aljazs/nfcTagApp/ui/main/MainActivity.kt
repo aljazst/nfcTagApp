@@ -24,9 +24,8 @@ import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
 import com.aljazs.nfcTagApp.common.Animation
-import com.aljazs.nfcTagApp.common.Constants.INIT_VECTOR
-import com.aljazs.nfcTagApp.domain.DomainMenuNavigation
 import com.aljazs.nfcTagApp.extensions.extReplaceFragmentWithAnimation
+import com.aljazs.nfcTagApp.extensions.extShowToast
 import com.aljazs.nfcTagApp.model.MenuNavigationItem
 import com.aljazs.nfcTagApp.model.NfcTag
 import com.aljazs.nfcTagApp.ui.main.adapter.MenuNavigationAdapter
@@ -34,11 +33,7 @@ import com.aljazs.nfcTagApp.ui.readNfcTag.ReadFragment
 import com.aljazs.nfcTagApp.ui.readNfcTag.ReadViewModel
 import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteFragment
 import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteViewModel
-import kotlinx.android.synthetic.main.fragment_read.*
-import java.lang.RuntimeException
 import java.nio.charset.Charset
-import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.experimental.and
 
 class MainActivity : AppCompatActivity() {
@@ -198,6 +193,15 @@ class MainActivity : AppCompatActivity() {
         val makeReadOnly = Ndef.get(tagFromIntent)
         val makeReadOnlya : Array<String> = tagFromIntent?.techList as Array<String>
 
+        /*
+        val technologies = tag.techList
+        val tagTechs = Arrays.asList(*technologies)
+        if (tagTechs.contains(NDEF)) {
+            Log.i("WritableTag", "contains ndef")
+            ndef = Ndef.get(tag)
+            ndefFormatable = null
+        } */
+
         println("test1 techlist ${makeReadOnlya.contentToString()}")
 
         val type  = Ndef.get(tagFromIntent)
@@ -210,9 +214,9 @@ class MainActivity : AppCompatActivity() {
             writeViewModel?._closeDialog.value = true
 
             if (messageWrittenSuccessfully) {
-                showToast("Message has been saved successfully")
+                extShowToast("Message has been saved successfully.")
             } else {
-                showToast("Failed to save message. Please try again")
+                extShowToast("Failed to save message. Maybe the message is too long.")
             }
         } else {
             if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
@@ -251,10 +255,6 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-    }
-
-    fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 

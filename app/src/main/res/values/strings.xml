@@ -2,7 +2,8 @@
     <string name="app_name">nfcTagApp</string>
 
     // INFO RECYCLE
-    <string name="info_recycle_settings">Spremenite nastavitve in prilagodite svojo aplikacijo.</string>
+    <string name="dialog_scan_nfc">Tap the phone on the NFC tag to write the message.</string>
+
     <string name="info_recycle_sub">Pregled na voljo tukaj.</string>
     <string name="info_recycle_send_preposition">Skupaj z vami smo najboljše mesto.</string>
     <string name="info_recycle_sub_prepositon">Pošljite svoj predlog ali komentar.</string>
@@ -10,9 +11,9 @@
     // MENU ITEMS NAVIGATION
     <string name="menu_item_read">Read</string>
     <string name="menu_item_write">Write</string>
-    <string name="menu_item_encode">Encode</string>
-    <string name="menu_item_decode">Decode</string>
-    <string name="menu_item_settings">Settings</string>
+    <string name="menu_item_encode">Protect</string>
+    <string name="menu_item_decode">Settings</string>
+    <string name="menu_item_settings">About</string>
 
     //WRITE FRAGMENT
     <string name="write_editText_hint">Your message</string>
@@ -20,4 +21,8 @@
     <string name="dialog_write_message">Tap the NFC tag to write the message</string>
     <string name="message_size">Message size: </string>
     <string name="message_size_bytes">bytes</string>
+    <string name="write_text">Enter your message</string>
+    <string name="write_password">Enter your password</string>
+    <string name="btn_write">Encrypt message</string>
+    <string name="password_text">Password: </string>
 </resources>

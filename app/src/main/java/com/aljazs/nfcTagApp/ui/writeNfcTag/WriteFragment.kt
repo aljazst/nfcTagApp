@@ -7,7 +7,9 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -18,10 +20,7 @@ import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.common.Constants.INIT_VECTOR
 import com.aljazs.nfcTagApp.extensions.TAG
 import com.aljazs.nfcTagApp.extensions.extClick
-import com.aljazs.nfcTagApp.ui.dialog.AlertDialog
-import com.labters.lottiealertdialoglibrary.ClickListener
-import com.labters.lottiealertdialoglibrary.DialogTypes
-import com.labters.lottiealertdialoglibrary.LottieAlertDialog
+import kotlinx.android.synthetic.main.fragment_read.*
 import kotlinx.android.synthetic.main.fragment_write.*
 import java.nio.charset.Charset
 
@@ -49,8 +48,6 @@ class WriteFragment : Fragment(R.layout.fragment_write) {
         encryptor = Encryptor()
 
 
-
-
         writeViewModel.text.observe(viewLifecycleOwner, Observer {
             writeViewModel.messageToSave = it
         })
@@ -60,36 +57,48 @@ class WriteFragment : Fragment(R.layout.fragment_write) {
             }
         })
 
-        et_message.doOnTextChanged { text, start, before, count ->
+        etMessage.doOnTextChanged { text, start, before, count ->
 
-            tv_message_size_data.text = count.plus(7).toString() // add 7bytes for basic nfc data
+            tvMessageSizeData.text = count.plus(7).toString() // add 7bytes for basic nfc data
+            if(count >= 1){
+                tvWritePasswordTitle.visibility =View.VISIBLE
+                etPassword.visibility =View.VISIBLE
+            }else{
+                tvWritePasswordTitle.visibility = View.GONE
+                etPassword.visibility =View.GONE
+            }
+        }
+        etPassword.doOnTextChanged { text, start, before, count ->
+            if(count >= 1){
+                btnWrite.visibility =View.VISIBLE
+            }else{
+                btnWrite.visibility = View.GONE
+            }
+
         }
 
-        button_write.extClick {
+        btnWrite.extClick {
             showDialog()
             writeViewModel.isWriteTagOptionOn = true
-            writeViewModel.messageToSave = et_message.text.toString()
+            writeViewModel.messageToSave = etMessage.text.toString()
             Log.i(TAG,"Write button was clicked.")
-            val encryptedText = encryptor.encryptText(et_password.text.toString(), writeViewModel.messageToSave,INIT_VECTOR)
+            val encryptedText = encryptor.encryptText(etPassword.text.toString(), writeViewModel.messageToSave,INIT_VECTOR)
             writeViewModel.messageToSave = encryptedText
         }
 
     }
     private fun showDialog() {
-       /* dialog.setCancelable(true)
+        dialog.setCancelable(true)
         dialog.setContentView(R.layout.dialog_nfc_write_tag)
-        dialog.show() */
-
-        val alertDialog = LottieAlertDialog.Builder(context,DialogTypes.TYPE_SUCCESS)
-            .setTitle("Custom Assert")
-            .setDescription("Would you like to see ?")
-            .setPositiveText("Ok")
-            .setPositiveListener(object : ClickListener {
-                override fun onClick(dialog: LottieAlertDialog) { dialog.dismiss()}
-            })
-            .build()
-        alertDialog?.show()
+        dialog.show()
 
     }
+    fun showKeyboard() =
+        (context?.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as? InputMethodManager)!!
+            .toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+
+    fun hideKeyboard() =
+        (context?.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as? InputMethodManager)!!
+            .hideSoftInputFromWindow(view?.getWindowToken(), 0)
 
 }

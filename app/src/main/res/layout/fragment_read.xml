@@ -8,17 +8,21 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_tag_info"
+        android:id="@+id/clTagInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_12"
+        android:layout_marginTop="@dimen/spacing_32"
+        android:layout_marginStart="@dimen/spacing_12"
+        android:layout_marginEnd="@dimen/spacing_12"
+        android:layout_marginBottom="@dimen/spacing_12"
         android:background="@drawable/bg_white_rounded_12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
-            android:id="@+id/tv_tag_info"
+            android:id="@+id/tvTagInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_20"
@@ -41,11 +45,11 @@
             android:background="@color/grey20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tag_info" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTagInfo" />
 
 
         <TextView
-            android:id="@+id/tv_message"
+            android:id="@+id/tvMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
@@ -56,42 +60,58 @@
             app:layout_constraintTop_toBottomOf="@+id/vDivider" />
 
         <TextView
-            android:id="@+id/tv_message_data"
+            android:id="@+id/tvMessageData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_4"
             android:layout_marginEnd="@dimen/spacing_12"
             android:textColor="@color/baby_pink"
-            app:layout_constraintEnd_toStartOf="@+id/iv_asterisk"
-            app:layout_constraintStart_toStartOf="@+id/tv_message"
-            app:layout_constraintTop_toBottomOf="@+id/tv_message" />
+            app:layout_constraintEnd_toStartOf="@+id/ivAsterisk"
+            app:layout_constraintStart_toStartOf="@+id/tvMessage"
+            app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
+
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password_text"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_24"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMessageData" />
+
 
         <ImageView
-            android:id="@+id/iv_asterisk"
+            android:id="@+id/ivAsterisk"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="@dimen/spacing_12"
             android:background="@drawable/bg_button_circle_white"
             android:padding="@dimen/spacing_8"
             android:src="@drawable/ic_hide_text"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_message_data"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMessageData"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_message_data" />
+            app:layout_constraintTop_toTopOf="@+id/tvMessageData" />
 
         <Button
-            android:id="@+id/btn_decrypt"
+            android:id="@+id/btnDecrypt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_16"
+            android:text="Decrypt"
+            android:textColor="@color/white"
+
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_message_data" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPassword"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/et_password"
+            android:id="@+id/etPasswordRead"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="@dimen/spacing_32"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_32"
             android:background="@drawable/bg_white_rounded_12dp"
             android:gravity="top"
@@ -101,28 +121,26 @@
             android:outlineSpotShadowColor="@color/baby_pink"
             android:padding="@dimen/spacing_16"
             android:textColor="@color/black"
-            android:textColorHint="@color/baby_pink"
+            android:textColorHint="@color/grey20"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPassword"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-
-            app:layout_constraintTop_toBottomOf="@+id/btn_decrypt"
+            app:layout_constraintStart_toEndOf="@+id/tvPassword"
+            app:layout_constraintTop_toTopOf="@+id/tvPassword"
             tools:ignore="Autofill" />
 
         <ImageView
             android:id="@+id/ivLineArrowItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_16"
             android:padding="@dimen/spacing_8"
             android:src="@drawable/ic_arrow"
-            app:layout_constraintBottom_toBottomOf="@+id/et_password"
+            android:layout_marginEnd="@dimen/spacing_16"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDecrypt"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/et_password"
-            app:layout_constraintTop_toBottomOf="@+id/btn_decrypt" />
+            app:layout_constraintTop_toTopOf="@+id/btnDecrypt" />
 
-        <LinearLayout
-            android:id="@+id/clFaqExpanded"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTagInfoExtended"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -130,50 +148,53 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_password">
+            app:layout_constraintTop_toBottomOf="@id/btnDecrypt">
 
             <TextView
-                android:id="@+id/tv_utf"
+                android:id="@+id/tvUtf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16"
                 android:padding="@dimen/spacing_8"
                 android:text="UTF: "
                 android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
-                android:id="@+id/tv_utf_data"
+                android:id="@+id/tvUtfData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_12"
                 android:padding="@dimen/spacing_8"
                 android:textColor="@color/baby_pink"
-                app:layout_constraintStart_toEndOf="@+id/tv_utf"
-                app:layout_constraintTop_toTopOf="@+id/tv_utf" />
+                app:layout_constraintStart_toEndOf="@+id/tvUtf"
+                app:layout_constraintTop_toTopOf="@+id/tvUtf" />
 
             <TextView
-                android:id="@+id/tv_tagId"
+                android:id="@+id/tvTagId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_16"
                 android:layout_marginTop="@dimen/spacing_12"
-                android:layout_marginBottom="@dimen/spacing_12"
                 android:padding="@dimen/spacing_8"
+                android:layout_marginStart="@dimen/spacing_16"
                 android:text="Tag ID: "
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvUtf" />
 
             <TextView
-                android:id="@+id/tv_tagId_data"
+                android:id="@+id/tvTagIdData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_12"
-
                 android:padding="@dimen/spacing_8"
-                android:textColor="@color/baby_pink" />
+                android:textColor="@color/baby_pink"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTagId"
+                app:layout_constraintStart_toEndOf="@+id/tvTagId"
+                app:layout_constraintTop_toTopOf="@+id/tvTagId" />
 
             <TextView
-                android:id="@+id/tv_tagSize"
+                android:id="@+id/tvtagSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16"
@@ -182,19 +203,19 @@
                 android:text="Tag size: "
                 android:textColor="@color/black"
                 app:layout_constraintLeft_toLeftOf="parent"
-
-                app:layout_constraintTop_toBottomOf="@+id/tv_tagId" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTagId" />
 
             <TextView
-                android:id="@+id/tv_ttagSized_data"
+                android:id="@+id/tvTagSizeData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_12"
-
                 android:padding="@dimen/spacing_8"
-                android:textColor="@color/baby_pink" />
+                android:textColor="@color/baby_pink"
+                app:layout_constraintBottom_toBottomOf="@+id/tvtagSize"
+                app:layout_constraintStart_toEndOf="@+id/tvtagSize"
+                app:layout_constraintTop_toTopOf="@+id/tvtagSize" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

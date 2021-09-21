@@ -2,7 +2,6 @@ package com.aljazs.nfcTagApp.ui.main.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.aljazs.nfcTagApp.domain.DomainMenuNavigation
 import com.aljazs.nfcTagApp.extensions.notifiableListOf
 import com.aljazs.nfcTagApp.model.MenuNavigationItem
 

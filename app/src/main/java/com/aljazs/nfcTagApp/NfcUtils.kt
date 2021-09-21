@@ -11,10 +11,11 @@ import android.nfc.tech.Ndef
 import android.nfc.tech.NdefFormatable
 import android.os.Parcelable
 import android.util.Log
+import android.widget.Toast
+import kotlin.coroutines.coroutineContext
 
 class  NfcUtils {
     companion object {
-
 
         fun createNFCMessage(payload: String, intent: Intent?): Boolean {
             val pathPrefix = "A"
@@ -34,7 +35,9 @@ class  NfcUtils {
             try {
                 Ndef.get(tag)?.let {
                     it.connect()
-                    if (it.maxSize < nfcMessage.toByteArray().size) return false
+                    if (it.maxSize < nfcMessage.toByteArray().size) {
+                        return false
+                    }
 
                     return if (it.isWritable) {
                         it.writeNdefMessage(nfcMessage)

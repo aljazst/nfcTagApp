@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.aljazs.nfcTagApp.R
-import com.aljazs.nfcTagApp.domain.DomainMenuNavigation
 import com.aljazs.nfcTagApp.extensions.extClick
 import com.aljazs.nfcTagApp.extensions.extInflate
 import com.aljazs.nfcTagApp.model.MenuNavigationItem
