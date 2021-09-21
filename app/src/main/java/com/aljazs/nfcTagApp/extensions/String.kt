@@ -27,7 +27,6 @@ fun TextView.setAsterisk(message: String) {
         //this.setTextSize(TypedValue.COMPLEX_UNIT_DIP, resources.getDimension(R.dimen.spacing_12))
         asterisk
     } else {
-
         message
     }
     //someTextView.text = asterisk

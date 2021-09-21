@@ -24,23 +24,19 @@ class MainViewModel : ViewModel() {
         ),
         MenuNavigationItem(
             title = R.string.menu_item_encode,
-            imageRes = R.drawable.ic_nfc,
+            imageRes = R.drawable.ic_lock,
             isSelected = false
         ),
         MenuNavigationItem(
             title = R.string.menu_item_decode,
-            imageRes = R.drawable.ic_nfc,
+            imageRes = R.drawable.ic_settings,
             isSelected = false
         ),
         MenuNavigationItem(
             title = R.string.menu_item_settings,
-            imageRes = R.drawable.ic_nfc,
-            isSelected = false
-        ),
-        MenuNavigationItem(
-            title = R.string.info_recycle_send_preposition,
-            imageRes = R.drawable.ic_nfc,
+            imageRes = R.drawable.ic_help,
             isSelected = false
         )
+
     )
 }

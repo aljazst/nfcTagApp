@@ -21,6 +21,17 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_rv_menu_navigation" />
 
+    <TextView
+        android:id="@+id/tvMainActivityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yo bro, there is nothing here. Select a fragment."
+        android:layout_marginTop="@dimen/spacing_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/rvMainNavigationOptions" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/content_container"
         android:layout_width="match_parent"
@@ -30,15 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvMainNavigationOptions" />
 
-    <TextView
-        android:id="@+id/tv_textssss"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lol"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/rvMainNavigationOptions" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ import com.aljazs.nfcTagApp.R
 
 class AlertDialog : DialogFragment() {
 
+    //TODO: Custom dialog
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         getDialog()!!.getWindow()?.setBackgroundDrawableResource(R.drawable.bg_button_circle_white);
         return inflater.inflate(R.layout.dialog_alert, container, false)

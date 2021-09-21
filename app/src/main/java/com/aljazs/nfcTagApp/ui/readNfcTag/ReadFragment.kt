@@ -44,26 +44,40 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
         var decryptedString : String = ""
 
         readViewModel.tag.observe(viewLifecycleOwner, Observer {
-            tv_message_data.text = it.message
-            encryptedString = it.message
-            tv_utf_data.text = it.UTF
-            tv_tagId_data.text = it.tagID
-            tv_ttagSized_data.text = it.tagUsedMemory +"/"+ it.tagSize.toString() +" bytes"
+            if(it.message.isNullOrBlank()){
+                btnDecrypt.visibility =View.GONE
+                etPasswordRead.visibility = View.GONE
+                ivAsterisk.visibility = View.GONE
+                tvPassword.visibility = View.GONE
+                ivLineArrowItem.visibility = View.GONE
+            }else {
+                tvMessageData.text = it.message
+                encryptedString = it.message
+                tvUtfData.text = it.UTF
+                tvTagIdData.text = it.tagID
+                tvTagSizeData.text = it.tagUsedMemory + "/" + it.tagSize.toString() + getString(R.string.message_size_bytes)
+
+                btnDecrypt.visibility =View.VISIBLE
+                etPasswordRead.visibility = View.VISIBLE
+                ivAsterisk.visibility = View.VISIBLE
+                tvPassword.visibility = View.VISIBLE
+                ivLineArrowItem.visibility = View.VISIBLE
+            }
 
         })
 
-        iv_asterisk.extClick {
+        ivAsterisk.extClick {
             if(decryptedString.isNotEmpty()){
-                tv_message_data.setAsterisk(decryptedString)
+                tvMessageData.setAsterisk(decryptedString)
             }
 
         }
 
-        btn_decrypt.extClick {
+        btnDecrypt.extClick {
             val decodedBytes = Base64.decode(encryptedString, Base64.NO_WRAP)
 
-            decryptedString =  decryptor.decryptData(et_password.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
-            tv_message_data.text = decryptedString
+            decryptedString =  decryptor.decryptData(etPasswordRead.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
+            tvMessageData.text = decryptedString
 
         }
         ivLineArrowItem.extClick {
@@ -71,9 +85,9 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
               it.isExtended = !it.isExtended
 
                 if(it.isExtended){
-                    clFaqExpanded.extVisible()
+                    clTagInfoExtended.extVisible()
                 }else{
-                    clFaqExpanded.extGone()
+                    clTagInfoExtended.extGone()
                 }
             })
         }
