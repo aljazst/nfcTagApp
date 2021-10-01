@@ -36,6 +36,7 @@ import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteViewModel
 import java.nio.charset.Charset
 import kotlin.experimental.and
 import android.nfc.tech.MifareUltralight
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var readViewModel: ReadViewModel
     private lateinit var writeViewModel: WriteViewModel
 
+    private lateinit var layoutManager: StaggeredGridLayoutManager
 
     private val menuAdapter by lazy {
         MenuNavigationAdapter { titleId ->
@@ -83,8 +85,11 @@ class MainActivity : AppCompatActivity() {
     private fun initAdapter() {
 
         rvMainNavigationOptions.adapter = menuAdapter
-        menuAdapter.menuItems = viewModel.getMenuItems()
 
+
+        layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        rvMainNavigationOptions.layoutManager = layoutManager
+        menuAdapter.menuItems = viewModel.getMenuItems()
     }
 
     private fun getAndroidId() : String {
