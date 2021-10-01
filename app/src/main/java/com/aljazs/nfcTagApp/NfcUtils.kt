@@ -11,11 +11,11 @@ import android.nfc.tech.Ndef
 import android.nfc.tech.NdefFormatable
 import android.os.Parcelable
 import android.util.Log
+import android.widget.Toast
+import kotlin.coroutines.coroutineContext
 
 class  NfcUtils {
     companion object {
-        private val mimeType: String = ""
-
 
         fun createNFCMessage(payload: String, intent: Intent?): Boolean {
             val pathPrefix = "A"
@@ -35,7 +35,9 @@ class  NfcUtils {
             try {
                 Ndef.get(tag)?.let {
                     it.connect()
-                    if (it.maxSize < nfcMessage.toByteArray().size) return false
+                    if (it.maxSize < nfcMessage.toByteArray().size) {
+                        return false
+                    }
 
                     return if (it.isWritable) {
                         it.writeNdefMessage(nfcMessage)
@@ -58,43 +60,5 @@ class  NfcUtils {
             }
         }
 
-
-        fun getData(rawMsgs: Array<Parcelable>): String {
-            val msgs = arrayOfNulls<NdefMessage>(rawMsgs.size)
-            for (i in rawMsgs.indices) {
-                msgs[i] = rawMsgs[i] as NdefMessage
-            }
-
-            val records = msgs[0]!!.records
-
-            var recordData = ""
-
-            for (record in records) {
-                recordData += record.toString() + "\n"
-            }
-
-            return recordData
-        }
-
-        fun getIntentFilters(): Array<IntentFilter> {
-            val ndefFilter = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED)
-            try {
-                ndefFilter.addDataType("application/vnd.com.tickets")
-            } catch (e: IntentFilter.MalformedMimeTypeException) {
-                Log.e("NfcUtils", "Problem in parsing mime type for nfc reading", e)
-            }
-
-            return arrayOf(ndefFilter)
-        }
-
-        fun prepareMessageToWrite(tagData: String, context: Context): NdefMessage {
-            val message: NdefMessage
-            val typeBytes = mimeType.toByteArray()
-            val payload = tagData.toByteArray()
-            val record1 = NdefRecord(NdefRecord.TNF_MIME_MEDIA, typeBytes, null, payload)
-            val record2 = NdefRecord.createApplicationRecord(context.packageName)
-            message = NdefMessage(arrayOf(record1, record2))
-            return message
-        }
     }
 }
