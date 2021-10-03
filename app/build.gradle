@@ -48,4 +48,7 @@ dependencies {
 
     //dialog
     implementation 'com.airbnb.android:lottie:3.2.2'
+
+    //switch button
+    implementation  'com.github.zcweng:switch-button:0.0.3@aar'
 }

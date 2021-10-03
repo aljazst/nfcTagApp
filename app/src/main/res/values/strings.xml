@@ -9,11 +9,11 @@
     <string name="info_recycle_sub_prepositon">Pošljite svoj predlog ali komentar.</string>
 
     // MENU ITEMS NAVIGATION
-    <string name="menu_item_read">Read</string>
-    <string name="menu_item_write">Write</string>
-    <string name="menu_item_encode">Protect</string>
+    <string name="menu_item_read">Decrypt data</string>
+    <string name="menu_item_write">Encrypt data </string>
+    <string name="menu_item_encode">Protect tags</string>
     <string name="menu_item_decode">Settings</string>
-    <string name="menu_item_settings">About</string>
+    <string name="menu_item_settings">About app</string>
 
     //WRITE FRAGMENT
     <string name="write_editText_hint">Your message</string>
@@ -25,4 +25,9 @@
     <string name="write_password">Enter your password</string>
     <string name="btn_write">Encrypt message</string>
     <string name="password_text">Password: </string>
+
+    //WRITE FRAGMENT
+    <string name="nfc">NFC</string>
+    <!--<string name="nfc">NFC \u0020 </string> -->
+
 </resources>

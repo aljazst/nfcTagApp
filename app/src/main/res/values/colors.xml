@@ -51,5 +51,19 @@
     <color name="very_light_pink">#f3f2f2</color>
 
     <!-- Base layout colors -->
-    <color name="jet">#333333</color>
+    <color name="jet">#232323</color>
+
+    <color name="manatee">#979DAC</color>
+    <color name="roman_silver">#7D8597</color>
+    <color name="black_coral">#5C677D</color>
+    <color name="independance">#33415C</color>
+    <color name="oxford_blue">#001233</color>
+    <color name="oxford_blue_light">#001845</color>
+    <color name="oxford_blue_lighter">#00215f</color>
+    <color name="oxford_blue_lightest">#002855</color>
+    <color name="dark_cornflower_blue">#023E7D</color>
+    <color name="usafa_blue">#0353A4</color>
+    <color name="true_blue">#0466C8</color>
+
+
 </resources>

@@ -11,13 +11,10 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior.getTag
 import com.aljazs.nfcTagApp.extensions.extClick
 import kotlinx.android.synthetic.main.activity_main.*
 import android.nfc.*
+
 import android.nfc.tech.Ndef
 import android.nfc.tech.NfcA
 import android.provider.Settings
-import android.util.Base64
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
 import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.NfcUtils
@@ -102,23 +99,23 @@ class MainActivity : AppCompatActivity() {
     private fun onReadSelected() {
 
         writeViewModel?.isWriteTagOptionOn = false
-        extReplaceFragmentWithAnimation(
+       /* extReplaceFragmentWithAnimation(
             ReadFragment.newInstance(),
             Animation.RIGHT,
             R.id.content_container,
             addToBackStack = true,
             popBackStackInclusive = true
-        )
+        ) */
     }
 
     private fun onWriteSelected() {
-        extReplaceFragmentWithAnimation(
+       /* extReplaceFragmentWithAnimation(
             WriteFragment.newInstance(),
             Animation.RIGHT,
             R.id.content_container,
             addToBackStack = true,
             popBackStackInclusive = true
-        )
+        )*/
     }
 
     private fun onEncodeSelected() {
@@ -196,8 +193,71 @@ class MainActivity : AppCompatActivity() {
         tagId = tag!!.tagId
         /* val NFCa : NfcA = NfcA.get(tagFromIntent) https://stackoverflow.com/questions/22719465/ntag212-mifare-ultralight-with-authentication/22723250#22723250
         https://www.tabnine.com/code/java/methods/android.nfc.tech.NfcA/transceive
+        https://stackoverflow.com/questions/33100674/setting-password-for-ntag213
+
           NFCa.connect() //TODO: password protect tag
-          NFCa.transceive() */
+          NFCa.transceive()
+
+        val nfcA = NfcA.get(tagFromIntent)
+
+        val result1 = nfcA.transceive(
+            byteArrayOf(
+                0xA2.toByte(),  /* CMD = WRITE */
+                0x02.toByte(),  /* PAGE = 2    */
+                0x00.toByte(), 0x00.toByte(), 0xFF.toByte(),
+                0xFF.toByte() /* DATA = lock pages 3..15 */
+            )
+        )
+
+
+
+        val mifare = MifareUltralight.get(tagFromIntent)
+
+        try {
+        mifare.connect()
+
+
+        val pwd = byteArrayOf(
+            0x70.toByte(),
+            0x61.toByte(), 0x73.toByte(), 0x73.toByte()
+        )
+        val pack = byteArrayOf(0x98.toByte(), 0x76.toByte())
+
+// write PACK:
+
+// write PACK:
+         mifare.transceive(
+            byteArrayOf(
+                0xA2.toByte(),  /* CMD = WRITE */
+                0x2C.toByte(),  /* PAGE = 44 */
+                pack[0], pack[1], 0, 0
+            )
+        )
+            // write PWD:
+
+// write PWD:
+            mifare.transceive(
+                byteArrayOf(
+                    0xA2.toByte(),  /* CMD = WRITE */
+                    0x2B.toByte(),  /* PAGE = 43 */
+                    pwd[0], pwd[1], pwd[2], pwd[3]
+                )
+            )
+        }catch (e : Exception){
+            println("exception e $e")
+
+        }finally {
+            try {
+                mifare.close()
+            }catch (e : Exception){
+                println("exception e $e")
+
+            }
+        }
+*/
+
+
+
 
         val tagSize = Ndef.get(tagFromIntent).maxSize
         // val makeReadOnly : Boolean = Ndef.get(tagFromIntent).makeReadOnly()

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.NfcTagApp" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/jet</item>
         <item name="colorPrimaryVariant">@color/black</item>
@@ -15,11 +15,11 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MainTheme" parent="Theme.NfcTagApp">
+    <style name="MainTheme" parent="AppTheme">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightNavigationBar">false</item>
         <item name="android:navigationBarColor">@color/jet</item>
         <item name="android:statusBarColor">@color/jet</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
