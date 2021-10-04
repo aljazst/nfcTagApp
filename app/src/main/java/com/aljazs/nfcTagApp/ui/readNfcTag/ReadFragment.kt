@@ -85,9 +85,9 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
               it.isExtended = !it.isExtended
 
                 if(it.isExtended){
-                    clTagInfoExtended.extVisible()
+                    //clTagInfoExtended.extVisible()
                 }else{
-                    clTagInfoExtended.extGone()
+                    //clTagInfoExtended.extGone()
                 }
             })
         }

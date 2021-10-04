@@ -34,6 +34,7 @@ import java.nio.charset.Charset
 import kotlin.experimental.and
 import android.nfc.tech.MifareUltralight
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.aljazs.nfcTagApp.ui.readNfcTag.ReadActivity
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
@@ -76,7 +77,6 @@ class MainActivity : AppCompatActivity() {
         initNfcAdapter()
 
         initAdapter()
-        onReadSelected()
     }
 
     private fun initAdapter() {
@@ -99,6 +99,10 @@ class MainActivity : AppCompatActivity() {
     private fun onReadSelected() {
 
         writeViewModel?.isWriteTagOptionOn = false
+
+        val intent = Intent(this, ReadActivity::class.java)
+
+        startActivity(intent)
        /* extReplaceFragmentWithAnimation(
             ReadFragment.newInstance(),
             Animation.RIGHT,
@@ -146,11 +150,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        enableNfcForegroundDispatch()
+        //enableNfcForegroundDispatch()
     }
 
     override fun onPause() {
-        disableNfcForegroundDispatch()
+        //disableNfcForegroundDispatch()
         super.onPause()
     }
 
@@ -178,7 +182,7 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-        handleIntent(intent)
+       // handleIntent(intent)
     }
 
     private fun handleIntent(intent: Intent) {

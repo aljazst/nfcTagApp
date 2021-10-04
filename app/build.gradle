@@ -47,7 +47,7 @@ dependencies {
     implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03'
 
     //dialog
-    implementation 'com.airbnb.android:lottie:3.2.2'
+    implementation 'com.github.chnouman:AwesomeDialog:1.0.5'
 
     //switch button
     implementation  'com.github.zcweng:switch-button:0.0.3@aar'
