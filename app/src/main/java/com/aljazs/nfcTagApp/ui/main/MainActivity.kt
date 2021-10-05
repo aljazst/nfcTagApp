@@ -1,44 +1,42 @@
 package com.aljazs.nfcTagApp.ui.main
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior.getTag
-import com.aljazs.nfcTagApp.extensions.extClick
 import kotlinx.android.synthetic.main.activity_main.*
 import android.nfc.*
 
 import android.nfc.tech.Ndef
-import android.nfc.tech.NfcA
 import android.provider.Settings
 import androidx.lifecycle.ViewModelProvider
-import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
-import com.aljazs.nfcTagApp.common.Animation
-import com.aljazs.nfcTagApp.extensions.extReplaceFragmentWithAnimation
 import com.aljazs.nfcTagApp.extensions.extShowToast
-import com.aljazs.nfcTagApp.model.MenuNavigationItem
 import com.aljazs.nfcTagApp.model.NfcTag
 import com.aljazs.nfcTagApp.ui.main.adapter.MenuNavigationAdapter
-import com.aljazs.nfcTagApp.ui.readNfcTag.ReadFragment
 import com.aljazs.nfcTagApp.ui.readNfcTag.ReadViewModel
-import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteFragment
 import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteViewModel
 import java.nio.charset.Charset
 import kotlin.experimental.and
 import android.nfc.tech.MifareUltralight
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.aljazs.nfcTagApp.ui.readNfcTag.ReadActivity
+import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteActivity
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
 import kotlin.experimental.or
+import android.nfc.NfcAdapter
+import android.view.MotionEvent
+import com.suke.widget.SwitchButton
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     private var adapter: NfcAdapter? = null
     var tag: WritableTag? = null
     var tagId: String? = null
+
 
     private val viewModel = MainViewModel()
 
@@ -77,7 +76,42 @@ class MainActivity : AppCompatActivity() {
         initNfcAdapter()
 
         initAdapter()
+
+       /* switchNfc.setOnCheckedChangeListener { switchView, isChecked ->
+
+                if (isChecked) {
+                    openNfcSettings()
+                } else {
+                    // do something else
+                }
+
+        }
+
+        switchNfc.setOnCheckedChangeListener(SwitchButton.OnCheckedChangeListener { view, isChecked ->
+                if (isChecked) {
+                    openNfcSettings()
+                } else {
+                    // do something else
+                }
+        })*/
+
+        switchNfc.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                openNfcSettings()
+                true
+            } else false
+        }
     }
+
+    private val mNfcReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val action = intent.action
+            if (action != null && action == NfcAdapter.ACTION_ADAPTER_STATE_CHANGED) {
+                initNfcAdapter()
+            }
+        }
+    }
+
 
     private fun initAdapter() {
 
@@ -89,9 +123,17 @@ class MainActivity : AppCompatActivity() {
         menuAdapter.menuItems = viewModel.getMenuItems()
     }
 
-    private fun getAndroidId() : String {
+    private fun openNfcSettings() {
+        startActivity(Intent(Settings.ACTION_NFC_SETTINGS))
+    }
 
-        var androidID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID) // Android id is a 64-bit number as hex. hex digit = 4 bits. so we get 4x16 = 64. android_id is 16 characters long.
+    @SuppressLint("HardwareIds")
+    private fun getAndroidId(): String {
+
+        var androidID = Settings.Secure.getString(
+            contentResolver,
+            Settings.Secure.ANDROID_ID
+        ) // Android id is a 64-bit number as hex. hex digit = 4 bits. so we get 4x16 = 64. android_id is 16 characters long.
 
         return androidID.take(12) //iv needs 12
     }
@@ -103,23 +145,19 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ReadActivity::class.java)
 
         startActivity(intent)
-       /* extReplaceFragmentWithAnimation(
-            ReadFragment.newInstance(),
-            Animation.RIGHT,
-            R.id.content_container,
-            addToBackStack = true,
-            popBackStackInclusive = true
-        ) */
+        /* extReplaceFragmentWithAnimation(
+             ReadFragment.newInstance(),
+             Animation.RIGHT,
+             R.id.content_container,
+             addToBackStack = true,
+             popBackStackInclusive = true
+         ) */
     }
 
     private fun onWriteSelected() {
-       /* extReplaceFragmentWithAnimation(
-            WriteFragment.newInstance(),
-            Animation.RIGHT,
-            R.id.content_container,
-            addToBackStack = true,
-            popBackStackInclusive = true
-        )*/
+        val intent = Intent(this, WriteActivity::class.java)
+
+        startActivity(intent)
     }
 
     private fun onEncodeSelected() {
@@ -131,6 +169,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onSettingsSelected() {
+        switchNfc.isChecked = false
 
     }
 
@@ -139,6 +178,23 @@ class MainActivity : AppCompatActivity() {
         val nfcManager = getSystemService(Context.NFC_SERVICE) as NfcManager
         adapter = nfcManager.defaultAdapter
 
+        val nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+        if (!nfcAdapter.isEnabled) {
+            Toast.makeText(this, "NFC IS NOT ENABLED.", Toast.LENGTH_SHORT).show();
+
+            switchNfc.setEnabled(true)
+            switchNfc.setEnableEffect(true)
+            switchNfc.isChecked = false
+
+
+        } else {
+
+            switchNfc.isChecked = true
+            switchNfc.setEnabled(false)
+            switchNfc.setEnableEffect(false);//disable the switch animation
+
+
+        }
         if (adapter == null) {
             // Stop here, we definitely need NFC
             Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
@@ -150,12 +206,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        registerReceiver(mNfcReceiver, IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED))
+
+        initNfcAdapter()
+
         //enableNfcForegroundDispatch()
     }
 
     override fun onPause() {
-        //disableNfcForegroundDispatch()
+
         super.onPause()
+        unregisterReceiver(mNfcReceiver)
+
+        //disableNfcForegroundDispatch()
     }
 
     private fun getTag() = "MainActivity"
@@ -182,7 +246,7 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-       // handleIntent(intent)
+        // handleIntent(intent)
     }
 
     private fun handleIntent(intent: Intent) {
@@ -261,12 +325,10 @@ class MainActivity : AppCompatActivity() {
 */
 
 
-
-
         val tagSize = Ndef.get(tagFromIntent).maxSize
         // val makeReadOnly : Boolean = Ndef.get(tagFromIntent).makeReadOnly()
         val makeReadOnly = Ndef.get(tagFromIntent)
-        val makeReadOnlya : Array<String> = tagFromIntent?.techList as Array<String>
+        val makeReadOnlya: Array<String> = tagFromIntent?.techList as Array<String>
 
 
         val mifare: MifareUltralight = MifareUltralight.get(tagFromIntent)
@@ -335,21 +397,22 @@ var response : ByteArray
                     pwd[0], pwd[1], pwd[2], pwd[3]
                 )
             )*/
-        }catch (e: Exception){
+        } catch (e: Exception) {
             println("exceptionn ${e}")
-        }finally {
+        } finally {
 
-           // makeReadOnly.close()
+            // makeReadOnly.close()
         }
 
         println("test1 techlist ${makeReadOnlya.contentToString()}")
 
-        val type  = Ndef.get(tagFromIntent)
+        val type = Ndef.get(tagFromIntent)
         //showToast("Tag tapped type: $makeReadOnlya")
 
 
         if (writeViewModel?.isWriteTagOptionOn) {
-            val messageWrittenSuccessfully = NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
+            val messageWrittenSuccessfully =
+                NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
             writeViewModel?.isWriteTagOptionOn = false
             writeViewModel?._closeDialog.value = true
 
@@ -387,7 +450,15 @@ var response : ByteArray
 
                         //showToast("Tag tapped type: $length")
 
-                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize.toString(),usedMemory.toString()))
+                        readViewModel?.setTagMessage(
+                            NfcTag(
+                                inMessage1,
+                                charset.toString(),
+                                tagId,
+                                tagSize.toString(),
+                                usedMemory.toString()
+                            )
+                        )
 
 
                     }
@@ -479,8 +550,7 @@ var response : ByteArray
                     byteArrayOf(
                         0xA2.toByte(),
                         42,
-                        (responseAuthLim[0] and 0x078 or (if (prot) 0x080.toByte() else 0x000) or ((authLim and 0x007).toByte())).toByte()
-                        ,
+                        (responseAuthLim[0] and 0x078 or (if (prot) 0x080.toByte() else 0x000) or ((authLim and 0x007).toByte())).toByte(),
                         responseAuthLim[1],
                         responseAuthLim[2],
                         responseAuthLim[3]
@@ -525,6 +595,7 @@ var response : ByteArray
 
 
     }
+
     private fun deletePassword(mfc: MifareUltralight) {
 
         val sp = getSharedPreferences("pwd", Context.MODE_PRIVATE)
@@ -567,7 +638,11 @@ var response : ByteArray
                         Toast.LENGTH_LONG
                     ).show();
                 } else {
-                    Toast.makeText(this@MainActivity, "Password verification is correct", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Password verification is correct",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             } else {
 

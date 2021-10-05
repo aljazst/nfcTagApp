@@ -44,7 +44,8 @@
                 android:resource="@xml/nfc_tech_filter" />
 
         </activity>
-        <activity android:name=".ui.readNfcTag.WriteActivity">
+
+        <activity android:name=".ui.writeNfcTag.WriteActivity">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT"/>
