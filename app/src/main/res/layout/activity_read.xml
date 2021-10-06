@@ -13,8 +13,8 @@
         android:src="@drawable/ic_arrow_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/spacing_12"
         android:padding="@dimen/spacing_12"
-
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,6 +37,7 @@
             android:layout_marginStart="@dimen/spacing_20"
             android:layout_marginTop="@dimen/spacing_12"
             android:text="Tag info"
+            android:visibility="gone"
             android:textColor="@color/oxford_blue_light"
             android:textSize="@dimen/spacing_18"
             android:textStyle="bold"
@@ -49,6 +50,7 @@
             android:layout_height="2dp"
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_2"
+            android:visibility="invisible"
             android:layout_marginEnd="@dimen/spacing_16"
             android:layout_marginBottom="@dimen/spacing_8"
             android:background="@color/oxford_blue_light"
@@ -63,8 +65,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_12"
-            android:text="Message: "
-            android:textColor="@color/black"
+            android:text="@string/encoded_message_text"
+            android:textStyle="bold"
+            android:textColor="@color/independance"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vDivider" />
 
@@ -74,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_4"
             android:layout_marginEnd="@dimen/spacing_12"
-            android:textColor="@color/baby_pink"
+            android:textColor="@color/oxford_blue_lighter"
             app:layout_constraintEnd_toStartOf="@+id/ivAsterisk"
             app:layout_constraintStart_toStartOf="@+id/tvMessage"
             app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
@@ -84,9 +87,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
-            android:layout_marginTop="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_32"
             android:text="@string/password_text"
-            android:textColor="@color/black"
+            android:textColor="@color/independance"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvMessageData" />
 
@@ -98,6 +102,7 @@
             android:layout_marginEnd="@dimen/spacing_12"
             android:background="@drawable/bg_button_circle_white"
             android:padding="@dimen/spacing_8"
+            android:visibility="invisible"
             android:src="@drawable/ic_hide_text"
             app:layout_constraintBottom_toBottomOf="@+id/tvMessageData"
             app:layout_constraintEnd_toEndOf="parent"
@@ -107,32 +112,49 @@
             android:id="@+id/btnDecrypt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:text="Decrypt"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:layout_marginBottom="@dimen/spacing_8"
+            android:paddingStart="@dimen/spacing_6"
+            android:paddingEnd="@dimen/spacing_6"
+            android:background="@drawable/bg_blue_rounded_12"
+            android:text="@string/button_decode"
             android:textColor="@color/white"
+            android:elevation="@dimen/spacing_2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
-        <EditText
-            android:id="@+id/etPasswordRead"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_32"
-            android:background="@drawable/bg_white_rounded_12dp"
-            android:gravity="top"
-            android:hint="@string/write_password_hint"
-            android:inputType="textMultiLine|textCapSentences"
-            android:outlineAmbientShadowColor="@color/baby_pink"
-            android:outlineSpotShadowColor="@color/baby_pink"
-            android:padding="@dimen/spacing_16"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey20"
+            android:layout_height="66dp"
+            android:layout_marginBottom="@dimen/spacing_12"
+            android:layout_marginTop="@dimen/spacing_6"
+            android:layout_marginEnd="@dimen/spacing_56"
+            app:endIconMode="password_toggle"
+            app:boxBackgroundColor="@color/independance"
+            app:boxStrokeColor="@color/independance"
+            app:boxBackgroundMode="outline"
             app:layout_constraintBottom_toBottomOf="@+id/tvPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvPassword"
             app:layout_constraintTop_toTopOf="@+id/tvPassword"
-            tools:ignore="Autofill" />
+            style="@style/CustomTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPasswordRead"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/independance"
+                android:inputType="textPassword"
+                android:nextFocusDown="@id/tilPassword"
+                android:outlineSpotShadowColor="@color/jet"
+                android:textColor="@color/independance"
+                app:hintTextColor="@color/roman_silver" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
             android:id="@+id/ivLineArrowItem"

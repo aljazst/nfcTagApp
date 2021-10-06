@@ -9,6 +9,7 @@ import android.nfc.tech.MifareUltralight
 import android.nfc.tech.Ndef
 import android.nfc.tech.NfcA
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -18,9 +19,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior.getTag
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
+import com.aljazs.nfcTagApp.common.Constants
 import com.aljazs.nfcTagApp.extensions.extClick
 import com.aljazs.nfcTagApp.extensions.extGone
 import com.aljazs.nfcTagApp.extensions.extShowToast
@@ -28,7 +31,7 @@ import com.aljazs.nfcTagApp.extensions.extVisible
 import com.aljazs.nfcTagApp.model.NfcTag
 import kotlinx.android.synthetic.main.activity_read.*
 import kotlinx.android.synthetic.main.activity_read.btnDecrypt
-import kotlinx.android.synthetic.main.activity_read.etPasswordRead
+
 import kotlinx.android.synthetic.main.activity_read.ivAsterisk
 import kotlinx.android.synthetic.main.activity_read.ivLineArrowItem
 import kotlinx.android.synthetic.main.activity_read.tvMessageData
@@ -49,11 +52,18 @@ class ReadActivity : AppCompatActivity() {
 
     private fun getTag() = "ReadActivity"
 
+    private lateinit var decryptor: Decryptor
+
     private val readViewModel: ReadViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_read)
+
+        decryptor = Decryptor()
+
+        var encryptedString : String = ""
+        var decryptedString : String = ""
 
 
         initNfcAdapter()
@@ -65,8 +75,8 @@ class ReadActivity : AppCompatActivity() {
         readViewModel.tag.observe(this, Observer {
             if(it.message.isNullOrBlank()){
                 btnDecrypt.visibility =View.GONE
-                etPasswordRead.visibility = View.GONE
-                ivAsterisk.visibility = View.GONE
+                tilPassword.visibility = View.GONE
+                //ivAsterisk.visibility = View.GONE
                 tvPassword.visibility = View.GONE
                 ivLineArrowItem.visibility = View.GONE
             }else {
@@ -77,8 +87,8 @@ class ReadActivity : AppCompatActivity() {
                 tvTagSizeData.text = it.tagUsedMemory + "/" + it.tagSize.toString() + getString(R.string.message_size_bytes)
 
                 btnDecrypt.visibility =View.VISIBLE
-                etPasswordRead.visibility = View.VISIBLE
-                ivAsterisk.visibility = View.VISIBLE
+                tilPassword.visibility = View.VISIBLE
+                //ivAsterisk.visibility = View.VISIBLE
                 tvPassword.visibility = View.VISIBLE
                 ivLineArrowItem.visibility = View.VISIBLE
             }
@@ -95,6 +105,14 @@ class ReadActivity : AppCompatActivity() {
                     clTagInfoExtended.extGone()
                 }
             })
+        }
+
+        btnDecrypt.extClick {
+            val decodedBytes = Base64.decode(encryptedString, Base64.NO_WRAP)
+
+            decryptedString =  decryptor.decryptData(etPasswordRead.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
+            tvMessageData.text = decryptedString
+
         }
 
 

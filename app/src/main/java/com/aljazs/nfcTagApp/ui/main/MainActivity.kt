@@ -36,6 +36,9 @@ import java.util.*
 import kotlin.experimental.or
 import android.nfc.NfcAdapter
 import android.view.MotionEvent
+import android.view.View
+import com.aljazs.nfcTagApp.extensions.extInvisible
+import com.aljazs.nfcTagApp.extensions.extVisible
 import com.suke.widget.SwitchButton
 
 
@@ -45,6 +48,8 @@ class MainActivity : AppCompatActivity() {
     var tag: WritableTag? = null
     var tagId: String? = null
 
+    var openActionNfcSettings: Boolean =
+        true //workaround for library issue: click listener not implemented https://github.com/zcweng/SwitchButton/issues/27
 
     private val viewModel = MainViewModel()
 
@@ -77,38 +82,24 @@ class MainActivity : AppCompatActivity() {
 
         initAdapter()
 
-       /* switchNfc.setOnCheckedChangeListener { switchView, isChecked ->
-
-                if (isChecked) {
-                    openNfcSettings()
-                } else {
-                    // do something else
-                }
-
-        }
 
         switchNfc.setOnCheckedChangeListener(SwitchButton.OnCheckedChangeListener { view, isChecked ->
+            if (openActionNfcSettings) {
                 if (isChecked) {
                     openNfcSettings()
-                } else {
-                    // do something else
                 }
-        })*/
-
-        switchNfc.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                openNfcSettings()
-                true
-            } else false
-        }
+            }
+        })
     }
 
     private val mNfcReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (action != null && action == NfcAdapter.ACTION_ADAPTER_STATE_CHANGED) {
+                openActionNfcSettings = false
                 initNfcAdapter()
             }
+
         }
     }
 
@@ -169,6 +160,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onSettingsSelected() {
+        switchNfc.setEnabled(true)
+        switchNfc.setEnableEffect(true)
         switchNfc.isChecked = false
 
     }
@@ -180,24 +173,41 @@ class MainActivity : AppCompatActivity() {
 
         val nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         if (!nfcAdapter.isEnabled) {
-            Toast.makeText(this, "NFC IS NOT ENABLED.", Toast.LENGTH_SHORT).show();
 
+
+            switchNfc.extVisible()
+            tvNfcText.extVisible()
             switchNfc.setEnabled(true)
             switchNfc.setEnableEffect(true)
             switchNfc.isChecked = false
-
+            openActionNfcSettings = true
 
         } else {
+            openActionNfcSettings = false
 
-            switchNfc.isChecked = true
+            switchNfc.setChecked(true)
             switchNfc.setEnabled(false)
             switchNfc.setEnableEffect(false);//disable the switch animation
 
+            switchNfc.postDelayed(Runnable {
+                switchNfc.extInvisible()
+                switchNfc.setEnabled(true)
+                switchNfc.setEnableEffect(true)
+                switchNfc.setChecked(false)
+            }, 3000)
+
+
+            tvNfcText.postDelayed(Runnable { tvNfcText.extInvisible() }, 3000)
 
         }
+
         if (adapter == null) {
             // Stop here, we definitely need NFC
-            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
+            Toast.makeText(
+                this,
+                "This device doesn't support NFC. Get a better phone.",
+                Toast.LENGTH_LONG
+            ).show();
             finish();
             return;
         }
@@ -243,11 +253,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
 
-        // handleIntent(intent)
-    }
 
     private fun handleIntent(intent: Intent) {
 

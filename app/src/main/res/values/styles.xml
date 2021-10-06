@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomTextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@color/independance</item>
+        <item name="colorControlHighlight">@color/independance</item>
+    </style>
+
+</resources>

@@ -23,8 +23,11 @@
     <string name="message_size_bytes">bytes</string>
     <string name="write_text">Enter your message</string>
     <string name="write_password">Enter your password</string>
-    <string name="btn_write">Encrypt message</string>
+    <string name="btn_write">Encode data</string>
     <string name="password_text">Password: </string>
+    <string name="encoded_message_text">Encoded message </string>
+    <string name="decoded_message_text">Decoded message </string>
+    <string name="button_decode">Decode data</string>
 
     //WRITE FRAGMENT
     <string name="nfc">NFC</string>

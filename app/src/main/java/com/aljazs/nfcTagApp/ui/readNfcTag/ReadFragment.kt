@@ -46,7 +46,7 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
         readViewModel.tag.observe(viewLifecycleOwner, Observer {
             if(it.message.isNullOrBlank()){
                 btnDecrypt.visibility =View.GONE
-                etPasswordRead.visibility = View.GONE
+                etPasswordRead1.visibility = View.GONE
                 ivAsterisk.visibility = View.GONE
                 tvPassword.visibility = View.GONE
                 ivLineArrowItem.visibility = View.GONE
@@ -58,7 +58,7 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
                 tvTagSizeData.text = it.tagUsedMemory + "/" + it.tagSize.toString() + getString(R.string.message_size_bytes)
 
                 btnDecrypt.visibility =View.VISIBLE
-                etPasswordRead.visibility = View.VISIBLE
+                etPasswordRead1.visibility = View.VISIBLE
                 ivAsterisk.visibility = View.VISIBLE
                 tvPassword.visibility = View.VISIBLE
                 ivLineArrowItem.visibility = View.VISIBLE
@@ -76,7 +76,7 @@ class ReadFragment : Fragment(R.layout.fragment_read) {
         btnDecrypt.extClick {
             val decodedBytes = Base64.decode(encryptedString, Base64.NO_WRAP)
 
-            decryptedString =  decryptor.decryptData(etPasswordRead.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
+            decryptedString =  decryptor.decryptData(etPasswordRead1.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
             tvMessageData.text = decryptedString
 
         }

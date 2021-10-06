@@ -15,11 +15,19 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import com.aljazs.nfcTagApp.Encryptor
 import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
+import com.aljazs.nfcTagApp.common.Constants
+import com.aljazs.nfcTagApp.extensions.TAG
+import com.aljazs.nfcTagApp.extensions.extClick
 import com.aljazs.nfcTagApp.extensions.extShowToast
+import kotlinx.android.synthetic.main.activity_read.*
+import kotlinx.android.synthetic.main.fragment_write.*
 import java.lang.Exception
 
 class WriteActivity : AppCompatActivity() {
@@ -30,13 +38,58 @@ class WriteActivity : AppCompatActivity() {
     private var adapter: NfcAdapter? = null
     var tag: WritableTag? = null
 
-
+    private lateinit var encryptor: Encryptor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
         initNfcAdapter()
+
+        iv_back.extClick {
+            finish()
+        }
+
+        encryptor = Encryptor()
+
+
+        writeViewModel.text.observe(this, Observer {
+            writeViewModel.messageToSave = it
+        })
+        writeViewModel.closeDialog.observe(this, Observer {
+
+        })
+
+        etMessage.doOnTextChanged { text, start, before, count ->
+
+            tvMessageSizeData.text = count.plus(7).toString() // add 7bytes for basic nfc data
+            if(count >= 1){
+                tvWritePasswordTitle.visibility =View.VISIBLE
+                etPassword.visibility =View.VISIBLE
+            }else{
+                tvWritePasswordTitle.visibility = View.GONE
+                etPassword.visibility =View.GONE
+            }
+        }
+        etPassword.doOnTextChanged { text, start, before, count ->
+            if(count >= 1){
+                btnWrite.visibility =View.VISIBLE
+            }else{
+                btnWrite.visibility = View.GONE
+            }
+
+        }
+
+        btnWrite.extClick {
+
+            writeViewModel.isWriteTagOptionOn = true
+            writeViewModel.messageToSave = etMessage.text.toString()
+            Log.i(TAG,"Write button was clicked.")
+            val encryptedText = encryptor.encryptText(etPassword.text.toString(), writeViewModel.messageToSave,
+                Constants.INIT_VECTOR
+            )
+            writeViewModel.messageToSave = encryptedText
+        }
     }
 
     /** Called when the user taps the Send button */
@@ -121,7 +174,7 @@ class WriteActivity : AppCompatActivity() {
 
         if (writeViewModel?.isWriteTagOptionOn) {
             val messageWrittenSuccessfully =
-                NfcUtils.createNFCMessage("pikapolonica", intent)
+                NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
             writeViewModel?.isWriteTagOptionOn = false
             writeViewModel?._closeDialog.value = true
 
