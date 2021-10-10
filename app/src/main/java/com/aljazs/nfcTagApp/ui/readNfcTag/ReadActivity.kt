@@ -15,32 +15,25 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior.getTag
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
 import com.aljazs.nfcTagApp.common.Constants
-import com.aljazs.nfcTagApp.extensions.extClick
-import com.aljazs.nfcTagApp.extensions.extGone
-import com.aljazs.nfcTagApp.extensions.extShowToast
-import com.aljazs.nfcTagApp.extensions.extVisible
+import com.aljazs.nfcTagApp.extensions.*
 import com.aljazs.nfcTagApp.model.NfcTag
+import com.example.awesomedialog.*
 import kotlinx.android.synthetic.main.activity_read.*
 import kotlinx.android.synthetic.main.activity_read.btnDecrypt
 
-import kotlinx.android.synthetic.main.activity_read.ivAsterisk
 import kotlinx.android.synthetic.main.activity_read.ivLineArrowItem
 import kotlinx.android.synthetic.main.activity_read.tvMessageData
 import kotlinx.android.synthetic.main.activity_read.tvPassword
 import kotlinx.android.synthetic.main.activity_read.tvTagIdData
 import kotlinx.android.synthetic.main.activity_read.tvTagSizeData
 import kotlinx.android.synthetic.main.activity_read.tvUtfData
-import kotlinx.android.synthetic.main.fragment_read.*
-import java.lang.Exception
+
 import java.nio.charset.Charset
 import kotlin.experimental.and
 
@@ -50,7 +43,8 @@ class ReadActivity : AppCompatActivity() {
     var tag: WritableTag? = null
     var tagId: String? = null
 
-    private fun getTag() = "ReadActivity"
+
+    var encryptedString : String = ""
 
     private lateinit var decryptor: Decryptor
 
@@ -62,15 +56,25 @@ class ReadActivity : AppCompatActivity() {
 
         decryptor = Decryptor()
 
-        var encryptedString : String = ""
-        var decryptedString : String = ""
+        var lol = AwesomeDialog.build(this)
+            .title("title")
+            .body("body")
+            .icon(R.drawable.ic_congrts)
+            .onPositive("goToMyAccount") {
+                Log.d("TAG", "positive ")
+            }
+            .onNegative("cancel") {
 
+            }
+
+        var decryptedString : String = ""
 
         initNfcAdapter()
 
         iv_back.extClick {
             finish()
         }
+
 
         readViewModel.tag.observe(this, Observer {
             if(it.message.isNullOrBlank()){
@@ -82,8 +86,8 @@ class ReadActivity : AppCompatActivity() {
             }else {
                 tvMessageData.text = it.message
                 //encryptedString = it.message
-                tvUtfData.text = it.UTF
-                tvTagIdData.text = it.tagID
+                tvUtfData.text = it.utf
+                tvTagIdData.text = it.tagId
                 tvTagSizeData.text = it.tagUsedMemory + "/" + it.tagSize.toString() + getString(R.string.message_size_bytes)
 
                 btnDecrypt.visibility =View.VISIBLE
@@ -111,7 +115,15 @@ class ReadActivity : AppCompatActivity() {
             val decodedBytes = Base64.decode(encryptedString, Base64.NO_WRAP)
 
             decryptedString =  decryptor.decryptData(etPasswordRead.text.toString(), decodedBytes, Constants.INIT_VECTOR.toByteArray())
-            tvMessageData.text = decryptedString
+            if(decryptedString != "Exception") {
+                tvMessageData.text = decryptedString
+                tvMessage.text =getString(R.string.decoded_message_text)
+
+            }else{
+                tvMessageData.text = "Wrong pw"
+
+
+            }
 
         }
 
@@ -130,39 +142,16 @@ class ReadActivity : AppCompatActivity() {
         }
     }
 
-    /** Called when the user taps the Send button */
-    fun sendMessage(view: View) {
-        // Do something in response to button
-    }
 
     override fun onResume() {
         super.onResume()
-        enableNfcForegroundDispatch()
+        extEnableNfcForegroundDispatch(this,adapter)
     }
 
     override fun onPause() {
-        disableNfcForegroundDispatch()
+        extDisableNfcForegroundDispatch(this,adapter)
         super.onPause()
     }
-
-    private fun enableNfcForegroundDispatch() {
-        try {
-            val intent = Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            val nfcPendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-            adapter?.enableForegroundDispatch(this, nfcPendingIntent, null, null)
-        } catch (ex: IllegalStateException) {
-            Log.e(getTag(), "Error enabling NFC foreground dispatch", ex)
-        }
-    }
-
-    private fun disableNfcForegroundDispatch() {
-        try {
-            adapter?.disableForegroundDispatch(this)
-        } catch (ex: IllegalStateException) {
-            Log.e(getTag(), "Error disabling NFC foreground dispatch", ex)
-        }
-    }
-
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
@@ -176,31 +165,18 @@ class ReadActivity : AppCompatActivity() {
         try {
             tag = tagFromIntent?.let { WritableTag(it) }
         } catch (e: FormatException) {
-            Log.e(getTag(), "Unsupported tag tapped", e)
+            Log.e(this.javaClass.simpleName, "Unsupported tag tapped", e)
             return
         }
         tagId = tag!!.tagId
 
        var miki = tagFromIntent?.techList  // android.nfc.tech.NfcA   android.nfc.tech.MifareUltralight android.nfc.tech.Ndef
 
-
-
         val tagSize = Ndef.get(tagFromIntent).maxSize
-        val type  = Ndef.get(tagFromIntent)
-        extShowToast("Tag tapped type: $miki")
 
 
-      /*  if (writeViewModel?.isWriteTagOptionOn) {
-            val messageWrittenSuccessfully = NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
-            writeViewModel?.isWriteTagOptionOn = false
-            writeViewModel?._closeDialog.value = true
 
-            if (messageWrittenSuccessfully) {
-                extShowToast("Message has been saved successfully.")
-            } else {
-                extShowToast("Failed to save message. Maybe the message is too long.")
-            }
-        } else { */
+
             if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
                 intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
                     ?.also { rawMessages ->
@@ -208,7 +184,7 @@ class ReadActivity : AppCompatActivity() {
                         val inNdefRecords = messages[0].records
                         val usedMemory = messages[0].byteArrayLength
                         val ndefRecord_0 = inNdefRecords[0]
-                        var inMessage1 = String(ndefRecord_0.payload)
+                        var receivedMessage = String(ndefRecord_0.payload)
                         val payloadArray: Byte = ndefRecord_0.payload[0]
                         val utfBitMask: Byte =
                             payloadArray and 0x80.toByte() // mask 7th bit that shows utf encoding https://dzone.com/articles/nfc-android-read-ndef-tag
@@ -219,6 +195,9 @@ class ReadActivity : AppCompatActivity() {
                             Charsets.UTF_8
                         else
                             Charsets.UTF_16
+
+                        encryptedString = receivedMessage
+
                         /*
                        val inMessage = String(
                             ndefRecord_0.payload,
@@ -229,7 +208,7 @@ class ReadActivity : AppCompatActivity() {
 
                         //showToast("Tag tapped type: $length")
 
-                        readViewModel?.setTagMessage(NfcTag(inMessage1,charset.toString(),tagId,tagSize.toString(),usedMemory.toString()))
+                        readViewModel?.setTagMessage(NfcTag(receivedMessage,charset.toString(),tagId,tagSize.toString(),usedMemory.toString()))
 
 
                     }

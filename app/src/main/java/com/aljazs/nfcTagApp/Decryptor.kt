@@ -35,7 +35,7 @@ internal class Decryptor {
             return String(cipher.doFinal(encryptedData))
         }catch (ex: Exception) {
             Log.e("DataEncryptNFC", "decrypt(): $ex")
-            ""
+            return "Exception"
         }
     }
 

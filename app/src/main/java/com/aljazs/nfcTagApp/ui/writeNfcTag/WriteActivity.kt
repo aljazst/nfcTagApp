@@ -23,11 +23,8 @@ import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
 import com.aljazs.nfcTagApp.common.Constants
-import com.aljazs.nfcTagApp.extensions.TAG
-import com.aljazs.nfcTagApp.extensions.extClick
-import com.aljazs.nfcTagApp.extensions.extShowToast
-import kotlinx.android.synthetic.main.activity_read.*
-import kotlinx.android.synthetic.main.fragment_write.*
+import com.aljazs.nfcTagApp.extensions.*
+import kotlinx.android.synthetic.main.activity_write.*
 import java.lang.Exception
 
 class WriteActivity : AppCompatActivity() {
@@ -36,6 +33,7 @@ class WriteActivity : AppCompatActivity() {
     private val writeViewModel: WriteViewModel by viewModels()
 
     private var adapter: NfcAdapter? = null
+
     var tag: WritableTag? = null
 
     private lateinit var encryptor: Encryptor
@@ -60,7 +58,7 @@ class WriteActivity : AppCompatActivity() {
 
         })
 
-        etMessage.doOnTextChanged { text, start, before, count ->
+      /*  etMessage.doOnTextChanged { text, start, before, count ->
 
             tvMessageSizeData.text = count.plus(7).toString() // add 7bytes for basic nfc data
             if(count >= 1){
@@ -78,7 +76,7 @@ class WriteActivity : AppCompatActivity() {
                 btnWrite.visibility = View.GONE
             }
 
-        }
+        } */
 
         btnWrite.extClick {
 
@@ -92,10 +90,6 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
-    /** Called when the user taps the Send button */
-    fun sendMessage(view: View) {
-        // Do something in response to button
-    }
 
     private fun initNfcAdapter() {
         val nfcManager = getSystemService(Context.NFC_SERVICE) as NfcManager
@@ -111,30 +105,12 @@ class WriteActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        enableNfcForegroundDispatch()
+        extEnableNfcForegroundDispatch(this,adapter)
     }
 
     override fun onPause() {
-        disableNfcForegroundDispatch()
         super.onPause()
-    }
-
-    private fun enableNfcForegroundDispatch() {
-        try {
-            val intent = Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            val nfcPendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-            adapter?.enableForegroundDispatch(this, nfcPendingIntent, null, null)
-        } catch (ex: IllegalStateException) {
-            Log.e("getTag()", "Error enabling NFC foreground dispatch", ex)
-        }
-    }
-
-    private fun disableNfcForegroundDispatch() {
-        try {
-            adapter?.disableForegroundDispatch(this)
-        } catch (ex: IllegalStateException) {
-            Log.e("getTag()", "Error disabling NFC foreground dispatch", ex)
-        }
+        extDisableNfcForegroundDispatch(this,adapter)
     }
 
 
@@ -150,7 +126,7 @@ class WriteActivity : AppCompatActivity() {
         try {
             tag = tagFromIntent?.let { WritableTag(it) }
         } catch (e: FormatException) {
-            Log.e("getTag()", "Unsupported tag tapped", e)
+            Log.e(this.javaClass.simpleName, "Unsupported tag tapped", e)
             return
         }
         val tagId = tag!!.tagId
