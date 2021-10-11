@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.NfcUtils
@@ -26,13 +27,17 @@ import com.aljazs.nfcTagApp.model.NfcTag
 import com.example.awesomedialog.*
 import kotlinx.android.synthetic.main.activity_read.*
 import kotlinx.android.synthetic.main.activity_read.btnDecrypt
+import kotlinx.android.synthetic.main.activity_read.clTagInfo
 
 import kotlinx.android.synthetic.main.activity_read.ivLineArrowItem
+import kotlinx.android.synthetic.main.activity_read.iv_back
+import kotlinx.android.synthetic.main.activity_read.tilPassword
 import kotlinx.android.synthetic.main.activity_read.tvMessageData
 import kotlinx.android.synthetic.main.activity_read.tvPassword
 import kotlinx.android.synthetic.main.activity_read.tvTagIdData
 import kotlinx.android.synthetic.main.activity_read.tvTagSizeData
 import kotlinx.android.synthetic.main.activity_read.tvUtfData
+import kotlinx.android.synthetic.main.activity_write.*
 
 import java.nio.charset.Charset
 import kotlin.experimental.and
@@ -56,16 +61,11 @@ class ReadActivity : AppCompatActivity() {
 
         decryptor = Decryptor()
 
-        var lol = AwesomeDialog.build(this)
-            .title("title")
-            .body("body")
-            .icon(R.drawable.ic_congrts)
-            .onPositive("goToMyAccount") {
-                Log.d("TAG", "positive ")
-            }
-            .onNegative("cancel") {
-
-            }
+        var readTagDialog = AwesomeDialog.build(this)
+            .title(getString(R.string.dialog_tap_tag),null,getColor(R.color.independance))
+            .body(getString(R.string.dialog_tap_tag_sub))
+            .icon(R.drawable.ic_nfc_signal,true)
+            .position(AwesomeDialog.POSITIONS.CENTER)
 
         var decryptedString : String = ""
 
@@ -76,11 +76,16 @@ class ReadActivity : AppCompatActivity() {
         }
 
 
+        readViewModel.closeDialog.observe(this, Observer {
+            if(it){
+                readTagDialog.dismiss()
+            }
+        })
+
         readViewModel.tag.observe(this, Observer {
             if(it.message.isNullOrBlank()){
                 btnDecrypt.visibility =View.GONE
                 tilPassword.visibility = View.GONE
-                //ivAsterisk.visibility = View.GONE
                 tvPassword.visibility = View.GONE
                 ivLineArrowItem.visibility = View.GONE
             }else {
@@ -111,6 +116,16 @@ class ReadActivity : AppCompatActivity() {
             })
         }
 
+        etPasswordRead.doOnTextChanged { text, start, before, count ->
+            if (text != null) {
+                if(text.length >= 4){ //count options is always returning 1, bug!
+                    enableButton()
+                }else{
+                    btnDecrypt.isEnabled= false
+                }
+            }
+        }
+
         btnDecrypt.extClick {
             val decodedBytes = Base64.decode(encryptedString, Base64.NO_WRAP)
 
@@ -118,6 +133,10 @@ class ReadActivity : AppCompatActivity() {
             if(decryptedString != "Exception") {
                 tvMessageData.text = decryptedString
                 tvMessage.text =getString(R.string.decoded_message_text)
+                tvPassword.extGone()
+                etPasswordRead.text?.clear()
+                tilPassword.extGone()
+                btnDecrypt.extGone()
 
             }else{
                 tvMessageData.text = "Wrong pw"
@@ -126,8 +145,10 @@ class ReadActivity : AppCompatActivity() {
             }
 
         }
+    }
 
-
+    private fun enableButton() {
+        btnDecrypt.isEnabled = true
     }
 
     private fun initNfcAdapter() {
@@ -160,6 +181,9 @@ class ReadActivity : AppCompatActivity() {
     }
 
     private fun handleIntent(intent: Intent) {
+
+        readViewModel?._closeDialog.value = true
+        clTagInfo.extVisible()
 
         val tagFromIntent = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
         try {

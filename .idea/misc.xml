@@ -13,41 +13,16 @@
         <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/layout/item_nfc_tag_info.xml" value="0.2115036231884058" />
         <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/layout/item_rv_menu_navigation.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagApp/app/src/main/res/xml/nfc_tech_filter.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_blue_rounded_12.xml" value="0.2703125" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_cornflower_blue.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_ox_blue_light.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_ox_blue_lighter.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_ox_blue_lightest.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_true_blue.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_usafa_blue.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_white1.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_white2.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_white3.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_edit_text.xml" value="0.2546875" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_white_rounded_12dp.xml" value="0.1953125" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_white_with_blue_border_rounded_12.xml" value="0.536" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1953125" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_help.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_lock.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_nfc.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_nfc_signal.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_power_button.xml" value="0.1953125" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_read_nfc.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_settings.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_write_nfc.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/activity_main.xml" value="0.3623725671918443" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/activity_read.xml" value="0.4" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/activity_write.xml" value="0.4" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/dialog_nfc_write_tag.xml" value="0.17916666666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/fragment_read.xml" value="0.17916666666666667" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/fragment_write.xml" value="0.17300724637681159" />
-        <entry key="..\:/Users/Aljaz Stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/item_rv_menu_navigation.xml" value="0.536" />
+        <entry key="..\:/Users/aljaz.stajnko/.gradle/caches/transforms-3/a9df6fdf1d6add35fe4f58178c49e947/transformed/jetified-AwesomeDialog-1.0.5/res/drawable-anydpi-v21/ic_congrts.xml" value="0.2015625" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable-v24/bg_white_rounded_12dp.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_blue_rounded_12.xml" value="0.43846153846153846" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_blue.xml" value="0.3416666666666667" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/bg_button_circle_white.xml" value="0.3416666666666667" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/ic_arrow.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/drawable/progress_bar.xml" value="0.43846153846153846" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/activity_main.xml" value="0.20871327254305977" />
+        <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/activity_read.xml" value="0.5" />
+        <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/activity_write.xml" value="0.20871327254305977" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/dialog_alert.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/dialog_nfc_write_tag.xml" value="0.3804347826086957" />
         <entry key="..\:/Users/aljaz.stajnko/AndroidStudioProjects/nfcTagDataEncryptApp/app/src/main/res/layout/fragment_read.xml" value="0.22" />

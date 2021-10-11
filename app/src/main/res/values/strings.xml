@@ -4,9 +4,6 @@
     // INFO RECYCLE
     <string name="dialog_scan_nfc">Tap the phone on the NFC tag to write the message.</string>
 
-    <string name="info_recycle_sub">Pregled na voljo tukaj.</string>
-    <string name="info_recycle_send_preposition">Skupaj z vami smo najboljše mesto.</string>
-    <string name="info_recycle_sub_prepositon">Pošljite svoj predlog ali komentar.</string>
 
     // MENU ITEMS NAVIGATION
     <string name="menu_item_read">Decrypt data</string>
@@ -15,7 +12,7 @@
     <string name="menu_item_decode">Settings</string>
     <string name="menu_item_settings">About app</string>
 
-    //WRITE FRAGMENT
+    //WRITE ACTIVITY
     <string name="write_editText_hint">Your message</string>
     <string name="write_password_hint">Your password</string>
     <string name="dialog_write_message">Tap the NFC tag to write the message</string>
@@ -32,5 +29,13 @@
     //WRITE FRAGMENT
     <string name="nfc">NFC</string>
     <!--<string name="nfc">NFC \u0020 </string> -->
+
+    //READ ACTIVITY
+    <string name="dialog_tap_tag">Tap the NFC tag</string>
+    <string name="dialog_tap_tag_sub">It wont explode. I hope.</string>
+    <string name="dialog_success_write">Write completed!</string>
+    <string name="dialog_error_write">Write Error!</string>
+    <string name="dialog_error_write_sub">Write Error!</string>
+    <string name="tag_info">Tag info</string>
 
 </resources>

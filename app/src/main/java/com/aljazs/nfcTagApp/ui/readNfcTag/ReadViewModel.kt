@@ -17,4 +17,9 @@ class ReadViewModel : ViewModel() {
         _tag.value = message
 
     }
+
+    val _closeDialog = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val closeDialog: LiveData<Boolean> = _closeDialog
 }

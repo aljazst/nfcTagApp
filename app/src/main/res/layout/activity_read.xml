@@ -23,6 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_12"
         android:layout_marginEnd="@dimen/spacing_12"
+        android:visibility="visible"
+        android:paddingBottom="@dimen/spacing_24"
         android:background="@drawable/bg_white_with_blue_border_rounded_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,12 +78,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_4"
-            android:padding="@dimen/spacing_8"
+            android:padding="@dimen/spacing_10"
             android:background="@drawable/bg_edit_text"
             android:layout_marginEnd="@dimen/spacing_12"
             android:textIsSelectable="true"
             android:textColor="@color/oxford_blue_lighter"
-            app:layout_constraintEnd_toStartOf="@+id/ivAsterisk"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvMessage"
             app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
 
@@ -98,19 +100,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tvMessageData" />
 
 
-        <ImageView
-            android:id="@+id/ivAsterisk"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="@dimen/spacing_12"
-            android:background="@drawable/bg_button_circle_white"
-            android:padding="@dimen/spacing_8"
-            android:visibility="invisible"
-            android:src="@drawable/ic_hide_text"
-            app:layout_constraintBottom_toBottomOf="@+id/tvMessageData"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvMessageData" />
-
         <Button
             android:id="@+id/btnDecrypt"
             android:layout_width="wrap_content"
@@ -121,9 +110,10 @@
             android:paddingEnd="@dimen/spacing_6"
             android:background="@drawable/bg_blue_rounded_12"
             android:text="@string/button_decode"
+            android:enabled="false"
             android:textColor="@color/white"
             android:elevation="@dimen/spacing_2"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
@@ -165,30 +155,33 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_16"
             android:padding="@dimen/spacing_8"
+            app:layout_goneMarginTop="@dimen/spacing_12"
+            app:layout_goneMarginBottom="@dimen/spacing_12"
             android:src="@drawable/ic_arrow"
-            app:layout_constraintBottom_toBottomOf="@+id/btnDecrypt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnDecrypt" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clTagInfoExtended"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnDecrypt">
+
 
             <TextView
                 android:id="@+id/tvUtf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_8"
                 android:padding="@dimen/spacing_8"
                 android:text="UTF: "
-                android:textColor="@color/black"
+                android:textColor="@color/independance"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -196,9 +189,9 @@
                 android:id="@+id/tvUtfData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_12"
+
                 android:padding="@dimen/spacing_8"
-                android:textColor="@color/baby_pink"
+                android:textColor="@color/roman_silver"
                 app:layout_constraintStart_toEndOf="@+id/tvUtf"
                 app:layout_constraintTop_toTopOf="@+id/tvUtf" />
 
@@ -207,10 +200,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16"
-                android:layout_marginTop="@dimen/spacing_12"
+                android:layout_marginTop="@dimen/spacing_8"
                 android:padding="@dimen/spacing_8"
                 android:text="Tag ID: "
-                android:textColor="@color/black"
+                android:textColor="@color/independance"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvUtf" />
 
@@ -219,7 +212,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_8"
-                android:textColor="@color/baby_pink"
+                android:textColor="@color/roman_silver"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTagId"
                 app:layout_constraintStart_toEndOf="@+id/tvTagId"
                 app:layout_constraintTop_toTopOf="@+id/tvTagId" />
@@ -229,10 +222,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16"
-                android:layout_marginTop="@dimen/spacing_12"
+                android:layout_marginTop="@dimen/spacing_8"
                 android:padding="@dimen/spacing_8"
                 android:text="Tag size: "
-                android:textColor="@color/black"
+                android:textColor="@color/independance"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTagId" />
 
@@ -241,7 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_8"
-                android:textColor="@color/baby_pink"
+                android:textColor="@color/roman_silver"
                 app:layout_constraintBottom_toBottomOf="@+id/tvtagSize"
                 app:layout_constraintStart_toEndOf="@+id/tvtagSize"
                 app:layout_constraintTop_toTopOf="@+id/tvtagSize" />

@@ -420,7 +420,7 @@ var response : ByteArray
             val messageWrittenSuccessfully =
                 NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
             writeViewModel?.isWriteTagOptionOn = false
-            writeViewModel?._closeDialog.value = true
+           // writeViewModel?._closeDialog.value = true
 
             if (messageWrittenSuccessfully) {
                 extShowToast("Message has been saved successfully.")

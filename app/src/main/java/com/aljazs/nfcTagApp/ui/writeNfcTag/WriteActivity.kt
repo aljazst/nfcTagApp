@@ -10,6 +10,7 @@ import android.nfc.Tag
 import android.nfc.tech.MifareUltralight
 import android.nfc.tech.Ndef
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -24,6 +25,7 @@ import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
 import com.aljazs.nfcTagApp.common.Constants
 import com.aljazs.nfcTagApp.extensions.*
+import com.example.awesomedialog.*
 import kotlinx.android.synthetic.main.activity_write.*
 import java.lang.Exception
 
@@ -50,44 +52,69 @@ class WriteActivity : AppCompatActivity() {
 
         encryptor = Encryptor()
 
-
         writeViewModel.text.observe(this, Observer {
             writeViewModel.messageToSave = it
         })
-        writeViewModel.closeDialog.observe(this, Observer {
 
-        })
-
-      /*  etMessage.doOnTextChanged { text, start, before, count ->
-
-            tvMessageSizeData.text = count.plus(7).toString() // add 7bytes for basic nfc data
-            if(count >= 1){
-                tvWritePasswordTitle.visibility =View.VISIBLE
-                etPassword.visibility =View.VISIBLE
-            }else{
-                tvWritePasswordTitle.visibility = View.GONE
-                etPassword.visibility =View.GONE
-            }
-        }
         etPassword.doOnTextChanged { text, start, before, count ->
-            if(count >= 1){
-                btnWrite.visibility =View.VISIBLE
-            }else{
-                btnWrite.visibility = View.GONE
+            if (text != null) {
+                if(text.length >= 4){ //count options is always returning 1, bug!
+                    enableButton()
+                }else{
+                    btnWrite.isEnabled= false
+                }
             }
-
-        } */
+    }
 
         btnWrite.extClick {
+            var writeTagDialog = AwesomeDialog.build(this)
 
-            writeViewModel.isWriteTagOptionOn = true
+            writeTagDialog.title(
+                getString(R.string.dialog_tap_tag),null, getColor(R.color.independance))
+                .body(getString(R.string.dialog_tap_tag_sub))
+                .icon(R.drawable.ic_nfc_signal, true)
+                .position(AwesomeDialog.POSITIONS.BOTTOM)
+
             writeViewModel.messageToSave = etMessage.text.toString()
-            Log.i(TAG,"Write button was clicked.")
-            val encryptedText = encryptor.encryptText(etPassword.text.toString(), writeViewModel.messageToSave,
+            Log.i(TAG, "Write button was clicked.")
+            val encryptedText = encryptor.encryptText(
+                etPassword.text.toString(), writeViewModel.messageToSave,
                 Constants.INIT_VECTOR
             )
             writeViewModel.messageToSave = encryptedText
+
+            writeViewModel.writeSuccess.observe(this, Observer {
+                if (it && writeViewModel.isWriteTagOptionOn) {
+                    writeTagDialog.icon(R.drawable.ic_congrts)
+                        .title(getString(R.string.dialog_success_write),null,
+                            getColor(R.color.independance))
+                        .body("")
+
+                    Handler().postDelayed({
+                        writeTagDialog.dismiss()
+                        writeViewModel.isWriteTagOptionOn = false
+                        etMessage.text.clear()
+                        etPassword.text?.clear()
+                    }, 2000)
+
+                } else if (writeViewModel.isWriteTagOptionOn) {
+                    writeTagDialog.icon(R.drawable.ic_error)
+                        .title(getString(R.string.dialog_error_write),null,
+                            getColor(R.color.independance))
+                        .body("")
+
+                    Handler().postDelayed({
+                        writeTagDialog.dismiss()
+                        writeViewModel.isWriteTagOptionOn = false
+                    }, 2000)
+
+                }
+            })
         }
+    }
+
+    private fun enableButton() {
+        btnWrite.isEnabled = etMessage.text.isNotBlank() && etPassword.text?.isNotBlank() == true
     }
 
 
@@ -105,12 +132,12 @@ class WriteActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        extEnableNfcForegroundDispatch(this,adapter)
+        extEnableNfcForegroundDispatch(this, adapter)
     }
 
     override fun onPause() {
         super.onPause()
-        extDisableNfcForegroundDispatch(this,adapter)
+        extDisableNfcForegroundDispatch(this, adapter)
     }
 
 
@@ -121,6 +148,8 @@ class WriteActivity : AppCompatActivity() {
     }
 
     private fun handleIntent(intent: Intent) {
+
+        writeViewModel.isWriteTagOptionOn = true
 
         val tagFromIntent = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
         try {
@@ -141,24 +170,11 @@ class WriteActivity : AppCompatActivity() {
         val mifare: MifareUltralight = MifareUltralight.get(tagFromIntent)
 
 
+        //Write the data
+        val messageWrittenSuccessfully = NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
 
-        println("test1 techlist ${makeReadOnlya.contentToString()}")
-
-        val type = Ndef.get(tagFromIntent)
-        //showToast("Tag tapped type: $makeReadOnlya")
+        writeViewModel._writeSuccess.value = messageWrittenSuccessfully
 
 
-        if (writeViewModel?.isWriteTagOptionOn) {
-            val messageWrittenSuccessfully =
-                NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
-            writeViewModel?.isWriteTagOptionOn = false
-            writeViewModel?._closeDialog.value = true
-
-            if (messageWrittenSuccessfully) {
-                extShowToast("Message has been saved successfully.")
-            } else {
-                extShowToast("Failed to save message. Maybe the message is too long.")
-            }
-        }
     }
 }

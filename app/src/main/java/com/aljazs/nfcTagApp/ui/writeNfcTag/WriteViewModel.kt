@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class WriteViewModel : ViewModel() {
 
-    var isWriteTagOptionOn: Boolean = true
+    var isWriteTagOptionOn: Boolean = false
     var messageToSave: String = ""
 
     private val _text = MutableLiveData<String>().apply {
@@ -14,8 +14,8 @@ class WriteViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    val _closeDialog = MutableLiveData<Boolean>().apply {
-        value = false
+    val _writeSuccess = MutableLiveData<Boolean>().apply {
+
     }
-    val closeDialog: LiveData<Boolean> = _closeDialog
+    val writeSuccess: LiveData<Boolean> = _writeSuccess
 }
