@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/jet">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_circle_blackish"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/spacing_12"
+        android:padding="@dimen/spacing_12"
+        />
+
+    <ImageView
+        android:id="@+id/ivInfoReadOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_info"
+        android:background="@drawable/bg_button_circle_blackish"
+        android:layout_marginEnd="@dimen/spacing_12"
+        app:layout_constraintBottom_toBottomOf="@+id/clReadOnly"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toTopOf="@+id/clReadOnly" />
+
+    <ImageView
+        android:id="@+id/ivInfoSetPw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_info"
+        android:layout_marginEnd="@dimen/spacing_12"
+        android:background="@drawable/bg_button_circle_blackish"
+        app:layout_constraintBottom_toBottomOf="@+id/clSetPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toTopOf="@+id/clSetPassword" />
+    <ImageView
+        android:id="@+id/ivInfoRemovePw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_info"
+        android:layout_marginEnd="@dimen/spacing_12"
+        android:background="@drawable/bg_button_circle_blackish"
+        app:layout_constraintBottom_toBottomOf="@+id/clRemovePassword"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toTopOf="@+id/clRemovePassword" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clReadOnly"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/spacing_14"
+        android:layout_marginTop="@dimen/spacing_32"
+        android:layout_marginEnd="@dimen/spacing_12"
+        android:background="@drawable/bg_white_with_blue_border_rounded_12"
+
+        app:layout_constraintEnd_toStartOf="@+id/ivInfoReadOnly"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_back">
+
+        <TextView
+            android:id="@+id/tvReadOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lock tag"
+            android:textStyle="bold"
+            android:textColor="@color/independance"
+            android:layout_marginStart="@dimen/spacing_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSetPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:layout_marginStart="@dimen/spacing_14"
+        android:layout_marginEnd="@dimen/spacing_14"
+        android:background="@drawable/bg_white_with_blue_border_rounded_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivInfoSetPw"
+        app:layout_constraintTop_toBottomOf="@+id/clReadOnly">
+
+        <TextView
+            android:id="@+id/tvSetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_12"
+            android:layout_marginTop="@dimen/spacing_20"
+            app:layout_goneMarginBottom="@dimen/spacing_20"
+            android:text="Set password"
+            android:textStyle="bold"
+            android:textColor="@color/independance"
+            app:layout_constraintBottom_toTopOf="@+id/clEnterPw"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <ImageView
+            android:id="@+id/ivArrowSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_down"
+            android:layout_marginEnd="@dimen/spacing_12"
+            android:background="@drawable/bg_button_circle_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSetPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvSetPassword" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clEnterPw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/tvPasswordProtect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password_text"
+                android:layout_marginStart="@dimen/spacing_12"
+                android:layout_marginTop="@dimen/spacing_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/CustomTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/independance"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/independance"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPasswordProtect"
+                app:layout_constraintEnd_toStartOf="@+id/btnSetPw"
+                app:layout_constraintStart_toEndOf="@+id/tvPasswordProtect"
+                app:layout_constraintTop_toTopOf="@+id/tvPasswordProtect">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPasswordRead"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/spacing_14"
+                    android:backgroundTint="@color/independance"
+                    android:nextFocusDown="@id/tilPassword"
+                    android:outlineSpotShadowColor="@color/jet"
+                    android:textColor="@color/independance"
+                    app:hintTextColor="@color/roman_silver" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnSetPw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:layout_marginEnd="@dimen/spacing_12"
+                android:text=" SET "
+                android:padding="@dimen/spacing_8"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPasswordProtect"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintTop_toTopOf="@+id/tvPasswordProtect" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRemovePassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:layout_marginStart="@dimen/spacing_14"
+        android:layout_marginEnd="@dimen/spacing_14"
+        android:background="@drawable/bg_white_with_blue_border_rounded_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivInfoSetPw"
+        app:layout_constraintTop_toBottomOf="@+id/clSetPassword">
+
+        <TextView
+            android:id="@+id/tvRemovePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_12"
+            android:layout_marginTop="@dimen/spacing_20"
+            app:layout_goneMarginBottom="@dimen/spacing_20"
+            android:text="Remove password"
+            android:textStyle="bold"
+            android:textColor="@color/independance"
+            app:layout_constraintBottom_toTopOf="@+id/clEnterPwRemove"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <ImageView
+            android:id="@+id/ivArrowRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_down"
+            android:layout_marginEnd="@dimen/spacing_12"
+            android:background="@drawable/bg_button_circle_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRemovePassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvRemovePassword" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clEnterPwRemove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/tvPasswordRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password_text"
+                android:layout_marginStart="@dimen/spacing_12"
+                android:layout_marginTop="@dimen/spacing_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPasswordRemove"
+                style="@style/CustomTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/independance"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/independance"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPasswordRemove"
+                app:layout_constraintEnd_toStartOf="@+id/btnRemovePw"
+                app:layout_constraintStart_toEndOf="@+id/tvPasswordRemove"
+                app:layout_constraintTop_toTopOf="@+id/tvPasswordRemove">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPasswordRemove"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/spacing_14"
+                    android:backgroundTint="@color/independance"
+                    android:nextFocusDown="@id/tilPassword"
+                    android:outlineSpotShadowColor="@color/jet"
+                    android:textColor="@color/independance"
+                    app:hintTextColor="@color/roman_silver" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnRemovePw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:layout_marginEnd="@dimen/spacing_12"
+                android:text=" REMOVE "
+                android:padding="@dimen/spacing_8"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPasswordRemove"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintTop_toTopOf="@+id/tvPasswordRemove" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

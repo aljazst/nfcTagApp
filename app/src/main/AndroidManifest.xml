@@ -22,11 +22,9 @@
 
             </intent-filter>
 
-
         </activity>
 
         <activity android:name=".ui.readNfcTag.ReadActivity">
-
 
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
@@ -36,6 +34,12 @@
 
         <activity android:name=".ui.writeNfcTag.WriteActivity">
 
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+
+        </activity>
+        <activity android:name=".ui.protectNfcTag.ProtectActivity">
 
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"

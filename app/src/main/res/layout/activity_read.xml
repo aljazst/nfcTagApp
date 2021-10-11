@@ -10,6 +10,7 @@
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_circle_blackish"
         android:src="@drawable/ic_arrow_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_12"
         android:layout_marginEnd="@dimen/spacing_12"
-        android:visibility="visible"
+        android:visibility="gone"
         android:paddingBottom="@dimen/spacing_24"
         android:background="@drawable/bg_white_with_blue_border_rounded_12"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -155,23 +156,39 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_16"
             android:padding="@dimen/spacing_8"
-            app:layout_goneMarginTop="@dimen/spacing_12"
-            app:layout_goneMarginBottom="@dimen/spacing_12"
             android:src="@drawable/ic_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMessageData"
+            app:layout_goneMarginBottom="@dimen/spacing_12"
+            app:layout_goneMarginTop="@dimen/spacing_22" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clTagInfoExtended"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnDecrypt">
 
+            <TextView
+                android:id="@+id/tvTagDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tag_info"
+                android:textColor="@color/independance"
+                android:textStyle="bold"
+
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_8"
+                android:padding="@dimen/spacing_8"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <TextView
                 android:id="@+id/tvUtf"
@@ -183,13 +200,12 @@
                 android:text="UTF: "
                 android:textColor="@color/independance"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTagDetail"/>
 
             <TextView
                 android:id="@+id/tvUtfData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:padding="@dimen/spacing_8"
                 android:textColor="@color/roman_silver"
                 app:layout_constraintStart_toEndOf="@+id/tvUtf"

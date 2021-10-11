@@ -39,6 +39,7 @@ import android.view.MotionEvent
 import android.view.View
 import com.aljazs.nfcTagApp.extensions.extInvisible
 import com.aljazs.nfcTagApp.extensions.extVisible
+import com.aljazs.nfcTagApp.ui.protectNfcTag.ProtectActivity
 import com.suke.widget.SwitchButton
 
 
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             when (titleId) {
                 R.string.menu_item_read -> onReadSelected()
                 R.string.menu_item_write -> onWriteSelected()
-                R.string.menu_item_encode -> onEncodeSelected()
+                R.string.menu_item_encode -> onProtectSelected()
                 R.string.menu_item_decode -> onDecodeSelected()
                 R.string.menu_item_settings -> onSettingsSelected()
             }
@@ -151,8 +152,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun onEncodeSelected() {
+    private fun onProtectSelected() {
+        val intent = Intent(this, ProtectActivity::class.java)
 
+        startActivity(intent)
     }
 
     private fun onDecodeSelected() {
@@ -233,25 +236,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getTag() = "MainActivity"
-
-    private fun enableNfcForegroundDispatch() {
-        try {
-            val intent = Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            val nfcPendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-            adapter?.enableForegroundDispatch(this, nfcPendingIntent, null, null)
-        } catch (ex: IllegalStateException) {
-            Log.e(getTag(), "Error enabling NFC foreground dispatch", ex)
-        }
-    }
-
-    private fun disableNfcForegroundDispatch() {
-        try {
-            adapter?.disableForegroundDispatch(this)
-        } catch (ex: IllegalStateException) {
-            Log.e(getTag(), "Error disabling NFC foreground dispatch", ex)
-        }
-    }
-
 
 
 

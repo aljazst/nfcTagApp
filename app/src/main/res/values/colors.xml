@@ -52,6 +52,7 @@
 
     <!-- Base layout colors -->
     <color name="jet">#232323</color>
+    <color name="jet_lighter">#3D3D3D</color>
 
     <color name="manatee">#979DAC</color>
     <color name="roman_silver">#7D8597</color>

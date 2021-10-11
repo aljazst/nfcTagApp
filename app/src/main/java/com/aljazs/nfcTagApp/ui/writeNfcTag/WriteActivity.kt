@@ -158,17 +158,6 @@ class WriteActivity : AppCompatActivity() {
             Log.e(this.javaClass.simpleName, "Unsupported tag tapped", e)
             return
         }
-        val tagId = tag!!.tagId
-
-
-        val tagSize = Ndef.get(tagFromIntent).maxSize
-        // val makeReadOnly : Boolean = Ndef.get(tagFromIntent).makeReadOnly()
-        val makeReadOnly = Ndef.get(tagFromIntent)
-        val makeReadOnlya: Array<String> = tagFromIntent?.techList as Array<String>
-
-
-        val mifare: MifareUltralight = MifareUltralight.get(tagFromIntent)
-
 
         //Write the data
         val messageWrittenSuccessfully = NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
