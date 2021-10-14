@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         var androidID = Settings.Secure.getString(
             contentResolver,
             Settings.Secure.ANDROID_ID
-        ) // Android id is a 64-bit number as hex. hex digit = 4 bits. so we get 4x16 = 64. android_id is 16 characters long.
+        ) // Android id is a 64-bit number as hex. hex digit = 4 bits. so we get 4x16 = 64. android_id is 16 characters long. //USE: extension from general
 
         return androidID.take(12) //iv needs 12
     }

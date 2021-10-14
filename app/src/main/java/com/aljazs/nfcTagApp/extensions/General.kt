@@ -1,6 +1,8 @@
 package com.aljazs.nfcTagApp.extensions
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.provider.Settings
 import android.widget.Toast
 
 val Any.TAG: String
@@ -11,4 +13,9 @@ val Any.TAG: String
 
 fun Context.extShowToast(message: String, duration: Int = Toast.LENGTH_LONG){
     Toast.makeText(this, message , duration).show()
+}
+
+@SuppressLint("HardwareIds")
+fun Context.extGetDeviceId(): String {
+    return Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 }
