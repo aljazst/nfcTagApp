@@ -75,7 +75,7 @@ class ReadActivity : AppCompatActivity() {
         }
 
 
-        readViewModel.closeDialog.observe(this, Observer {
+        readViewModel.closeDialog.observe(this, {
             if (it) {
                 readTagDialog.dismiss()
             }

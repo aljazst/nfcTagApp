@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.nfc.FormatException
 import android.nfc.NfcAdapter
+import android.nfc.NfcManager
 import android.nfc.Tag
 import android.nfc.tech.MifareUltralight
 import android.nfc.tech.Ndef
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -31,20 +33,120 @@ import kotlin.experimental.or
 
 class ProtectActivity : AppCompatActivity() {
 
+
     private var adapter: NfcAdapter? = null
     var tag: WritableTag? = null
     var tagId: String? = null
 
+    enum class Type {
+        READ_ONLY, SET_PASSWORD, REMOVE_PASSWORD,NONE;
+    }
+
+    var NFC_PROTECTION_TYPE : Type = Type.NONE
+
+
     private val protectViewModel: ProtectViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_protect)
 
+        initNfcAdapter()
+
         iv_back.extClick {
             finish()
         }
 
+        clReadOnly.extClickOnce {
+            NFC_PROTECTION_TYPE = Type.READ_ONLY
+
+            AwesomeDialog.build(this)
+                .title(
+                    getString(R.string.dialog_set_pw_title),
+                    null,
+                    getColor(R.color.independance)
+                )
+                .icon(R.drawable.ic_nfc_signal, true)
+                .body(getString(R.string.dialog_set_pw_sub))
+                .onNegative(getString(R.string.close)) {
+                    Log.d("TAG", "negative ") }}
+
+        //{ protectViewModel.onTypeClick(ProtectViewModel.Type.READ_ONLY) }
+        clSetPassword.extClickOnce {
+            NFC_PROTECTION_TYPE = Type.SET_PASSWORD
+
+            var setPasswordDialog = AwesomeDialog.build(this)
+            setPasswordDialog
+                .title(
+                    getString(R.string.dialog_set_pw_title),
+                    null,
+                    getColor(R.color.independance)
+                )
+                .icon(R.drawable.ic_nfc_signal, true)
+                .body(getString(R.string.dialog_set_pw_sub))
+                .onNegative(getString(R.string.close)) {
+                    Log.d("TAG", "negative ") }
+
+
+            protectViewModel.writeSuccess.observe(this, {
+                if(it){
+                setPasswordDialog.icon(R.drawable.ic_congrts)
+                    .title(getString(R.string.dialog_success_write),null,
+                        getColor(R.color.independance))
+                    .body("")
+
+                Handler().postDelayed({
+                    setPasswordDialog.dismiss()
+                }, 2000)
+            }})
+
+
+        }
+
+        clRemovePassword.extClickOnce {
+            NFC_PROTECTION_TYPE = Type.REMOVE_PASSWORD
+            var deletePasswordDialog = AwesomeDialog.build(this)
+            deletePasswordDialog
+                .title(
+                    getString(R.string.dialog_set_pw_title),
+                    null,
+                    getColor(R.color.independance)
+                )
+                .icon(R.drawable.ic_nfc_signal, true)
+                .body(getString(R.string.dialog_set_pw_sub))
+                .onNegative(getString(R.string.close)) {
+                    Log.d("TAG", "negative ")
+                }
+
+
+            protectViewModel.writeSuccess.observe(this, {
+                if (it) {
+                    deletePasswordDialog.icon(R.drawable.ic_congrts)
+                        .title(
+                            getString(R.string.dialog_success_write), null,
+                            getColor(R.color.independance)
+                        )
+                        .body("")
+
+                    Handler().postDelayed({
+                        deletePasswordDialog.dismiss()
+                    }, 2000)
+                }
+            })
+        }
+
+
+
+
+        protectViewModel.selectedType.observe(this,  { type ->
+            when (type) {
+                ProtectViewModel.Type.READ_ONLY -> "openStations()"
+                ProtectViewModel.Type.READ_ONLY -> "openMap()"
+                ProtectViewModel.Type.READ_ONLY -> "openPointsOfSale()"
+                else -> "openStations()"
+            }
+        })
         ivArrowSet.extClick {
 
             if (clEnterPw.visibility == View.GONE) {
@@ -118,6 +220,18 @@ class ProtectActivity : AppCompatActivity() {
         super.onPause()
     }
 
+    private fun initNfcAdapter() {
+        val nfcManager = getSystemService(Context.NFC_SERVICE) as NfcManager
+        adapter = nfcManager.defaultAdapter
+
+        if (adapter == null) {
+            // Stop here, we definitely need NFC
+            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+    }
+
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
@@ -128,6 +242,7 @@ class ProtectActivity : AppCompatActivity() {
 
 
         val tagFromIntent = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+        val mifare: MifareUltralight = MifareUltralight.get(tagFromIntent)
         try {
             tag = tagFromIntent?.let { WritableTag(it) }
         } catch (e: FormatException) {
@@ -136,7 +251,12 @@ class ProtectActivity : AppCompatActivity() {
         }
 
         if (tagFromIntent != null) {
-            makeReadOnly(tagFromIntent)
+            when (NFC_PROTECTION_TYPE) {
+                Type.READ_ONLY -> makeReadOnly(tagFromIntent)
+                Type.SET_PASSWORD -> writePassword(mifare)
+                Type.REMOVE_PASSWORD ->  deletePassword(mifare)
+                else -> extShowToast("NOTHING")
+            }
         }
     }
 
@@ -278,6 +398,8 @@ class ProtectActivity : AppCompatActivity() {
                     )
                 )
             }
+            protectViewModel._writeSuccess.value = true
+            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
 
             Log.e("写密码完成", "写密码完成")
         } catch (e: IOException) {
@@ -291,6 +413,8 @@ class ProtectActivity : AppCompatActivity() {
 
 
     }
+
+
 
     private fun deletePassword(mfc: MifareUltralight) {
 
@@ -406,7 +530,7 @@ class ProtectActivity : AppCompatActivity() {
                 )
             }
 
-            Toast.makeText(this, "清除密码成功", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Password cleared successfully", Toast.LENGTH_LONG).show()
 
         } catch (e: IOException) {
             e.printStackTrace()
