@@ -72,7 +72,23 @@ class ProtectActivity : AppCompatActivity() {
                 .onNegative(getString(R.string.close)) {
                     Log.d("TAG", "negative ") }}
 
+        ivInfoReadOnly.extClick {
+            AwesomeDialog.build(this)
+                .title(
+                    getString(R.string.dialog_read_only_title),
+                    null,
+                    getColor(R.color.independance)
+                )
+                .icon(R.drawable.ic_nfc_signal, true)
+                .body(getString(R.string.dialog_read_only_sub))
+                .onNegative(getString(R.string.close)) {
+                    Log.d("TAG", "negative ")
+                }
+
+        }
+
         //{ protectViewModel.onTypeClick(ProtectViewModel.Type.READ_ONLY) }
+        /*
         clSetPassword.extClickOnce {
             NFC_PROTECTION_TYPE = Type.SET_PASSWORD
 
@@ -136,17 +152,6 @@ class ProtectActivity : AppCompatActivity() {
             })
         }
 
-
-
-
-        protectViewModel.selectedType.observe(this,  { type ->
-            when (type) {
-                ProtectViewModel.Type.READ_ONLY -> "openStations()"
-                ProtectViewModel.Type.READ_ONLY -> "openMap()"
-                ProtectViewModel.Type.READ_ONLY -> "openPointsOfSale()"
-                else -> "openStations()"
-            }
-        })
         ivArrowSet.extClick {
 
             if (clEnterPw.visibility == View.GONE) {
@@ -167,20 +172,7 @@ class ProtectActivity : AppCompatActivity() {
                 ivArrowRemove.setImageResource(R.drawable.ic_arrow_down)
             }
         }
-        ivInfoReadOnly.extClick {
-            AwesomeDialog.build(this)
-                .title(
-                    getString(R.string.dialog_read_only_title),
-                    null,
-                    getColor(R.color.independance)
-                )
-                .icon(R.drawable.ic_nfc_signal, true)
-                .body(getString(R.string.dialog_read_only_sub))
-                .onNegative(getString(R.string.close)) {
-                    Log.d("TAG", "negative ")
-                }
 
-        }
         ivInfoSetPw.extClick {
             AwesomeDialog.build(this)
                 .title(
@@ -206,7 +198,7 @@ class ProtectActivity : AppCompatActivity() {
                 .onNegative(getString(R.string.close)) {
                     Log.d("TAG", "negative ")
                 }
-        }
+        }*/
 
     }
 
@@ -250,11 +242,11 @@ class ProtectActivity : AppCompatActivity() {
             return
         }
 
-        if (tagFromIntent != null) {
+        if (tagFromIntent != null ) {
             when (NFC_PROTECTION_TYPE) {
                 Type.READ_ONLY -> makeReadOnly(tagFromIntent)
-                Type.SET_PASSWORD -> writePassword(mifare)
-                Type.REMOVE_PASSWORD ->  deletePassword(mifare)
+                //Type.SET_PASSWORD -> writePassword(mifare)
+                //Type.REMOVE_PASSWORD ->  deletePassword(mifare)
                 else -> extShowToast("NOTHING")
             }
         }
@@ -270,10 +262,12 @@ class ProtectActivity : AppCompatActivity() {
 
             if (ndefTag.canMakeReadOnly()) {
                 ndefTag.makeReadOnly()
+                extShowToast("Tag is read only now.")
             }
 
         } catch (e: Exception) {
             println("exception e $e")
+            extShowToast("Error making tag read only.")
 
         } finally {
             try {
@@ -287,13 +281,13 @@ class ProtectActivity : AppCompatActivity() {
 
     }
 
-
+/*
     private fun writePassword(mfc: MifareUltralight) {
 
 
         val sp = getSharedPreferences("pwd", Context.MODE_PRIVATE)
         val pwdstr = "pass"
-        //创建默认为0的4字节数组
+
         val pwd = Array<Byte>(4) { ((0).toByte()) }
         val temp = pwdstr?.toByteArray()
         if (temp != null) {
@@ -301,7 +295,6 @@ class ProtectActivity : AppCompatActivity() {
                 pwd[index] = temp[index]
             }
         }
-        //得出的PWD即用户设置的密码
 
 
         mfc.connect()
@@ -401,7 +394,6 @@ class ProtectActivity : AppCompatActivity() {
             protectViewModel._writeSuccess.value = true
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
 
-            Log.e("写密码完成", "写密码完成")
         } catch (e: IOException) {
             e.printStackTrace()
         } catch (e: FormatException) {
@@ -421,7 +413,6 @@ class ProtectActivity : AppCompatActivity() {
         val sp = getSharedPreferences("pwd", Context.MODE_PRIVATE)
 
         val pwdstr = "pass"
-        //创建默认为0的4字节数组
         val pwd = Array<Byte>(4) { ((0).toByte()) }
         val temp = pwdstr?.toByteArray()
         if (temp != null) {
@@ -440,7 +431,6 @@ class ProtectActivity : AppCompatActivity() {
         val pack = byteArrayOf(0.toByte(), 0.toByte())
 
         try {
-            //用用户设置的密码询问登录
             val response = mfc.transceive(
                 byteArrayOf(
                     0x1B, pwd[0], pwd[1], pwd[2], pwd[3]
@@ -468,7 +458,6 @@ class ProtectActivity : AppCompatActivity() {
 
             }
 
-            //pack置为默认
             mfc.transceive(
                 byteArrayOf(
                     0xA2.toByte(),
@@ -477,7 +466,6 @@ class ProtectActivity : AppCompatActivity() {
                 )
             )
 
-            //pwd置为默认
             mfc.transceive(
                 byteArrayOf(
                     0xA2.toByte(),
@@ -506,7 +494,6 @@ class ProtectActivity : AppCompatActivity() {
                         responseAuthLim[2],
                         responseAuthLim[3]
 
-                        //将1-3位按原数据写会
                     )
                 )
             }
@@ -524,7 +511,6 @@ class ProtectActivity : AppCompatActivity() {
                         responseAuthLim[1],
                         responseAuthLim[2],
 
-                        //将0-2位按原数据写会
                         0x0ff.toByte()
                     )
                 )
@@ -544,6 +530,6 @@ class ProtectActivity : AppCompatActivity() {
 
         }
 
-    }
+    }*/
 
 }
