@@ -7,23 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimation"
-        android:layout_width="@dimen/dialog_animation_size"
-        android:layout_height="@dimen/dialog_animation_size_small"
-        android:layout_marginBottom="@dimen/spacing_16"
-        android:visibility="visible"
-        app:lottie_rawRes="@raw/nfc_tap_phone"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        android:layout_marginStart="@dimen/spacing_40"
-        android:layout_marginEnd="@dimen/spacing_40"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvTitle"
-        tools:visibility="visible"/>
+
 
     <TextView
         android:id="@+id/tvTitle"
@@ -37,7 +21,6 @@
         android:layout_marginBottom="@dimen/spacing_16"
         app:layout_goneMarginBottom="@dimen/spacing_16"
         android:text="@string/dialog_scan_nfc"
-        app:layout_constraintTop_toBottomOf="@id/lottieAnimation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

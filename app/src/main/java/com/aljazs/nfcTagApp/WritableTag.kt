@@ -7,8 +7,6 @@ import android.nfc.Tag
 import android.nfc.tech.Ndef
 import android.nfc.tech.NdefFormatable
 import android.util.Log
-import android.widget.Toast
-import java.io.IOException
 import java.util.*
 import kotlin.coroutines.coroutineContext
 
@@ -45,33 +43,6 @@ class WritableTag @Throws(FormatException::class) constructor(tag: Tag) {
         }
     }
 
-
-    @Throws(IOException::class, FormatException::class)
-    fun writeData(tagId: String,
-                  message: NdefMessage): Boolean {
-        if (tagId != tagId) {
-            return false
-        }
-        if (ndef != null) {
-            ndef.connect()
-            if (ndef.isConnected) {
-                ndef.writeNdefMessage(message)
-                return true
-            }
-        } else if (ndefFormatable != null) {
-            ndefFormatable.connect()
-            if (ndefFormatable.isConnected) {
-                ndefFormatable.format(message)
-                return true
-            }
-        }
-        return false
-    }
-
-    @Throws(IOException::class)
-    private fun close() {
-        ndef?.close() ?: ndefFormatable?.close()
-    }
 
     companion object {
         fun bytesToHexString(src: ByteArray): String? {

@@ -6,34 +6,54 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivShortcutIcon"
-        android:layout_width="66dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="@dimen/spacing_2"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clItem"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="@dimen/spacing_20"
         android:layout_marginStart="@dimen/spacing_10"
         android:layout_marginEnd="@dimen/spacing_10"
-        android:padding="@dimen/spacing_18"
+        android:layout_marginBottom="@dimen/spacing_20"
         android:background="@drawable/bg_button_circle_white"
-        tools:src="@drawable/ic_nfc"
-        android:contentDescription="Image description."
-        android:elevation="@dimen/spacing_2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tvShortcutTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_4"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:gravity="center_horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/ivShortcutIcon"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Moji nakupid"
-        />
+        >
+
+
+        <ImageView
+            android:id="@+id/ivShortcutIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Image description."
+            android:elevation="@dimen/spacing_2"
+            android:paddingTop="@dimen/spacing_32"
+            android:paddingStart="@dimen/spacing_32"
+            android:paddingEnd="@dimen/spacing_32"
+            android:paddingBottom="@dimen/spacing_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tvShortcutTitle"
+            tools:src="@drawable/ic_nfc" />
+
+        <TextView
+            android:id="@+id/tvShortcutTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_4"
+            android:layout_marginBottom="@dimen/spacing_12"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/spacing_18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            tools:text="Moji nfcji" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

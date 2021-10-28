@@ -7,40 +7,63 @@
     android:background="@color/jet"
     tools:context=".MainActivity">
 
+
+    <TextView
+        android:id="@+id/tvNfcText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nfc"
+        android:textColor="@color/white"
+        android:layout_marginEnd="@dimen/spacing_2"
+        android:drawableStart="@drawable/ic_power_button"
+        android:drawablePadding="@dimen/spacing_4"
+        android:textSize="@dimen/spacing_18"
+        app:layout_constraintBottom_toBottomOf="@+id/switchNfc"
+        app:layout_constraintEnd_toStartOf="@+id/switchNfc"
+        app:layout_constraintTop_toTopOf="@+id/switchNfc" />
+
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switchNfc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        app:sb_checked_color="@color/true_blue"
+        app:sb_uncheck_color="@color/roman_silver"
+        app:sb_background="@color/jet"
+        app:sb_show_indicator="false"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:layout_marginEnd="@dimen/spacing_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMainNavigationOptions"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_10"
+        android:layout_marginEnd="@dimen/spacing_10"
         android:orientation="horizontal"
         android:overScrollMode="never"
-        android:layout_marginTop="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="3"
         tools:listitem="@layout/item_rv_menu_navigation" />
 
-    <TextView
-        android:id="@+id/tvMainActivityText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Yo bro, there is nothing here. Select a fragment."
-        android:layout_marginTop="@dimen/spacing_100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/rvMainNavigationOptions" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/content_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvMainNavigationOptions" />
-
-
+    <!--
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvMainNavigationOptions" />
+     -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

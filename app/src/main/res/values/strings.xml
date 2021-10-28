@@ -4,18 +4,15 @@
     // INFO RECYCLE
     <string name="dialog_scan_nfc">Tap the phone on the NFC tag to write the message.</string>
 
-    <string name="info_recycle_sub">Pregled na voljo tukaj.</string>
-    <string name="info_recycle_send_preposition">Skupaj z vami smo najboljše mesto.</string>
-    <string name="info_recycle_sub_prepositon">Pošljite svoj predlog ali komentar.</string>
 
     // MENU ITEMS NAVIGATION
-    <string name="menu_item_read">Read</string>
-    <string name="menu_item_write">Write</string>
-    <string name="menu_item_encode">Protect</string>
+    <string name="menu_item_read">Decrypt data</string>
+    <string name="menu_item_write">Encrypt data </string>
+    <string name="menu_item_encode">Protect tags</string>
     <string name="menu_item_decode">Settings</string>
-    <string name="menu_item_settings">About</string>
+    <string name="menu_item_settings">About app</string>
 
-    //WRITE FRAGMENT
+    //WRITE ACTIVITY
     <string name="write_editText_hint">Your message</string>
     <string name="write_password_hint">Your password</string>
     <string name="dialog_write_message">Tap the NFC tag to write the message</string>
@@ -23,6 +20,39 @@
     <string name="message_size_bytes">bytes</string>
     <string name="write_text">Enter your message</string>
     <string name="write_password">Enter your password</string>
-    <string name="btn_write">Encrypt message</string>
+    <string name="btn_write">Encode data</string>
     <string name="password_text">Password: </string>
+    <string name="encoded_message_text">Encoded message </string>
+    <string name="decoded_message_text">Decoded message </string>
+    <string name="button_decode">Decode data</string>
+
+    //OTHER
+    <string name="nfc">NFC</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="close">Close</string>
+
+    <!--<string name="nfc">NFC \u0020 </string> -->
+
+    //READ ACTIVITY
+    <string name="dialog_tap_tag">Tap the NFC tag</string>
+    <string name="dialog_tap_tag_sub">It wont explode. I hope.</string>
+    <string name="dialog_success_write">Write completed!</string>
+    <string name="dialog_error_write">Write Error!</string>
+    <string name="dialog_error_write_sub">Write Error!</string>
+    <string name="tag_info">Tag info</string>
+
+    //PROTECT ACTIVITY
+    <string name="dialog_read_only_title">Lock tag</string>
+    <string name="dialog_read_only_sub">This process will lock the tag permanently! You can still read data from it, but nothing else. Be careful with this option.
+        \n\n Should work on most NFC tags.</string>
+
+    <string name="dialog_set_pw_title">Set password</string>
+    <string name="dialog_set_pw_sub">By setting a password only the person that knows the password can write to the tag.
+        \n\n This only works on the NFC tag:\n NXP-NTAG213</string>
+
+    <string name="dialog_remove_pw_title">Remove password</string>
+    <string name="dialog_remove_pw_sub">By removing the password, you can write to the tag again.
+        \n\n This only works on the NFC tag:\n NXP-NTAG213</string>
+
 </resources>

@@ -2,6 +2,7 @@ package com.aljazs.nfcTagApp
 
 
 import android.util.Log
+import com.aljazs.nfcTagApp.extensions.TAG
 import java.security.*
 import javax.crypto.*
 import javax.crypto.spec.*
@@ -24,6 +25,8 @@ internal class Decryptor {
     private fun initKeyStore() {
         keyStore = KeyStore.getInstance(ANDROID_KEY_STORE)
         keyStore!!.load(null)
+        Log.i(TAG,"Number of keys ${keyStore!!.size()}")
+        Log.i(TAG,"Does key exist ${keyStore!!.containsAlias("geslo1")}")
     }
 
     fun decryptData(alias: String, encryptedData: ByteArray, encryptionIv: ByteArray): String {
@@ -35,7 +38,7 @@ internal class Decryptor {
             return String(cipher.doFinal(encryptedData))
         }catch (ex: Exception) {
             Log.e("DataEncryptNFC", "decrypt(): $ex")
-            ""
+            return "Exception"
         }
     }
 

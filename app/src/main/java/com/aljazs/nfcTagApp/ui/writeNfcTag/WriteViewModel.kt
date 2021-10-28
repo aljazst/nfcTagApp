@@ -14,8 +14,8 @@ class WriteViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    val _closeDialog = MutableLiveData<Boolean>().apply {
-        value = false
+    val _writeSuccess = MutableLiveData<Boolean>().apply {
+
     }
-    val closeDialog: LiveData<Boolean> = _closeDialog
+    val writeSuccess: LiveData<Boolean> = _writeSuccess
 }
