@@ -7,16 +7,6 @@ import kotlinx.coroutines.*
 
 class ProtectViewModel : ViewModel() {
 
-    enum class Type {
-        READ_ONLY, SET_PASSWORD, REMOVE_PASSWORD,NONE;
-    }
-
-    private val _selectedType = MutableLiveData<Type>().apply { value = Type.NONE }
-    val selectedType = _selectedType as LiveData<Type>
-
-    fun onTypeClick(type: Type) {
-        _selectedType.postValue(type)
-    }
 
 
     val _writeSuccess = MutableLiveData<Boolean>().apply {

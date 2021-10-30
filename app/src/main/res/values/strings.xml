@@ -36,6 +36,7 @@
 
     //READ ACTIVITY
     <string name="dialog_tap_tag">Tap the NFC tag</string>
+    <string name="dialog_tap_tag_write_sub">This action will save the encoded message on the tag.</string>
     <string name="dialog_tap_tag_sub">It wont explode. I hope.</string>
     <string name="dialog_success_write">Write completed!</string>
     <string name="dialog_error_write">Write Error!</string>
@@ -43,8 +44,20 @@
     <string name="tag_info">Tag info</string>
 
     //PROTECT ACTIVITY
+
+    <string name="lock_tag_text">Lock tag</string>
+    <string name="other_text">Other options</string>
+    <string name="goto_play_store">Open Play Store</string>
+
+    <string name="dialog_other_options_title">Other protection options</string>
+    <string name="dialog_other_options_sub"> For other NFC tag protection options (password) I would recommend you to use the app NFC Tools.\n\n</string>
+
+    <string name="dialog_read_only_title_info">Lock tag info</string>
+
+    <string name="dialog_read_only_sub"> Tap the tag to lock it permanently.\n\n</string>
+
     <string name="dialog_read_only_title">Lock tag</string>
-    <string name="dialog_read_only_sub">This process will lock the tag permanently! You can still read data from it, but nothing else. Be careful with this option.
+    <string name="dialog_read_only_sub_info">This process will lock the tag permanently! You can still read data from it, but nothing else. Be careful with this option.
         \n\n Should work on most NFC tags.</string>
 
     <string name="dialog_set_pw_title">Set password</string>
@@ -54,5 +67,19 @@
     <string name="dialog_remove_pw_title">Remove password</string>
     <string name="dialog_remove_pw_sub">By removing the password, you can write to the tag again.
         \n\n This only works on the NFC tag:\n NXP-NTAG213</string>
+
+    <string name="toast_text_select_protection_type">Please select an option.</string>
+
+    //ABOUT ACTIVITY
+    <string name="about_app_title">About the application</string>
+    <string name="about_app_description">The app is mean to save private data like usernames, passwords, PIN numbers and other sensitive
+    informations on a NFC tag.\n\nYou can take a standard NFC tag like the NXP-NTAG213 and use the tag to save your passwords on your desk.
+        Only you can read the data on the tag. You can stick a tag to your wallet and save your PIN numbers and other info on it. If the wallet
+        gets stolen, nobody but you can read the encoded data on the tag.
+    </string>
+    <string name="developer_title">Development</string>
+    <string name="developer_description">Hello, I made this app because I wanted to store my password safely on my desk. But primarily because
+    I ordered 100+ NFC tags and I had no idea what to do with them.</string>
+    <string name="donation">If you like the app you can buy me a coffee or not.</string>
 
 </resources>

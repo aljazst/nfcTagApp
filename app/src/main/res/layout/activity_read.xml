@@ -191,25 +191,25 @@
                 />
 
             <TextView
-                android:id="@+id/tvUtf"
+                android:id="@+id/tvReadOnly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16"
                 android:layout_marginTop="@dimen/spacing_8"
                 android:padding="@dimen/spacing_8"
-                android:text="UTF: "
+                android:text="Is read only:"
                 android:textColor="@color/independance"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTagDetail"/>
 
             <TextView
-                android:id="@+id/tvUtfData"
+                android:id="@+id/tvReadOnlyData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_8"
                 android:textColor="@color/roman_silver"
-                app:layout_constraintStart_toEndOf="@+id/tvUtf"
-                app:layout_constraintTop_toTopOf="@+id/tvUtf" />
+                app:layout_constraintStart_toEndOf="@+id/tvReadOnly"
+                app:layout_constraintTop_toTopOf="@+id/tvReadOnly" />
 
             <TextView
                 android:id="@+id/tvTagId"
@@ -221,7 +221,7 @@
                 android:text="Tag ID: "
                 android:textColor="@color/independance"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvUtf" />
+                app:layout_constraintTop_toBottomOf="@+id/tvReadOnly" />
 
             <TextView
                 android:id="@+id/tvTagIdData"
@@ -240,7 +240,7 @@
                 android:layout_marginStart="@dimen/spacing_16"
                 android:layout_marginTop="@dimen/spacing_8"
                 android:padding="@dimen/spacing_8"
-                android:text="Tag size: "
+                android:text="Tag size:"
                 android:textColor="@color/independance"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTagId" />

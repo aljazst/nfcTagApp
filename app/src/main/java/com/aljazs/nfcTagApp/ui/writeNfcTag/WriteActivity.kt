@@ -71,9 +71,9 @@ class WriteActivity : AppCompatActivity() {
 
             writeTagDialog.title(
                 getString(R.string.dialog_tap_tag),null, getColor(R.color.independance))
-                .body(getString(R.string.dialog_tap_tag_sub))
+                .body(getString(R.string.dialog_tap_tag_write_sub))
                 .icon(R.drawable.ic_nfc_signal, true)
-                .position(AwesomeDialog.POSITIONS.BOTTOM)
+                .position(AwesomeDialog.POSITIONS.CENTER)
 
             writeViewModel.messageToSave = etMessage.text.toString()
             Log.i(TAG, "Write button was clicked.")

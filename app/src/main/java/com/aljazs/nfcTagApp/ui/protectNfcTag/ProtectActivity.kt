@@ -1,7 +1,9 @@
 package com.aljazs.nfcTagApp.ui.protectNfcTag
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.nfc.FormatException
 import android.nfc.NfcAdapter
 import android.nfc.NfcManager
@@ -15,6 +17,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.aljazs.nfcTagApp.Decryptor
 import com.aljazs.nfcTagApp.NfcUtils
@@ -63,18 +66,6 @@ class ProtectActivity : AppCompatActivity() {
 
             AwesomeDialog.build(this)
                 .title(
-                    getString(R.string.dialog_set_pw_title),
-                    null,
-                    getColor(R.color.independance)
-                )
-                .icon(R.drawable.ic_nfc_signal, true)
-                .body(getString(R.string.dialog_set_pw_sub))
-                .onNegative(getString(R.string.close)) {
-                    Log.d("TAG", "negative ") }}
-
-        ivInfoReadOnly.extClick {
-            AwesomeDialog.build(this)
-                .title(
                     getString(R.string.dialog_read_only_title),
                     null,
                     getColor(R.color.independance)
@@ -83,8 +74,45 @@ class ProtectActivity : AppCompatActivity() {
                 .body(getString(R.string.dialog_read_only_sub))
                 .onNegative(getString(R.string.close)) {
                     Log.d("TAG", "negative ")
+                    NFC_PROTECTION_TYPE = Type.NONE}
+                .position(AwesomeDialog.POSITIONS.CENTER)
+        }
+
+        ivInfoReadOnly.extClick {
+            AwesomeDialog.build(this)
+                .title(
+                    getString(R.string.dialog_read_only_title_info),
+                    null,
+                    getColor(R.color.independance)
+                )
+                .icon(R.drawable.ic_help_black, true)
+                .body(getString(R.string.dialog_read_only_sub_info))
+                .onNegative(getString(R.string.close)) {
+                    Log.d("TAG", "negative ")
                 }
 
+        }
+
+        clOtherOptions.extClickOnce {
+
+            AwesomeDialog.build(this)
+                .title(
+                    getString(R.string.dialog_other_options_title),
+                    null,
+                    getColor(R.color.independance)
+                )
+                .icon(R.drawable.ic_help_black, true)
+                .body(getString(R.string.dialog_other_options_sub))
+                .onNegative(getString(R.string.close)) {
+                    Log.d("TAG", "negative ") }
+                .onPositive(getString(R.string.goto_play_store),textColor = ContextCompat.getColor(this, R.color.google_play_blue)){
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.wakdev.wdnfc")))
+                    } catch (e: ActivityNotFoundException) {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps")))
+                    }
+                }
+                .position(AwesomeDialog.POSITIONS.BOTTOM)
         }
 
         //{ protectViewModel.onTypeClick(ProtectViewModel.Type.READ_ONLY) }
@@ -234,7 +262,7 @@ class ProtectActivity : AppCompatActivity() {
 
 
         val tagFromIntent = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
-        val mifare: MifareUltralight = MifareUltralight.get(tagFromIntent)
+        //val mifare: MifareUltralight = MifareUltralight.get(tagFromIntent)
         try {
             tag = tagFromIntent?.let { WritableTag(it) }
         } catch (e: FormatException) {
@@ -247,7 +275,7 @@ class ProtectActivity : AppCompatActivity() {
                 Type.READ_ONLY -> makeReadOnly(tagFromIntent)
                 //Type.SET_PASSWORD -> writePassword(mifare)
                 //Type.REMOVE_PASSWORD ->  deletePassword(mifare)
-                else -> extShowToast("NOTHING")
+                else -> extShowToast(getString(R.string.toast_text_select_protection_type))
             }
         }
     }
