@@ -36,8 +36,7 @@ import kotlinx.android.synthetic.main.activity_read.tvMessageData
 import kotlinx.android.synthetic.main.activity_read.tvPassword
 import kotlinx.android.synthetic.main.activity_read.tvTagIdData
 import kotlinx.android.synthetic.main.activity_read.tvTagSizeData
-import kotlinx.android.synthetic.main.activity_read.tvUtfData
-import kotlinx.android.synthetic.main.activity_write.*
+
 
 import java.nio.charset.Charset
 import kotlin.experimental.and
@@ -89,8 +88,7 @@ class ReadActivity : AppCompatActivity() {
                 ivLineArrowItem.visibility = View.GONE
             } else {
                 tvMessageData.text = it.message
-                //encryptedString = it.message
-                tvUtfData.text = it.utf
+                tvReadOnlyData.text = it.isReadOnly
                 tvTagIdData.text = it.tagId
                 tvTagSizeData.text =
                     it.tagUsedMemory + "/" + it.tagSize.toString() + getString(R.string.message_size_bytes)
@@ -197,9 +195,27 @@ class ReadActivity : AppCompatActivity() {
             return
         }
         tagId = tag!!.tagId
+        var isReadOnly : Boolean = true
 
-        var miki =
-            tagFromIntent?.techList  // android.nfc.tech.NfcA   android.nfc.tech.MifareUltralight android.nfc.tech.Ndef
+        val ndefTag = Ndef.get(tagFromIntent)
+        try {
+            ndefTag.connect()
+
+            isReadOnly = ndefTag.canMakeReadOnly()
+
+        } catch (e: Exception) {
+            println("exception e $e")
+            extShowToast("Error making tag read only.")
+
+        } finally {
+            try {
+                ndefTag.close()
+            } catch (e: Exception) {
+                println("exception e $e")
+
+            }
+        }
+        var techlist = tagFromIntent?.techList  // android.nfc.tech.NfcA   android.nfc.tech.MifareUltralight android.nfc.tech.Ndef
 
         val tagSize = Ndef.get(tagFromIntent).maxSize
 
@@ -238,10 +254,10 @@ class ReadActivity : AppCompatActivity() {
                     readViewModel?.setTagMessage(
                         NfcTag(
                             receivedMessage,
-                            charset.toString(),
                             tagId,
                             tagSize.toString(),
-                            usedMemory.toString()
+                            usedMemory.toString(),
+                            isReadOnly
                         )
                     )
 

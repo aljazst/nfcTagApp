@@ -31,3 +31,10 @@ fun TextView.setAsterisk(message: String) {
     }
     //someTextView.text = asterisk
 }
+fun Boolean.isReadOnly() : String{
+    return if (this){
+        "No"
+    }else{
+        "Yes"
+    }
+}

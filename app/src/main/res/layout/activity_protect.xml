@@ -23,7 +23,7 @@
         android:id="@+id/ivInfoReadOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_info"
+        android:src="@drawable/ic_help_32dp"
         android:background="@drawable/bg_button_circle_blackish"
         android:layout_marginEnd="@dimen/spacing_12"
         app:layout_constraintBottom_toBottomOf="@+id/clReadOnly"
@@ -31,36 +31,13 @@
 
         app:layout_constraintTop_toTopOf="@+id/clReadOnly" />
 
-    <ImageView
-        android:id="@+id/ivInfoSetPw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_info"
-        android:layout_marginEnd="@dimen/spacing_12"
-        android:background="@drawable/bg_button_circle_blackish"
-        app:layout_constraintBottom_toBottomOf="@+id/clSetPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintTop_toTopOf="@+id/clSetPassword" />
-    <ImageView
-        android:id="@+id/ivInfoRemovePw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_info"
-        android:layout_marginEnd="@dimen/spacing_12"
-        android:background="@drawable/bg_button_circle_blackish"
-        app:layout_constraintBottom_toBottomOf="@+id/clRemovePassword"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintTop_toTopOf="@+id/clRemovePassword" />
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clReadOnly"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="@dimen/spacing_14"
-        android:layout_marginTop="@dimen/spacing_32"
+        android:layout_marginTop="@dimen/spacing_56"
         android:layout_marginEnd="@dimen/spacing_12"
         android:background="@drawable/bg_white_with_blue_border_rounded_12"
 
@@ -72,7 +49,36 @@
             android:id="@+id/tvReadOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lock tag"
+            android:text="@string/lock_tag_text"
+            android:textStyle="bold"
+            android:textColor="@color/independance"
+            android:layout_marginStart="@dimen/spacing_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clOtherOptions"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/spacing_14"
+        android:layout_marginTop="@dimen/spacing_32"
+        android:layout_marginEnd="@dimen/spacing_12"
+        android:background="@drawable/bg_white_with_blue_border_rounded_12"
+
+        app:layout_constraintEnd_toStartOf="@+id/ivInfoReadOnly"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clReadOnly">
+
+        <TextView
+            android:id="@+id/tvOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/other_text"
             android:textStyle="bold"
             android:textColor="@color/independance"
             android:layout_marginStart="@dimen/spacing_12"

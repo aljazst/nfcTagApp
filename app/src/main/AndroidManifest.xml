@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.NFC" />
 
-    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +17,8 @@
         android:theme="@style/MainTheme">
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="userPortrait">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +27,9 @@
 
         </activity>
 
-        <activity android:name=".ui.readNfcTag.ReadActivity">
+        <activity
+            android:name=".ui.readNfcTag.ReadActivity"
+            android:screenOrientation="userPortrait">
 
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
@@ -32,18 +37,28 @@
 
         </activity>
 
-        <activity android:name=".ui.writeNfcTag.WriteActivity">
+        <activity
+            android:name=".ui.writeNfcTag.WriteActivity"
+            android:screenOrientation="userPortrait">
 
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
 
         </activity>
-        <activity android:name=".ui.protectNfcTag.ProtectActivity">
+        <activity
+            android:name=".ui.protectNfcTag.ProtectActivity"
+            android:screenOrientation="userPortrait">
 
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
+
+        </activity>
+
+        <activity
+            android:name=".ui.about.AboutActivity"
+            android:screenOrientation="userPortrait">
 
         </activity>
     </application>
