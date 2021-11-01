@@ -198,6 +198,7 @@ class ReadActivity : AppCompatActivity() {
         var isReadOnly : Boolean = true
 
         val ndefTag = Ndef.get(tagFromIntent)
+
         try {
             ndefTag.connect()
 
@@ -205,7 +206,7 @@ class ReadActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
             println("exception e $e")
-            extShowToast("Error making tag read only.")
+            extShowToast("Error reading tag.")
 
         } finally {
             try {
@@ -229,6 +230,8 @@ class ReadActivity : AppCompatActivity() {
                     val ndefRecord_0 = inNdefRecords[0]
                     var receivedMessage = String(ndefRecord_0.payload)
                     val payloadArray: Byte = ndefRecord_0.payload[0]
+                    val getType= String(ndefRecord_0.type)
+                    extShowToast(getType)
                     val utfBitMask: Byte =
                         payloadArray and 0x80.toByte() // mask 7th bit that shows utf encoding https://dzone.com/articles/nfc-android-read-ndef-tag
                     val lanLength: Byte =

@@ -61,6 +61,12 @@
             android:screenOrientation="userPortrait">
 
         </activity>
+
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:screenOrientation="userPortrait">
+
+        </activity>
     </application>
 
 </manifest>

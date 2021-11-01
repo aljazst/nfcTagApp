@@ -18,7 +18,7 @@ class  NfcUtils {
     companion object {
 
         fun createNFCMessage(payload: String, intent: Intent?): Boolean {
-            val pathPrefix = "A"
+            val pathPrefix = "ABC"
             val nfcRecord = NdefRecord(
                 NdefRecord.TNF_EXTERNAL_TYPE, pathPrefix.toByteArray(),
                 ByteArray(0), payload.toByteArray()

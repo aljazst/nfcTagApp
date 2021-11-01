@@ -41,6 +41,7 @@ import com.aljazs.nfcTagApp.extensions.extInvisible
 import com.aljazs.nfcTagApp.extensions.extVisible
 import com.aljazs.nfcTagApp.ui.about.AboutActivity
 import com.aljazs.nfcTagApp.ui.protectNfcTag.ProtectActivity
+import com.aljazs.nfcTagApp.ui.settings.SettingsActivity
 import com.suke.widget.SwitchButton
 
 
@@ -157,7 +158,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun onSettingsSelected() {
 
+        val intent = Intent(this, SettingsActivity::class.java)
 
+        startActivity(intent)
     }
 
 
