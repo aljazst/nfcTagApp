@@ -8,7 +8,7 @@
     android:background="@color/jet">
 
     <ImageView
-        android:id="@+id/iv_back"
+        android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_circle_blackish"
@@ -20,6 +20,122 @@
         />
 
     <TextView
+        android:id="@+id/tcProtectionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/type_of_protection"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/clEncodingType"
+        app:layout_constraintStart_toStartOf="@+id/clEncodingType" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEncodingType"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="@dimen/spacing_14"
+        android:layout_marginTop="@dimen/spacing_56"
+        android:layout_marginEnd="@dimen/spacing_14"
+        android:background="@drawable/bg_white_with_blue_border_rounded_12"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBack">
+
+        <TextView
+            android:id="@+id/tvCipherAlgorithm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_14"
+            android:layout_marginTop="@dimen/spacing_14"
+            android:text="@string/cipher_algo"
+            android:textColor="@color/independance"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivCipherInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_14"
+            android:layout_marginEnd="@dimen/spacing_32"
+            android:layout_marginTop="@dimen/spacing_14"
+            android:background="@drawable/bg_button_circle_whiteish"
+            android:src="@drawable/ic_help_32dp_black"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@+id/switchCipher"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/switchCipher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sb_checked="true"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="@dimen/spacing_14"
+            app:sb_background="@color/jet"
+            android:layout_marginTop="@dimen/spacing_14"
+            app:sb_checked_color="@color/true_blue"
+            app:sb_show_indicator="false"
+            app:sb_uncheck_color="@color/roman_silver" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+
+        <TextView
+            android:id="@+id/tvEncryptionAlgorithm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_14"
+            android:layout_marginBottom="@dimen/spacing_14"
+            android:text="@string/encrypt_algo"
+            android:textColor="@color/independance"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+        <ImageView
+            android:id="@+id/ivEnryptInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_14"
+            android:layout_marginEnd="@dimen/spacing_32"
+            android:background="@drawable/bg_button_circle_whiteish"
+            android:src="@drawable/ic_help_32dp_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/switchEcrypt"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/switchEcrypt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_marginBottom="@dimen/spacing_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="@dimen/spacing_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            app:sb_background="@color/jet"
+            app:sb_checked_color="@color/true_blue"
+            app:sb_show_indicator="false"
+            app:sb_uncheck_color="@color/roman_silver" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
         android:id="@+id/tv_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +144,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/clEncodingType" />
     <TextView
         android:id="@+id/tv_encoded"
         android:layout_width="wrap_content"

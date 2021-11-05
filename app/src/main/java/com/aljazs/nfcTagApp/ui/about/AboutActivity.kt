@@ -12,7 +12,7 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
-        iv_back.extClick {
+        ivBack.extClick {
             finish()
         }
 

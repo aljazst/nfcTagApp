@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">nfcTagApp</string>
+    <string name="app_name">NFC encode</string>
 
     // INFO RECYCLE
     <string name="dialog_scan_nfc">Tap the phone on the NFC tag to write the message.</string>
@@ -81,5 +81,25 @@
     <string name="developer_description">Hello, I made this app because I wanted to store my password safely on my desk. But primarily because
     I ordered 100+ NFC tags and I had no idea what to do with them.</string>
     <string name="donation">If you like the app you can buy me a coffee or not.</string>
+
+
+    //SETTINGS ACTIVITY
+    <string name="cipher_algo">Cipher algorithm</string>
+    <string name="encrypt_algo">Encryption algorithm</string>
+    <string name="type_of_protection">Selected algorithm type</string>
+
+
+    <string name="dialog_cipher_info_title">Cipher algorithm info</string>
+    <string name="dialog_cipher_sub_info">This algorithm encodes your message with a cipher algorithm. \n The encrypted message is the same size as the original, so you can store a longer message on the NFC tag.
+    \n \n The message can be deciphered with any device that uses this app, you only need to know the password. You can use the same password on multiple NFC tags.
+        \n \n The algorithm is not nearly as safe as the encryption type, but it gets the job done.
+    </string>
+
+    <string name="dialog_ecrypt_info_title">Encryption algorithm info</string>
+    <string name="dialog_ecrypt_sub_info">This algorithm will encrypt your message with a very strong AES algorithm. \n The encrypted message will be approximately 3x the size of the original one.
+    \n \n The message can only be read with the same mobile device it was created with and a unique password. \n \n If you use the same password twice for two different NFC tags, you will not be able to decrypt the
+            the message that was encoded with the same password first. Also, if you delete tha app you will not be able to decode the messages.
+        \n \n There is no chance that someone could crack this encoded message. In fact there is a big chance that at some point even you will not be able to decode it, if you are not careful.
+    </string>
 
 </resources>

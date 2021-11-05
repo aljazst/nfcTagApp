@@ -46,7 +46,7 @@ class WriteActivity : AppCompatActivity() {
 
         initNfcAdapter()
 
-        iv_back.extClick {
+        ivBack.extClick {
             finish()
         }
 

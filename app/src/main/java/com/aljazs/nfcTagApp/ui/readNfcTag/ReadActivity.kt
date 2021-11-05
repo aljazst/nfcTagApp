@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_read.btnDecrypt
 import kotlinx.android.synthetic.main.activity_read.clTagInfo
 
 import kotlinx.android.synthetic.main.activity_read.ivLineArrowItem
-import kotlinx.android.synthetic.main.activity_read.iv_back
+import kotlinx.android.synthetic.main.activity_read.ivBack
 import kotlinx.android.synthetic.main.activity_read.tilPassword
 import kotlinx.android.synthetic.main.activity_read.tvMessageData
 import kotlinx.android.synthetic.main.activity_read.tvPassword
@@ -69,7 +69,7 @@ class ReadActivity : AppCompatActivity() {
 
         initNfcAdapter()
 
-        iv_back.extClick {
+        ivBack.extClick {
             finish()
         }
 
