@@ -28,7 +28,7 @@ import com.aljazs.nfcTagApp.ui.readNfcTag.ReadViewModel
 import com.example.awesomedialog.*
 import kotlinx.android.synthetic.main.activity_protect.*
 import kotlinx.android.synthetic.main.activity_write.*
-import kotlinx.android.synthetic.main.activity_write.iv_back
+import kotlinx.android.synthetic.main.activity_write.ivBack
 import java.io.IOException
 import java.util.*
 import kotlin.experimental.and
@@ -57,7 +57,7 @@ class ProtectActivity : AppCompatActivity() {
 
         initNfcAdapter()
 
-        iv_back.extClick {
+        ivBack.extClick {
             finish()
         }
 
@@ -114,119 +114,6 @@ class ProtectActivity : AppCompatActivity() {
                 }
                 .position(AwesomeDialog.POSITIONS.BOTTOM)
         }
-
-        //{ protectViewModel.onTypeClick(ProtectViewModel.Type.READ_ONLY) }
-        /*
-        clSetPassword.extClickOnce {
-            NFC_PROTECTION_TYPE = Type.SET_PASSWORD
-
-            var setPasswordDialog = AwesomeDialog.build(this)
-            setPasswordDialog
-                .title(
-                    getString(R.string.dialog_set_pw_title),
-                    null,
-                    getColor(R.color.independance)
-                )
-                .icon(R.drawable.ic_nfc_signal, true)
-                .body(getString(R.string.dialog_set_pw_sub))
-                .onNegative(getString(R.string.close)) {
-                    Log.d("TAG", "negative ") }
-
-
-            protectViewModel.writeSuccess.observe(this, {
-                if(it){
-                setPasswordDialog.icon(R.drawable.ic_congrts)
-                    .title(getString(R.string.dialog_success_write),null,
-                        getColor(R.color.independance))
-                    .body("")
-
-                Handler().postDelayed({
-                    setPasswordDialog.dismiss()
-                }, 2000)
-            }})
-
-
-        }
-
-        clRemovePassword.extClickOnce {
-            NFC_PROTECTION_TYPE = Type.REMOVE_PASSWORD
-            var deletePasswordDialog = AwesomeDialog.build(this)
-            deletePasswordDialog
-                .title(
-                    getString(R.string.dialog_set_pw_title),
-                    null,
-                    getColor(R.color.independance)
-                )
-                .icon(R.drawable.ic_nfc_signal, true)
-                .body(getString(R.string.dialog_set_pw_sub))
-                .onNegative(getString(R.string.close)) {
-                    Log.d("TAG", "negative ")
-                }
-
-
-            protectViewModel.writeSuccess.observe(this, {
-                if (it) {
-                    deletePasswordDialog.icon(R.drawable.ic_congrts)
-                        .title(
-                            getString(R.string.dialog_success_write), null,
-                            getColor(R.color.independance)
-                        )
-                        .body("")
-
-                    Handler().postDelayed({
-                        deletePasswordDialog.dismiss()
-                    }, 2000)
-                }
-            })
-        }
-
-        ivArrowSet.extClick {
-
-            if (clEnterPw.visibility == View.GONE) {
-                clEnterPw.extVisible()
-                ivArrowSet.setImageResource(R.drawable.ic_arrow_up)
-            } else {
-                clEnterPw.extGone()
-                ivArrowSet.setImageResource(R.drawable.ic_arrow_down)
-            }
-        }
-        ivArrowRemove.extClick {
-
-            if (clEnterPwRemove.visibility == View.GONE) {
-                clEnterPwRemove.extVisible()
-                ivArrowRemove.setImageResource(R.drawable.ic_arrow_up)
-            } else {
-                clEnterPwRemove.extGone()
-                ivArrowRemove.setImageResource(R.drawable.ic_arrow_down)
-            }
-        }
-
-        ivInfoSetPw.extClick {
-            AwesomeDialog.build(this)
-                .title(
-                    getString(R.string.dialog_set_pw_title),
-                    null,
-                    getColor(R.color.independance)
-                )
-                .icon(R.drawable.ic_nfc_signal, true)
-                .body(getString(R.string.dialog_set_pw_sub))
-                .onNegative(getString(R.string.close)) {
-                    Log.d("TAG", "negative ")
-                }
-        }
-        ivInfoRemovePw.extClick {
-            AwesomeDialog.build(this)
-                .title(
-                    getString(R.string.dialog_remove_pw_title),
-                    null,
-                    getColor(R.color.independance)
-                )
-                .icon(R.drawable.ic_nfc_signal, true)
-                .body(getString(R.string.dialog_remove_pw_sub))
-                .onNegative(getString(R.string.close)) {
-                    Log.d("TAG", "negative ")
-                }
-        }*/
 
     }
 

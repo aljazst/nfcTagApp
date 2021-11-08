@@ -1,46 +1,31 @@
 package com.aljazs.nfcTagApp.ui.main
 
-import android.annotation.SuppressLint
-import android.app.PendingIntent
+
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import android.nfc.*
-
-import android.nfc.tech.Ndef
 import android.provider.Settings
 import androidx.lifecycle.ViewModelProvider
-import com.aljazs.nfcTagApp.NfcUtils
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
-import com.aljazs.nfcTagApp.extensions.extShowToast
-import com.aljazs.nfcTagApp.model.NfcTag
 import com.aljazs.nfcTagApp.ui.main.adapter.MenuNavigationAdapter
 import com.aljazs.nfcTagApp.ui.readNfcTag.ReadViewModel
 import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteViewModel
-import java.nio.charset.Charset
-import kotlin.experimental.and
-import android.nfc.tech.MifareUltralight
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.aljazs.nfcTagApp.ui.readNfcTag.ReadActivity
 import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteActivity
-import java.io.IOException
-import java.lang.Exception
-import java.util.*
-import kotlin.experimental.or
 import android.nfc.NfcAdapter
-import android.view.MotionEvent
-import android.view.View
 import com.aljazs.nfcTagApp.extensions.extInvisible
 import com.aljazs.nfcTagApp.extensions.extVisible
 import com.aljazs.nfcTagApp.ui.about.AboutActivity
 import com.aljazs.nfcTagApp.ui.protectNfcTag.ProtectActivity
+import com.aljazs.nfcTagApp.ui.settings.SettingsActivity
 import com.suke.widget.SwitchButton
 
 
@@ -48,10 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     private var adapter: NfcAdapter? = null
     var tag: WritableTag? = null
-    var tagId: String? = null
 
-    var openActionNfcSettings: Boolean =
-        true //workaround for library issue: click listener not implemented https://github.com/zcweng/SwitchButton/issues/27
+    var openActionNfcSettings: Boolean = true //workaround for library issue: click listener not implemented https://github.com/zcweng/SwitchButton/issues/27
 
     private val viewModel = MainViewModel()
 
@@ -157,7 +140,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun onSettingsSelected() {
 
+        val intent = Intent(this, SettingsActivity::class.java)
 
+        startActivity(intent)
     }
 
 
@@ -226,16 +211,11 @@ class MainActivity : AppCompatActivity() {
         //disableNfcForegroundDispatch()
     }
 
-    private fun getTag() = "MainActivity"
-
-
-
 
     //https://www.nxp.com/docs/en/data-sheet/NTAG213_215_216.pdf
     //https://github.com/yanjiepeng/TazanTagWritter/blob/master/app/src/main/java/com/tzsafe/tazantagwritter/MainActivity.kt
 
     //https://github.com/lionlancer/uiojklbnmz/blob/329d25a4fef0d20f82b4e33e0dd000d9037f6b00/src/android/MifarePlugin.java
-
 
 
 }

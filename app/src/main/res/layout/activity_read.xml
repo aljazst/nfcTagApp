@@ -7,7 +7,7 @@
     android:background="@color/jet">
 
     <ImageView
-        android:id="@+id/iv_back"
+        android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_circle_blackish"
@@ -17,6 +17,29 @@
         android:layout_marginTop="@dimen/spacing_12"
         android:padding="@dimen/spacing_12"
         />
+
+    <TextView
+        android:id="@+id/tv_algorithm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/algorithm_selected"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:layout_marginEnd="@dimen/spacing_6"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_algorithm_type"
+        app:layout_constraintEnd_toStartOf="@+id/tv_algorithm_type" />
+
+    <TextView
+        android:id="@+id/tv_algorithm_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/algorithm_type"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:layout_marginEnd="@dimen/spacing_4"
+        app:layout_constraintBottom_toTopOf="@+id/clTagInfo"
+        app:layout_constraintEnd_toEndOf="@+id/clTagInfo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTagInfo"
@@ -47,19 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/vDivider"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_marginStart="@dimen/spacing_16"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:visibility="invisible"
-            android:layout_marginEnd="@dimen/spacing_16"
-            android:layout_marginBottom="@dimen/spacing_8"
-            android:background="@color/oxford_blue_light"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTagInfo" />
+
 
 
         <TextView
@@ -72,7 +83,7 @@
             android:textStyle="bold"
             android:textColor="@color/independance"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vDivider" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvMessageData"
@@ -119,6 +130,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
+        <View
+            android:id="@+id/vDivider"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_2"
+            android:visibility="invisible"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_marginBottom="@dimen/spacing_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDecrypt"
+ />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPassword"
@@ -157,9 +182,9 @@
             android:layout_marginEnd="@dimen/spacing_16"
             android:padding="@dimen/spacing_8"
             android:src="@drawable/ic_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/bg_button_circle_whiteish"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMessageData"
+            app:layout_constraintTop_toBottomOf="@+id/vDivider"
             app:layout_goneMarginBottom="@dimen/spacing_12"
             app:layout_goneMarginTop="@dimen/spacing_22" />
 
