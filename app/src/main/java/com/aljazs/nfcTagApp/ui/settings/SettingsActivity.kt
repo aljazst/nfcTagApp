@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.aljazs.nfcTagApp.R
+import com.aljazs.nfcTagApp.common.Constants
 import com.aljazs.nfcTagApp.extensions.extClick
 import com.aljazs.nfcTagApp.extensions.extShowToast
 import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteViewModel
@@ -22,18 +23,16 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
         ivBack.extClick {
             finish()
         }
-        //settingsViewModel.saveNumberTest(33)
-
-        var message = "Miki3#99/?=";
-        var generatedKey = generateKey(message,"key")
-        var encodedMessage = encodeMessage(message,generatedKey)
-        tv_settings.text = generatedKey
-        tv_encoded.text = encodedMessage;
-        tv_decoded.text = decodeMessage(encodedMessage,generatedKey)
+        if(settingsViewModel.getSelectedAlgorithm() == Constants.CIPHER_ALGORITHM){
+            switchCipher.isChecked = true
+            switchEcrypt.isChecked = false
+        }else{
+            switchEcrypt.isChecked = true
+            switchCipher.isChecked = false
+        }
 
         ivCipherInfo.extClick {
             AwesomeDialog.build(this)
@@ -65,25 +64,17 @@ class SettingsActivity : AppCompatActivity() {
 
         switchCipher.setOnCheckedChangeListener(SwitchButton.OnCheckedChangeListener { view, isChecked ->
             switchEcrypt.isChecked = !isChecked
+            if(isChecked){
+                settingsViewModel.saveSelectedAlgorithm(Constants.CIPHER_ALGORITHM)
+            }
 
         })
         switchEcrypt.setOnCheckedChangeListener(SwitchButton.OnCheckedChangeListener { view, isChecked ->
             switchCipher.isChecked = !isChecked
-
+            if(isChecked){
+                settingsViewModel.saveSelectedAlgorithm(Constants.ENCRYPTION_ALGORITHM)
+            }
         })
 
-
-
-    }
-
-    external fun generateKey(message : String,key : String): String;
-    external fun encodeMessage(message : String, key : String): String;
-    external fun decodeMessage(encodedMessage : String, key : String): String;
-
-
-    companion object {
-        init {
-            System.loadLibrary("vigenere-cipher");
-        }
     }
 }

@@ -2,5 +2,6 @@ package com.aljazs.nfcTagApp.data.local
 
 interface LocalRepositoryContract {
 
-    fun saveNumberTest(serverTime: Int)
+    fun saveAlgorithmType(algorithmType: String)
+    fun getAlgorithmType(): String?
 }

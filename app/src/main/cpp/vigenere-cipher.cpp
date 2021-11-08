@@ -117,35 +117,20 @@ string VigenereCipher::decodeText(string encodedMessage, string key){
     return output_text;
 }
 
-
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_aljazs_nfcTagApp_ui_settings_SettingsActivity_Aprint(JNIEnv *env, jobject thiz) {
-    string hello = "Hello from Android C++";
-    jbyteArray result = env->NewByteArray(5);
-    VigenereCipher test;
-
-    string generatedKey = test.generateKey("Hello", "key");
-    string generateCipher = test.encodeText("Hello", "keyke");
-
-    return env->NewStringUTF(generatedKey.c_str());
-
-
-}
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_com_aljazs_nfcTagApp_ui_settings_SettingsActivity_generateKey(JNIEnv *env, jobject thiz,jstring message,
-                                                                   jstring key) {
-    VigenereCipher test;
+Java_com_aljazs_nfcTagApp_ui_writeNfcTag_WriteActivity_generateKey(JNIEnv *env, jobject thiz,
+                                                                   jstring message, jstring key) {
+    VigenereCipher cipherV;
 
     string keyUTF = env->GetStringUTFChars(key, reinterpret_cast<jboolean *>(false));
     string messageUTF = env->GetStringUTFChars(message, reinterpret_cast<jboolean *>(false));
-    string generatedKey =test.generateKey(messageUTF,keyUTF);
+    string generatedKey =cipherV.generateKey(messageUTF,keyUTF);
     return env->NewStringUTF(generatedKey.c_str());
 }
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_aljazs_nfcTagApp_ui_settings_SettingsActivity_encodeMessage(JNIEnv *env, jobject thiz,
+Java_com_aljazs_nfcTagApp_ui_writeNfcTag_WriteActivity_encodeMessage(JNIEnv *env, jobject thiz,
                                                                      jstring message, jstring key) {
     VigenereCipher test;
     string keyUTF = env->GetStringUTFChars(key, reinterpret_cast<jboolean *>(false));
@@ -155,15 +140,27 @@ Java_com_aljazs_nfcTagApp_ui_settings_SettingsActivity_encodeMessage(JNIEnv *env
     return env->NewStringUTF(encodedMessage.c_str());
 }
 
+
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_aljazs_nfcTagApp_ui_settings_SettingsActivity_decodeMessage(JNIEnv *env, jobject thiz,
-                                                                     jstring encoded_message,
-                                                                     jstring key) {
-    VigenereCipher test;
+Java_com_aljazs_nfcTagApp_ui_readNfcTag_ReadActivity_generateKey(JNIEnv *env, jobject thiz,
+                                                                 jstring message, jstring key) {
+    VigenereCipher cipherV;
+
+    string keyUTF = env->GetStringUTFChars(key, reinterpret_cast<jboolean *>(false));
+    string messageUTF = env->GetStringUTFChars(message, reinterpret_cast<jboolean *>(false));
+    string generatedKey =cipherV.generateKey(messageUTF,keyUTF);
+    return env->NewStringUTF(generatedKey.c_str());
+}
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_aljazs_nfcTagApp_ui_readNfcTag_ReadActivity_decodeMessage(JNIEnv *env, jobject thiz,
+                                                                   jstring encoded_message,
+                                                                   jstring key) {
+    VigenereCipher cipherV;
     string keyUTF = env->GetStringUTFChars(key, reinterpret_cast<jboolean *>(false));
     string encodedMessageUTF = env->GetStringUTFChars(encoded_message, reinterpret_cast<jboolean *>(false));
-    string decodedMessage = test.decodeText(encodedMessageUTF,keyUTF);
+    string decodedMessage = cipherV.decodeText(encodedMessageUTF,keyUTF);
 
     return env->NewStringUTF(decodedMessage.c_str());
 }

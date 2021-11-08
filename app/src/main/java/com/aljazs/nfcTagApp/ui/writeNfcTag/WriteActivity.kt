@@ -1,8 +1,10 @@
 package com.aljazs.nfcTagApp.ui.writeNfcTag
 
 import android.app.PendingIntent
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.nfc.FormatException
 import android.nfc.NfcAdapter
 import android.nfc.NfcManager
@@ -16,6 +18,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -38,7 +41,18 @@ class WriteActivity : AppCompatActivity() {
 
     var tag: WritableTag? = null
 
+    private var selectedAlgorithmType = Constants.CIPHER_ALGORITHM
+
     private lateinit var encryptor: Encryptor
+
+    companion object {
+        init {
+            System.loadLibrary("vigenere-cipher");
+        }
+    }
+
+    external fun generateKey(message : String,key : String): String;
+    external fun encodeMessage(message : String,key : String): String;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +60,17 @@ class WriteActivity : AppCompatActivity() {
 
         initNfcAdapter()
 
+        encryptor = Encryptor()
+
         ivBack.extClick {
             finish()
         }
 
-        encryptor = Encryptor()
+        selectedAlgorithmType = writeViewModel.getSelectedAlgorithm().toString()
+
+        tv_algorithm_type.text = selectedAlgorithmType
+
+
 
         writeViewModel.text.observe(this, Observer {
             writeViewModel.messageToSave = it
@@ -76,12 +96,29 @@ class WriteActivity : AppCompatActivity() {
                 .position(AwesomeDialog.POSITIONS.CENTER)
 
             writeViewModel.messageToSave = etMessage.text.toString()
-            Log.i(TAG, "Write button was clicked.")
-            val encryptedText = encryptor.encryptText(
-                etPassword.text.toString(), writeViewModel.messageToSave,
-                Constants.INIT_VECTOR
-            )
-            writeViewModel.messageToSave = encryptedText
+            //Log.i(TAG, "Write button was clicked.")
+           var length=  etPassword.text.toString().length
+           var length2=  writeViewModel.messageToSave.length
+            extShowToast("Lenth is $length and $length2")
+            if(selectedAlgorithmType == Constants.CIPHER_ALGORITHM){
+                if( etPassword.text.toString().length >= writeViewModel.messageToSave.length ){
+                    showPasswordTooSmall()
+                }else{
+                    var generatedKey = generateKey(message = writeViewModel.messageToSave,key = etPassword.text.toString())
+                    var encodedMessage = encodeMessage(writeViewModel.messageToSave,generatedKey)
+                    writeViewModel.messageToSave = encodedMessage
+                }
+
+            }else{
+                val encryptedText = encryptor.encryptText(
+                    etPassword.text.toString(), writeViewModel.messageToSave,
+                    Constants.INIT_VECTOR
+                )
+                writeViewModel.messageToSave = encryptedText
+            }
+
+
+
 
             writeViewModel.writeSuccess.observe(this, Observer {
                 if (it && writeViewModel.isWriteTagOptionOn) {
@@ -130,6 +167,20 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
+    private fun showPasswordTooSmall(){
+        AwesomeDialog.build(this)
+            .title(
+                getString(R.string.password_small),
+                null,
+                getColor(R.color.independance)
+            )
+            .icon(R.drawable.ic_error, true)
+            .body(getString(R.string.password_small_sub))
+            .onNegative(getString(R.string.ok)) {
+                Log.d("TAG", "negative ") }
+            .position(AwesomeDialog.POSITIONS.BOTTOM)
+    }
+
     override fun onResume() {
         super.onResume()
         extEnableNfcForegroundDispatch(this, adapter)
@@ -160,7 +211,7 @@ class WriteActivity : AppCompatActivity() {
         }
 
         //Write the data
-        val messageWrittenSuccessfully = NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent)
+        val messageWrittenSuccessfully = NfcUtils.createNFCMessage(writeViewModel.messageToSave, intent, selectedAlgorithmType)
 
         writeViewModel._writeSuccess.value = messageWrittenSuccessfully
 

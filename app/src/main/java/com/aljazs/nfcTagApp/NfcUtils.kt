@@ -1,24 +1,27 @@
 package com.aljazs.nfcTagApp
 
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.Ndef
 import android.nfc.tech.NdefFormatable
-import android.os.Parcelable
-import android.util.Log
-import android.widget.Toast
-import kotlin.coroutines.coroutineContext
+import com.aljazs.nfcTagApp.common.Constants
+
 
 class  NfcUtils {
     companion object {
 
-        fun createNFCMessage(payload: String, intent: Intent?): Boolean {
-            val pathPrefix = "ABC"
+        fun createNFCMessage(payload: String, intent: Intent?, selectedAlgorithm: String): Boolean {
+            var pathPrefix = "tmp"
+
+            pathPrefix = if(selectedAlgorithm == Constants.CIPHER_ALGORITHM){
+                Constants.CIPHER_ALGORITHM_SHORT
+            }else{
+                Constants.ENCRYPTION_ALGORITHM_SHORT
+            }
+
             val nfcRecord = NdefRecord(
                 NdefRecord.TNF_EXTERNAL_TYPE, pathPrefix.toByteArray(),
                 ByteArray(0), payload.toByteArray()

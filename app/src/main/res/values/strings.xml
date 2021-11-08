@@ -25,11 +25,16 @@
     <string name="encoded_message_text">Encoded message </string>
     <string name="decoded_message_text">Decoded message </string>
     <string name="button_decode">Decode data</string>
+    <string name="algorithm_selected">Protection type: </string>
+    <string name="algorithm_type">Cipher algorithm </string>
+
+    <string name="password_small">Password problem</string>
+    <string name="password_small_sub">Using the cipher algorithm, your password can\'t be the same size or smaller as the message.</string>
 
     //OTHER
-    <string name="nfc">NFC</string>
+    <string name="nfc" translatable="false">NFC</string>
     <string name="cancel">Cancel</string>
-    <string name="ok">Ok</string>
+    <string name="ok" translatable="false">Ok</string>
     <string name="close">Close</string>
 
     <!--<string name="nfc">NFC \u0020 </string> -->
@@ -42,6 +47,7 @@
     <string name="dialog_error_write">Write Error!</string>
     <string name="dialog_error_write_sub">Write Error!</string>
     <string name="tag_info">Tag info</string>
+    <string name="wrong_pw">Wrong password.</string>
 
     //PROTECT ACTIVITY
 
@@ -90,7 +96,7 @@
 
 
     <string name="dialog_cipher_info_title">Cipher algorithm info</string>
-    <string name="dialog_cipher_sub_info">This algorithm encodes your message with a cipher algorithm. \n The encrypted message is the same size as the original, so you can store a longer message on the NFC tag.
+    <string name="dialog_cipher_sub_info">This algorithm encodes your message with a cipher algorithm. \n The encoded message is the same size as the original, so you can store a longer message on the NFC tag.
     \n \n The message can be deciphered with any device that uses this app, you only need to know the password. You can use the same password on multiple NFC tags.
         \n \n The algorithm is not nearly as safe as the encryption type, but it gets the job done.
     </string>

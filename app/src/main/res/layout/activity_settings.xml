@@ -20,7 +20,7 @@
         />
 
     <TextView
-        android:id="@+id/tcProtectionType"
+        android:id="@+id/tvProtectionType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/type_of_protection"
@@ -134,37 +134,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/tv_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Halallalalalal"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clEncodingType" />
-    <TextView
-        android:id="@+id/tv_encoded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Halallalalalal"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings" />
-    <TextView
-        android:id="@+id/tv_decoded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Halallalalalal"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_encoded" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
