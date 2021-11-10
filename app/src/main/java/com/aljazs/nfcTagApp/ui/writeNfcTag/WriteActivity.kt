@@ -51,8 +51,8 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
-    external fun generateKey(message : String,key : String): String;
-    external fun encodeMessage(message : String,key : String): String;
+    private external fun generateKey(message : String, key : String): String;
+    private external fun encodeMessage(message : String, key : String): String;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +69,6 @@ class WriteActivity : AppCompatActivity() {
         selectedAlgorithmType = writeViewModel.getSelectedAlgorithm().toString()
 
         tv_algorithm_type.text = selectedAlgorithmType
-
 
 
         writeViewModel.text.observe(this, Observer {
@@ -96,12 +95,10 @@ class WriteActivity : AppCompatActivity() {
                 .position(AwesomeDialog.POSITIONS.CENTER)
 
             writeViewModel.messageToSave = etMessage.text.toString()
-            //Log.i(TAG, "Write button was clicked.")
-           var length=  etPassword.text.toString().length
-           var length2=  writeViewModel.messageToSave.length
-            extShowToast("Lenth is $length and $length2")
+
             if(selectedAlgorithmType == Constants.CIPHER_ALGORITHM){
                 if( etPassword.text.toString().length >= writeViewModel.messageToSave.length ){
+                    writeTagDialog.dismiss()
                     showPasswordTooSmall()
                 }else{
                     var generatedKey = generateKey(message = writeViewModel.messageToSave,key = etPassword.text.toString())
@@ -116,8 +113,6 @@ class WriteActivity : AppCompatActivity() {
                 )
                 writeViewModel.messageToSave = encryptedText
             }
-
-
 
 
             writeViewModel.writeSuccess.observe(this, Observer {
