@@ -101,6 +101,7 @@
     <string name="dialog_cipher_info_title">Cipher algorithm info</string>
     <string name="dialog_cipher_sub_info">This algorithm encodes your message with a cipher algorithm. \n The encoded message is the same size as the original, so you can store a longer message on the NFC tag.
     \n \n The message can be deciphered with any device that uses this app, you only need to know the password. You can use the same password on multiple NFC tags.
+        \n You can encode ASCII values from 32-126. If you use a character that is outside this range lets say a new line (ASCII value 10) it will encode a random value instead.
         \n \n The algorithm is not nearly as safe as the encryption type, but it gets the job done.
     </string>
 

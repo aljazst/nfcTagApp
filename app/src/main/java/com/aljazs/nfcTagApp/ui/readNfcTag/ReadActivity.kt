@@ -297,7 +297,7 @@ class ReadActivity : AppCompatActivity() {
                 tilPassword.extVisible()
                 tvPassword.extVisible()
             }
-            Constants.ENCRYPTION_ALGORITHM -> {
+            Constants.ENCRYPTION_ALGORITHM_SHORT -> {
                 tv_algorithm_type.text = Constants.ENCRYPTION_ALGORITHM
                 selectedAlgorithmType = Constants.ENCRYPTION_ALGORITHM
                 tvMessage.text = getString(R.string.encoded_message_text)
@@ -308,6 +308,7 @@ class ReadActivity : AppCompatActivity() {
             else -> {
                 tv_algorithm_type.text = getString(R.string.no_algorithm)
                 tvMessage.text = getString(R.string.content_no_encoding)
+                tvMessageData.setTextColor(resources.getColor(R.color.oxford_blue_lighter))
                 btnDecrypt.extGone()
                 tilPassword.extGone()
                 tvPassword.extGone()

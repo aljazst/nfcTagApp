@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.aljazs.nfcTagApp.ui.readNfcTag.ReadActivity
 import com.aljazs.nfcTagApp.ui.writeNfcTag.WriteActivity
 import android.nfc.NfcAdapter
+import android.view.ViewGroup
+import android.widget.Button
 import com.aljazs.nfcTagApp.extensions.extInvisible
 import com.aljazs.nfcTagApp.extensions.extVisible
 import com.aljazs.nfcTagApp.ui.about.AboutActivity
@@ -66,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         initNfcAdapter()
 
         initAdapter()
-
 
         switchNfc.setOnCheckedChangeListener(SwitchButton.OnCheckedChangeListener { view, isChecked ->
             if (openActionNfcSettings) {
