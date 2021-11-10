@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "744366343603",
+    "project_id": "nfc-encode-tag-app",
+    "storage_bucket": "nfc-encode-tag-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744366343603:android:c2c0edf5d0600c43dab7c6",
+        "android_client_info": {
+          "package_name": "com.aljazs.nfcTagApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744366343603-f0elvhqnu433c2th5r4c6n0erbedurhc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAViGwPbYnjTo5mVmOmUxNf62zm80gvm_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744366343603-f0elvhqnu433c2th5r4c6n0erbedurhc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
