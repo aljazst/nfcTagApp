@@ -16,7 +16,7 @@ class WriteViewModel : ViewModel(),KoinComponent {
     var messageToSave: String = ""
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Sample message holder"
+        value = "Sample message for NFC encode app."
     }
     val text: LiveData<String> = _text
 

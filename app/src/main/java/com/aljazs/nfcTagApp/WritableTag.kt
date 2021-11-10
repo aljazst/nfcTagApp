@@ -30,16 +30,20 @@ class WritableTag @Throws(FormatException::class) constructor(tag: Tag) {
     init {
         val technologies = tag.techList
         val tagTechs = Arrays.asList(*technologies)
-        if (tagTechs.contains(NDEF)) {
-            Log.i("WritableTag", "contains ndef")
-            ndef = Ndef.get(tag)
-            ndefFormatable = null
-        } else if (tagTechs.contains(NDEF_FORMATABLE)) {
-            Log.i("WritableTag", "contains ndef_formatable")
-            ndefFormatable = NdefFormatable.get(tag)
-            ndef = null
-        } else {
-            throw FormatException("Tag doesn't support ndef")
+        when {
+            tagTechs.contains(NDEF) -> {
+                Log.i("WritableTag", "contains ndef")
+                ndef = Ndef.get(tag)
+                ndefFormatable = null
+            }
+            tagTechs.contains(NDEF_FORMATABLE) -> {
+                Log.i("WritableTag", "contains ndef_formatable")
+                ndefFormatable = NdefFormatable.get(tag)
+                ndef = null
+            }
+            else -> {
+                throw FormatException("Tag doesn't support ndef")
+            }
         }
     }
 

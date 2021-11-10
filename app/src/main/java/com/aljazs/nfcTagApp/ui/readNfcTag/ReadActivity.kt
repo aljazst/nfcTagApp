@@ -65,8 +65,8 @@ class ReadActivity : AppCompatActivity() {
         }
     }
 
-    external fun generateKey(message : String,key : String): String;
-    external fun decodeMessage(encodedMessage : String, key : String): String;
+    private external fun generateKey(message : String, key : String): String;
+    private external fun decodeMessage(encodedMessage : String, key : String): String;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,21 +98,14 @@ class ReadActivity : AppCompatActivity() {
 
         readViewModel.tag.observe(this, Observer {
             if (it.message.isNullOrBlank()) {
-                btnDecrypt.visibility = View.GONE
-                tilPassword.visibility = View.GONE
-                tvPassword.visibility = View.GONE
-                ivLineArrowItem.visibility = View.GONE
+                tvMessageData.text = getString(R.string.blank)
             } else {
                 tvMessageData.text = it.message
-                tvReadOnlyData.text = it.isReadOnly
-                tvTagIdData.text = it.tagId
-                tvTagSizeData.text = it.tagUsedMemory + "/" + it.tagSize.toString() + getString(R.string.message_size_bytes)
-
-                btnDecrypt.visibility = View.VISIBLE
-                tilPassword.visibility = View.VISIBLE
-                tvPassword.visibility = View.VISIBLE
-                ivLineArrowItem.visibility = View.VISIBLE
             }
+
+            tvReadOnlyData.text = it.isReadOnly
+            tvTagIdData.text = it.tagId
+            tvTagSizeData.text = it.tagUsedMemory + "/" + it.tagSize.toString() + getString(R.string.message_size_bytes)
 
         })
 
@@ -295,12 +288,31 @@ class ReadActivity : AppCompatActivity() {
     }
 
     private fun getAlgorithmType(type : String){
-        if(type == Constants.CIPHER_ALGORITHM_SHORT){
-            tv_algorithm_type.text = Constants.CIPHER_ALGORITHM
-            selectedAlgorithmType = Constants.CIPHER_ALGORITHM
-        }else{
-            tv_algorithm_type.text = Constants.ENCRYPTION_ALGORITHM
-            selectedAlgorithmType = Constants.ENCRYPTION_ALGORITHM
+        when (type) {
+            Constants.CIPHER_ALGORITHM_SHORT -> {
+                tv_algorithm_type.text = Constants.CIPHER_ALGORITHM
+                selectedAlgorithmType = Constants.CIPHER_ALGORITHM
+                tvMessage.text = getString(R.string.encoded_message_text)
+                btnDecrypt.extVisible()
+                tilPassword.extVisible()
+                tvPassword.extVisible()
+            }
+            Constants.ENCRYPTION_ALGORITHM -> {
+                tv_algorithm_type.text = Constants.ENCRYPTION_ALGORITHM
+                selectedAlgorithmType = Constants.ENCRYPTION_ALGORITHM
+                tvMessage.text = getString(R.string.encoded_message_text)
+                btnDecrypt.extVisible()
+                tilPassword.extVisible()
+                tvPassword.extVisible()
+            }
+            else -> {
+                tv_algorithm_type.text = getString(R.string.no_algorithm)
+                tvMessage.text = getString(R.string.content_no_encoding)
+                btnDecrypt.extGone()
+                tilPassword.extGone()
+                tvPassword.extGone()
+
+            }
         }
     }
 

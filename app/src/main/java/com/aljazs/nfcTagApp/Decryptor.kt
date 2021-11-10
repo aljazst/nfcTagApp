@@ -25,8 +25,8 @@ internal class Decryptor {
     private fun initKeyStore() {
         keyStore = KeyStore.getInstance(ANDROID_KEY_STORE)
         keyStore!!.load(null)
-        Log.i(TAG,"Number of keys ${keyStore!!.size()}")
-        Log.i(TAG,"Does key exist ${keyStore!!.containsAlias("geslo1")}")
+/*        Log.i(TAG,"Number of keys ${keyStore!!.size()}")
+        Log.i(TAG,"Does key exist ${keyStore!!.containsAlias("geslo1")}")*/
     }
 
     fun decryptData(alias: String, encryptedData: ByteArray, encryptionIv: ByteArray): String {

@@ -48,6 +48,9 @@
     <string name="dialog_error_write_sub">Write Error!</string>
     <string name="tag_info">Tag info</string>
     <string name="wrong_pw">Wrong password.</string>
+    <string name="no_algorithm">No algorithm detected.</string>
+    <string name="content_no_encoding">Content of NFC tag</string>
+    <string name="blank">This tag has no saved data.</string>
 
     //PROTECT ACTIVITY
 
