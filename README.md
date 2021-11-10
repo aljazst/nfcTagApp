@@ -2,7 +2,7 @@
   <h1>NFC encode</h1>
 </div>
 
-NFC encode app is meant for storing sensitive data to a NFC tag. As NFC tags are portable or sticky you can stick them to your word desk and store password on it. Nobody else will be able to read the data from the tag. You can encode any tipe of text message on a NFC tag.
+NFC encode app is meant for storing sensitive data to a NFC tag. As NFC tags are portable or sticky you can stick them to your word desk and store passwords on it. Nobody else will be able to read the data from the tag. You can encode any tipe of text message on a NFC tag.
 
 ## Download 📦
 
@@ -12,7 +12,7 @@ You can download NFC encode on the Play Store!
 
 ## About the app ☄️
 
-You can choose between two encoding algorithms to encode your string and you are also able ... ohh you know what? Why don't you just download the app and try it. It should work. Well it works on my phone..
+You can choose between two encoding algorithms to encode your string and you are also able ... ohh you know what? Why don't you just download the app and try it. It should work. Well it works on my phone and my tags so...
 
 ## Acknowledgments 🍺
 
