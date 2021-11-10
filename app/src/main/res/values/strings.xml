@@ -79,6 +79,9 @@
 
     <string name="toast_text_select_protection_type">Please select an option.</string>
 
+    <string name="dialog_success_readOnly">Tag is read only now!</string>
+    <string name="dialog_error_readOnly">Error making tag read only!</string>
+
     //ABOUT ACTIVITY
     <string name="about_app_title">About the application</string>
     <string name="about_app_description">The app is mean to save private data like usernames, passwords, PIN numbers and other sensitive

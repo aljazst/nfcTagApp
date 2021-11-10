@@ -12,27 +12,23 @@ import android.nfc.tech.MifareUltralight
 import android.nfc.tech.Ndef
 import android.os.Bundle
 import android.os.Handler
+
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import com.aljazs.nfcTagApp.Decryptor
-import com.aljazs.nfcTagApp.NfcUtils
+import androidx.lifecycle.Observer
 import com.aljazs.nfcTagApp.R
 import com.aljazs.nfcTagApp.WritableTag
 import com.aljazs.nfcTagApp.extensions.*
-import com.aljazs.nfcTagApp.ui.readNfcTag.ReadViewModel
 import com.example.awesomedialog.*
 import kotlinx.android.synthetic.main.activity_protect.*
 import kotlinx.android.synthetic.main.activity_write.*
 import kotlinx.android.synthetic.main.activity_write.ivBack
-import java.io.IOException
+
 import java.util.*
-import kotlin.experimental.and
-import kotlin.experimental.or
+
 
 class ProtectActivity : AppCompatActivity() {
 
@@ -64,8 +60,9 @@ class ProtectActivity : AppCompatActivity() {
         clReadOnly.extClickOnce {
             NFC_PROTECTION_TYPE = Type.READ_ONLY
 
-            AwesomeDialog.build(this)
-                .title(
+            var protectTagDialog = AwesomeDialog.build(this)
+
+            protectTagDialog.title(
                     getString(R.string.dialog_read_only_title),
                     null,
                     getColor(R.color.independance)
@@ -76,6 +73,30 @@ class ProtectActivity : AppCompatActivity() {
                     Log.d("TAG", "negative ")
                     NFC_PROTECTION_TYPE = Type.NONE}
                 .position(AwesomeDialog.POSITIONS.CENTER)
+
+            protectViewModel.protectSuccess.observe(this, Observer{
+                if (it) {
+                    protectTagDialog.icon(R.drawable.ic_congrts)
+                        .title(getString(R.string.dialog_success_readOnly),null,
+                            getColor(R.color.independance))
+                        .body("")
+
+                    Handler().postDelayed({
+                        protectTagDialog.dismiss()
+                    }, 2000)
+
+                } else {
+                    protectTagDialog.icon(R.drawable.ic_error)
+                        .title(getString(R.string.dialog_error_readOnly),null,
+                            getColor(R.color.independance))
+                        .body("")
+
+                    Handler().postDelayed({
+                        protectTagDialog.dismiss()
+                    }, 2000)
+
+                }
+            })
         }
 
         ivInfoReadOnly.extClick {
@@ -177,12 +198,14 @@ class ProtectActivity : AppCompatActivity() {
 
             if (ndefTag.canMakeReadOnly()) {
                 ndefTag.makeReadOnly()
-                extShowToast("Tag is read only now.")
+               // extShowToast("Tag is read only now.")
+                protectViewModel._protectSuccess.value = true
             }
 
         } catch (e: Exception) {
             println("exception e $e")
             extShowToast("Error making tag read only.")
+            protectViewModel._protectSuccess.value = false
 
         } finally {
             try {
