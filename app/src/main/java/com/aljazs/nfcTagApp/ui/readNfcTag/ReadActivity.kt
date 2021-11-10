@@ -220,7 +220,7 @@ class ReadActivity : AppCompatActivity() {
         try {
             ndefTag.connect()
 
-            isReadOnly = ndefTag.canMakeReadOnly()
+            isReadOnly = ndefTag.isWritable
 
         } catch (e: Exception) {
             println("exception e $e")

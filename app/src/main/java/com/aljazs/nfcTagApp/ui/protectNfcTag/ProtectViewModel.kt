@@ -9,10 +9,10 @@ class ProtectViewModel : ViewModel() {
 
 
 
-    val _writeSuccess = MutableLiveData<Boolean>().apply {
+    val _protectSuccess = MutableLiveData<Boolean>().apply {
 
     }
-    val writeSuccess: LiveData<Boolean> = _writeSuccess
+    val protectSuccess: LiveData<Boolean> = _protectSuccess
 
 
 }
