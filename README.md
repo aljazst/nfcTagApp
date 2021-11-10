@@ -17,7 +17,7 @@ You can choose between two encoding algorithms to encode your string and you are
 ## Acknowledgments 🍺
 
 - All the vectors and the illustrations used in the app are provided by [freepik.com](https://it.freepik.com/foto-vettori-gratuito/design) and  [flaticon.com](https://www.flaticon.com/) 
-- Thanks to random Stackoverflow guy for posting code that works.
+- Thanks to random Stackoverflow guys or girls for posting code that works.
 
 ## License 📄
 
