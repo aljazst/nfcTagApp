@@ -22,7 +22,7 @@ You can choose between two encoding algorithms to encode your string and you are
 ## License 📄
 
 ```
-   Copyright 2021 Aljaz Stajnko
+   Copyright 2021 Aljaz S.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
